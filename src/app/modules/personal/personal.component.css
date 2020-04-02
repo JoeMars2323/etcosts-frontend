@@ -11005,3 +11005,23 @@
   cursor: pointer;
  } 
 
+/*fieldset*/
+/*fieldset
+{
+  border-color: #3366FF;
+  border-style: solid;
+  background-color:#fbf9f9;
+  /*max-width:500px;*/
+  /*padding:16px;	
+}*/
+
+.field_set{
+  border-color: #3366FF;
+  border-style: solid;
+  background-color:#dbd9d9;
+ }
+.legend1
+{
+  margin-bottom:0px;
+  margin-left:16px;
+}

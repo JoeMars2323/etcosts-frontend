@@ -21,15 +21,15 @@ export class LoginComponent implements OnInit {
                }
 
   onSubmit(): void {  
-    this.validate();
+    this.login();
   }
 
   ngOnInit(): void {
   }
 
-  validate(): boolean {
+  login(): boolean {
 
-    this.api.searchByUser(this.user).subscribe(
+    this.api.login(this.user).subscribe(
       data => {
         this.response = data;
         //alert('---> ' + data);

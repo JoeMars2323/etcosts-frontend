@@ -278,108 +278,106 @@
           </div>
 
 
-
-          
+          <!-- C R E A T E  N E W  E X P E N S E -->
           <div *ngIf="content1">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Despesas</h1>
+              <h1 class="h3 mb-0 text-gray-800">Criar nova despesa</h1>
             </div>
 
             <!--form expenses-->
-            <form>
-
+            <form ngSubmit="onSubmit()">
+              <!-- expense type -->
               <div class="form-group row">
                 <div class="col-xs-4">
                   <select class="form-control" (change)="getExpenseType()">
-					          <option value="0">Tipo de despesa...</option>
+                    <option value="0">Tipo de despesa...</option>
                     <option *ngFor="let et of expenseType"[value]="et">{{et}}</option>
                   </select>
                 </div>
               </div>
 				
               <br>
-
+              <!-- dates -->
               <div class="row">
                 <div class="col">
-                  <label for="expenseDate">Data da despesa</label>
-                  <input id="expenseDate" type="date" class="form-control" placeholder="Data da despesa">
+                  <label>Data da despesa: </label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="expenseDate" ngbDatepicker #d="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
                 </div>
                 <div class="col">
-                  <label for="paymentDate">Data do pagamento</label>
-                  <input id="paymentDate" type="date" class="form-control" placeholder="Data do pagamento">
+                  <label>Data do pagamento: </label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp2" [(ngModel)]="paymentDate" ngbDatepicker #d="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
                 </div>
               </div>
 
               <br>
-
               <hr>
 
               <div class="d-sm-flex align-items-center justify-content-between">
                 <h4 class="mb-2 text-gray-800">Items da despesa</h4>
               </div>
-
-              <br>
-              
-              <div class="row">
-                <div class="col">
-                  <label for="itemType">Tipo de item:</label>
-                  <select class="form-control" (change)="getItemType()">
-					          <option value="0">Tipo de item...</option>
-                    <option *ngFor="let it of itemType"[value]="it">{{it}}</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <label for="itemName">Nome do item:</label>
-                  <input id="itemName" type="text" class="form-control">
-                </div>
-              </div>
-
               <br>
 
-              <div class="row">
-                <div class="col">
-                  <label for="coin">Moeda:</label>
-                  <select class="form-control" (change)="getCoins()">
-					          <option value="0">Moeda...</option>
-                    <option *ngFor="let c of coins"[value]="c">{{c}}</option>
-                  </select>
+              <!-- item -->
+              <div class="form-group" *ngFor="let obj of dataArray; let i = index">
+                <p>Item {{i + 1}}</p>
+                 <div class="row">
+                    <div class="col">
+                      <label for="itemName">Nome do item:</label>
+                      <input id="itemName" name="itemName{{i}}" type="text" class="form-control" 
+                        [(ngModel)]="obj.itemName">
+                    </div>
+                    <div class="col">
+                      <label for="description">Descrição:</label>
+                      <textarea id="description" name="description{{i}}" type="text" rows="1" class="form-control" 
+                        [(ngModel)]="obj.description"></textarea>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col">
+                      <label for="currency">Moeda:</label>
+                      <select id="currency" name="currency{{i}}" class="form-control" [(ngModel)]="obj.currency" (change)="getCurrency()">
+                        <option value="0">Tipo de Moeda...</option>
+                        <option *ngFor="let c of currency"[value]="c">{{c}}</option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <label for="value">Valor:</label>
+                      <input id="value" name="value{{i}}" type="text" class="form-control" 
+                        [(ngModel)]="obj.value" >
+                    </div>
+                  </div>
+                  <br>
+                  <!--<label>Quer adicionar ficheiro?</label>-->
+                  <div class="row">
+                    <div class="col-0" *ngIf="i!=0">
+                      <span (click)="removeItem(i)" class="btn btn-danger">-</span>
+                    </div>
+                    <div class="col-1">
+                      <span (click)="addItem()" class="btn btn-success">+</span>
+                    </div>
+                  </div>
+                  <hr>
                 </div>
-                <div class="col">
-                  <label for="value">Valor:</label>
-                  <input id="value" type="text" class="form-control" >
-                </div>
-              </div>
-              <br>
-              <label>Quer adicionar ficheiro?</label>
-              <br>
-              <br>
-              <button type="button" class="btn btn-primary">Adicionar novo item</button>
+              <!--end of item-->
+
+              <!--<button type="button" class="btn btn-primary" *ngIf="!toggle" (click) ="addNewItem()">Adicionar item</button>-->
+              <!--<button type="button" class="btn btn-primary" *ngIf="toggle" (click) ="addNewItem()"> Remover  item</button>-->
               <br><br>
-              <!--
-              <div class="row">
-                <div class="col">
-                  <label for="itemType">Tipo de item:</label>
-                  <input id="itemType" type="text" class="form-control">
-                </div>
-                <div class="col">
-                  <label for="itemName">Nome do item:</label>
-                  <input id="itemName" type="text" class="form-control">
-                </div>
-              </div>-->
-
-              
-
-
 
 
               
 
-              
-              
-              
-              
-              
-              <br><br>
               <!--total value-->
               <div class="form-group row">
                 <div class="col-xs-4">
@@ -389,8 +387,10 @@
 
               </div>
               <br>
+              <button class="btn btn-primary">Submeter</button>
              
             </form>
+            <!-- end form expenses -->
           </div>
 
           
@@ -442,18 +442,6 @@
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
               <a class="btn btn-primary" href="login.html">Logout</a>
             </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="form-group">
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd"
-                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
           </div>
         </div>
       </div>

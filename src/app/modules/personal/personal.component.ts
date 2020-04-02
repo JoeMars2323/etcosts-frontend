@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 import { RestApiService } from '../../core/services/rest-api.service';
+import { ExpenseType } from '../../core/models/ExpenseType';
+import { Currency } from '../../core/models/Currency';
+import { ItemType } from '../../core/models/ItemType';
+import { ItemExpense } from '../../core/models/ItemExpense';
+import { Item } from 'src/app/core/models/Item';
 
 @Component({
   selector: 'app-personal',
@@ -10,31 +15,42 @@ import { RestApiService } from '../../core/services/rest-api.service';
 })
 export class PersonalComponent implements OnInit {
 
+  // add and remove items
+  item = new ItemExpense();
+  dataArray = [];
+
+  // lists
   expenseType: String[];
-  coins: String[];
-  itemType: String[];
+  currency: String[];
+  currencyList: String[];
 
-  model: NgbDateStruct;
+  // datepickers
+  expenseDate: NgbDateStruct;
+  paymentDate: NgbDateStruct;
 
-
+  // get username
   user: String = 'tv';
 
+  // flags
   expenses: boolean = false;
   search: boolean = false;
   revenue: boolean = false;
-
   dashbord: boolean = true;
   content: boolean = false;
   content1: boolean = false;
   content2: boolean = false;
   utilities: boolean = false;
+  toggle: boolean = false;
+  toggle2: boolean = false;
+
 
   constructor(private api: RestApiService) { }
 
   ngOnInit(): void {
     this.getExpenseType();
-    this.getCoins();
-    this.getItemType();
+    this.getCurrency();
+    this.dataArray.push(this.item); 
+    
   }
 
   getExpenseType() {
@@ -45,26 +61,16 @@ export class PersonalComponent implements OnInit {
     )
   }
 
-  getCoins() {
-    this.api.getCoins().subscribe(
+  getCurrency() {
+    this.api.getCurrency().subscribe(
       data => {
-        this.coins = data;
+        this.currency = data;
 
       }
     )
   }
 
-
-  getItemType() {
-    this.api.getItemType().subscribe(
-      data => {
-        this.itemType = data;
-
-      }
-    )
-  }
-
-
+  // side barr
   callAll1() {
     this.content1 = true;
     this.content2 = false;
@@ -76,6 +82,7 @@ export class PersonalComponent implements OnInit {
     this.dashbord = false;
   }
 
+  // dashboard
   callDashboard() {
     this.dashbord = true;
     this.content1 = false;
@@ -102,5 +109,32 @@ export class PersonalComponent implements OnInit {
   callexpenses(){
     this.utilities = !this.utilities;
   }
+  
+  // add items to expense
+  addNewItem() {
+    this.toggle = !this.toggle;
+
+  }
+
+  addNewItem2() {
+    this.toggle2 = !this.toggle2;
+
+  }
+
+  addItem() {
+    this.item = new ItemExpense();
+    this.dataArray.push(this.item);
+  }
+
+  removeItem(index) {
+    this.dataArray.splice(index);
+  }
+
+  onSubmit() {
+
+  }
+
+
+  
 
 }

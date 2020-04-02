@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../models/User';
+import { ExpenseType } from '../models/ExpenseType';
+import { Currency } from '../models/Currency';
+import { Expense } from '../models/Expense';
+import { ItemType } from '../models/ItemType';
 
 @Injectable({
   providedIn: 'root'
@@ -15,26 +19,25 @@ export class RestApiService {
   }
 
   // rest functions
-  public searchByUser(user: User): Observable<boolean> {
-
-    return this.http.post<boolean>(this.usersUrl + '/searchByUser', user);
-
+  public login(user: User): Observable<boolean> {
+    return this.http.post<boolean>(this.usersUrl + '/login', user);
   }
 
   public createAccount(user: User): Observable<boolean> {
     return this.http.post<boolean>(this.usersUrl + '/createAccount', user);
   }
 
+  public getExpensesByUser(user: User): Observable<Expense[]> {
+    return this.http.post<Expense[]>(this.usersUrl + '/expensesByUser', user);
+  }
+
   public getExpenseType(): Observable<String[]> {
     return this.http.get<String[]>(this.usersUrl + '/expenseTypes');
   }
 
-  public getCoins(): Observable<String[]> {
-    return this.http.get<String[]>(this.usersUrl + '/coins');
+  public getCurrency(): Observable<String[]> {
+    return this.http.get<String[]>(this.usersUrl + '/currency');
   }
 
-  public getItemType(): Observable<String[]> {
-    return this.http.get<String[]>(this.usersUrl + '/itemType');
-  }
 
 }
