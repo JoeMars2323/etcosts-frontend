@@ -1,23 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 import { RestApiService } from '../../core/services/rest-api.service';
-import { ExpenseType } from '../../core/models/ExpenseType';
-import { Currency } from '../../core/models/Currency';
-import { ItemType } from '../../core/models/ItemType';
 import { ItemExpense } from '../../core/models/ItemExpense';
-import { Item } from 'src/app/core/models/Item';
+
 
 @Component({
   selector: 'app-personal',
   templateUrl: './personal.component.html',
-  styleUrls: ['./personal.component.css']
+  styleUrls: ['./personal.component.css'],
+  styles: [`
+    .form-group.hidden {
+      width: 0;
+      margin: 0;
+      border: none;
+      padding: 0;
+    }
+    .custom-day {
+      text-align: center;
+      padding: 0.185rem 0.25rem;
+      display: inline-block;
+      height: 2rem;
+      width: 2rem;
+    }
+    .custom-day.focused {
+      background-color: #e6e6e6;
+    }
+    .custom-day.range, .custom-day:hover {
+      background-color: rgb(2, 117, 216);
+      color: white;
+    }
+    .custom-day.faded {
+      background-color: rgba(2, 117, 216, 0.5);
+    }
+  `]
 })
 export class PersonalComponent implements OnInit {
+
+  // range datepicker
+  hoveredDate: NgbDate | null = null;
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
+
 
   // add and remove items
   item = new ItemExpense();
   dataArray = [];
+
 
   // lists
   expenseType: String[];
@@ -40,11 +69,12 @@ export class PersonalComponent implements OnInit {
   content1: boolean = false;
   content2: boolean = false;
   utilities: boolean = false;
-  toggle: boolean = false;
-  toggle2: boolean = false;
-
-
-  constructor(private api: RestApiService) { }
+  
+  constructor(private api: RestApiService, private calendar: NgbCalendar, 
+    public formatter: NgbDateParserFormatter) { 
+      this.fromDate = calendar.getToday();
+      this.toDate = calendar.getNext(calendar.getToday(), 'd', 0);
+  }
 
   ngOnInit(): void {
     this.getExpenseType();
@@ -52,6 +82,36 @@ export class PersonalComponent implements OnInit {
     this.dataArray.push(this.item); 
     
   }
+
+  // datepicker range functions
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+  // end datepicker functions
 
   getExpenseType() {
     this.api.getExpenseType().subscribe(
@@ -109,18 +169,8 @@ export class PersonalComponent implements OnInit {
   callexpenses(){
     this.utilities = !this.utilities;
   }
-  
-  // add items to expense
-  addNewItem() {
-    this.toggle = !this.toggle;
 
-  }
-
-  addNewItem2() {
-    this.toggle2 = !this.toggle2;
-
-  }
-
+  // add and remove items
   addItem() {
     this.item = new ItemExpense();
     this.dataArray.push(this.item);
@@ -130,9 +180,13 @@ export class PersonalComponent implements OnInit {
     this.dataArray.splice(index);
   }
 
+ 
+
   onSubmit() {
 
   }
+
+
 
 
   

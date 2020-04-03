@@ -121,14 +121,14 @@
       <!-- Main Content -->
       <div id="content">
 
+
+
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow">
-
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
@@ -140,10 +140,8 @@
               </div>
             </div>
           </form>
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -163,37 +161,20 @@
                 </form>
               </div>
             </li>
-
-
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600">Bem-vindo {{user}}</span>
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400Be"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
+            <div class="row">
+              <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Ben-Vindo {{user}}&nbsp;&nbsp;<i class="far fa-user-circle"></i>&nbsp;</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem ><i class="fas fa-user"></i> Perfil</button>
+                    <button ngbDropdownItem><i class="fas fa-cog"></i> Definições</button>
+                    <button ngbDropdownItem routerLink="/main"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                  </div>
+                </div>
               </div>
-            </li>
-
+            </div>
           </ul>
-
         </nav>
         <!-- End of Topbar -->
 
@@ -205,12 +186,13 @@
           <!-- Dashbord Expenses -->
           <div *ngIf="dashbord">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+              <h1 class="h3 mb-0 text-blue">Dashboard</h1>
             </div>
             <!-- Content Row -->
+            <div class="container-fluid">
             <div class="row">
               <!-- Area Chart -->
-              <div class="col-xl-8 col-lg-7">
+              <div class="col-sm-8">
                 <div class="card shadow mb-4">
                   <!-- Card Header - Dropdown -->
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -237,7 +219,7 @@
                 </div>
               </div>
               <!--Other chart-->
-              <div class="col-xl-4 col-lg-5">
+              <div class="col-sm-4">
                 <div class="card shadow mb-4">
                   <!-- Card Header - Dropdown -->
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -274,129 +256,251 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div></div>
           </div>
 
 
-          <!-- C R E A T E  N E W  E X P E N S E -->
+          <!-- content 1 - create new -->
           <div *ngIf="content1">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Criar nova despesa</h1>
+              <h1 class="h3 mb-0 text-blue">Criar nova despesa</h1>
             </div>
-
             <!--form expenses-->
-            <form ngSubmit="onSubmit()">
+            <form #itemForm="ngForm" name="form" ngSubmit="onSubmit()">
               <!-- expense type -->
-              <div class="form-group row">
-                <div class="col-xs-4">
-                  <select class="form-control" (change)="getExpenseType()">
-                    <option value="0">Tipo de despesa...</option>
-                    <option *ngFor="let et of expenseType"[value]="et">{{et}}</option>
-                  </select>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <select class="form-control" (change)="getExpenseType()">
+                      <option value="0">Tipo de despesa...</option>
+                      <option *ngFor="let et of expenseType"[value]="et">{{et}}</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-				
-              <br>
-              <!-- dates -->
-              <div class="row">
-                <div class="col">
-                  <label>Data da despesa: </label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="expenseDate" ngbDatepicker #d="ngbDatepicker">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                <br>
+                <label>Data de despesa e do pagamento:</label>
+                <br>
+                <!-- dates -->
+                <div class="form-inline">
+                  <div class="form-group hidden">
+                    <div class="input-group">
+                      <input name="datepicker" class="form-control" ngbDatepicker
+                        #datepicker="ngbDatepicker" [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event)"
+                        [displayMonths]="2" [dayTemplate]="t"
+                        outsideDays="hidden" [startDate]="fromDate!" [(ngModel)]="expenseDate">
+                      <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused"
+                            [class.range]="isRange(date)"
+                            [class.faded]="isHovered(date) || isInside(date)"
+                           (mouseenter)="hoveredDate = date"
+                            (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                        </span>
+                      </ng-template>
+                    </div>
+                  </div>
+    
+                  <div class="form-group">
+                    <div class="input-group">
+                        <input #dpFromDate
+                            class="form-control" placeholder="yyyy-mm-dd"
+                            name="dpFromDate" [value]="formatter.format(fromDate)"
+                            (input)="fromDate = validateInput(fromDate, dpFromDate.value)" >
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" 
+                            (click)="datepicker.toggle()" type="button">
+                          </button>
+                        </div>
                       </div>
                     </div>
-                </div>
-                <div class="col">
-                  <label>Data do pagamento: </label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp2" [(ngModel)]="paymentDate" ngbDatepicker #d="ngbDatepicker">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                    <div class="form-group ml-2">
+                      <div class="input-group">
+                        <input #dpToDate
+                          class="form-control" placeholder="yyyy-mm-dd"
+                          name="dpToDate"
+                          [value]="formatter.format(toDate)"
+                          (input)="toDate = validateInput(toDate, dpToDate.value)">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+                        </div>
                       </div>
                     </div>
-                </div>
+                  </div>
+
+                <!-- end dates -->
               </div>
 
               <br>
               <hr>
 
-              <div class="d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-2 text-gray-800">Items da despesa</h4>
-              </div>
-              <br>
 
               <!-- item -->
-              <div class="form-group" *ngFor="let obj of dataArray; let i = index">
-                <p>Item {{i + 1}}</p>
+              <div class="container-fluid" *ngFor="let obj of dataArray; let i = index">
+                <h4 class="mb-2 text-blue2">Items da despesa</h4><br>
+                <h5 class="mb-2 text-gray-800">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5><br>
                  <div class="row">
-                    <div class="col">
-                      <label for="itemName">Nome do item:</label>
-                      <input id="itemName" name="itemName{{i}}" type="text" class="form-control" 
-                        [(ngModel)]="obj.itemName">
+                   <!--item name-->
+                    <div class="col-sm-6" [class.has-error]="item.invalid && item.touched"
+                    [class.has-success]="item.valid">
+                      <label for="itemName" class="control-label">Nome do item:</label>
+                      <input required id="itemName" name="itemName{{i}}" type="text" class="form-control" 
+                        [(ngModel)]="obj.itemName" #item="ngModel">
+                      <span class="help-block" *ngIf="item.invalid && item.touched">
+                        O nome do item é obrigatório
+                      </span>
                     </div>
-                    <div class="col">
+                    <!--item description-->
+                    <div class="col-sm-6">
                       <label for="description">Descrição:</label>
                       <textarea id="description" name="description{{i}}" type="text" rows="1" class="form-control" 
-                        [(ngModel)]="obj.description"></textarea>
+                        [(ngModel)]="obj.description" ></textarea>
                     </div>
                   </div>
                   <br>
                   <div class="row">
-                    <div class="col">
+                    <!--currency-->
+                    <div class="col-sm-6">
                       <label for="currency">Moeda:</label>
                       <select id="currency" name="currency{{i}}" class="form-control" [(ngModel)]="obj.currency" (change)="getCurrency()">
                         <option value="0">Tipo de Moeda...</option>
                         <option *ngFor="let c of currency"[value]="c">{{c}}</option>
                       </select>
                     </div>
-                    <div class="col">
-                      <label for="value">Valor:</label>
-                      <input id="value" name="value{{i}}" type="text" class="form-control" 
-                        [(ngModel)]="obj.value" >
+                    <!--value-->
+                    <div class="col-sm-6" [class.has-error]="val.invalid && val.touched"
+                      [class.has-success]="val.valid">
+                      <label for="value" class="control-label">Valor:</label>
+                      <input required id="value" name="value{{i}}" type="text" class="form-control" 
+                        [(ngModel)]="obj.value" #val="ngModel">
+                      <span class="help-block" *ngIf="val.invalid && val.touched">
+                        O valor do item é obrigatório
+                      </span>
                     </div>
+
+
                   </div>
                   <br>
                   <!--<label>Quer adicionar ficheiro?</label>-->
+                  <button type="button" class="btn btn-primary" name="add{{i}}" *ngIf="!obj.toggle" (click) ="obj.getOpenFileChooser()">Adicionar ficheiro</button>
+                  <button type="button" class="btn btn-primary" name="add{{i}}" *ngIf="obj.toggle" (click) ="obj.getOpenFileChooser()"> Fechar</button>
+                  <br><br>
+                  <div *ngIf="obj.toggle">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                          aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Escolher ficheiro</label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <br><br>
                   <div class="row">
                     <div class="col-0" *ngIf="i!=0">
                       <span (click)="removeItem(i)" class="btn btn-danger">-</span>
                     </div>
                     <div class="col-1">
-                      <span (click)="addItem()" class="btn btn-success">+</span>
+                      <span (click)="addItem()" class="btn btn-success" >+</span>
                     </div>
                   </div>
                   <hr>
                 </div>
               <!--end of item-->
+              <br>
+              <br>
 
-              <!--<button type="button" class="btn btn-primary" *ngIf="!toggle" (click) ="addNewItem()">Adicionar item</button>-->
-              <!--<button type="button" class="btn btn-primary" *ngIf="toggle" (click) ="addNewItem()"> Remover  item</button>-->
-              <br><br>
-
-
-              
 
               <!--total value-->
-              <div class="form-group row">
-                <div class="col-xs-4">
-                  <label for="value">Valor total: </label>
-                  <input id="value" type="text" class="form-control">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label for="value">Valor total: </label>
+                    <input id="value" type="text" class="form-control" readonly>
+                  </div>
                 </div>
-
+                <br>
+                <button class="btn btn-primary" [disabled]="itemForm.invalid">Submeter</button>
               </div>
-              <br>
-              <button class="btn btn-primary">Submeter</button>
              
             </form>
             <!-- end form expenses -->
           </div>
 
           
-
+          <!-- content 2  -->
           <div *ngIf="content2">
             Fazer procura de despesa
+            <form class="form-inline">
+              <div class="form-group hidden">
+                <div class="input-group">
+                  <input name="datepicker" class="form-control" ngbDatepicker
+                    #datepicker="ngbDatepicker" [autoClose]="'outside'"
+                    (dateSelect)="onDateSelection($event)"
+                    [displayMonths]="2" [dayTemplate]="t"
+                    outsideDays="hidden" [startDate]="fromDate!">
+                  <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day" [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                       (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                    <input #dpFromDate
+                        class="form-control" placeholder="yyyy-mm-dd"
+                        name="dpFromDate" [value]="formatter.format(fromDate)"
+                        (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" 
+                        (click)="datepicker.toggle()" type="button">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group ml-2">
+                  <div class="input-group">
+                    <input #dpToDate
+                      class="form-control" placeholder="yyyy-mm-dd"
+                      name="dpToDate"
+                      [value]="formatter.format(toDate)"
+                      (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <hr/>
+              <pre>From date model: {{ fromDate | json }}</pre>
+              <pre>To date model: {{ toDate | json }}</pre>
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
 
           <!-- Content Row - put contents one next to another-->

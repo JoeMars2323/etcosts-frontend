@@ -11,6 +11,10 @@ import { LoginComponent } from './modules/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { CreateLoginComponent } from './modules/create-login/create-login.component';
 import { PersonalComponent } from './modules/personal/personal.component';
+import { AboutComponent } from './modules/about/about.component';
+import { ServicesComponent } from './modules/services/services.component';
+import { ContactsComponent } from './modules/contacts/contacts.component';
+import { FaqComponent } from './modules/faq/faq.component';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { PersonalComponent } from './modules/personal/personal.component';
     MainComponent,
     LoginComponent,
     CreateLoginComponent,
-    PersonalComponent
+    PersonalComponent,
+    AboutComponent,
+    ServicesComponent,
+    ContactsComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

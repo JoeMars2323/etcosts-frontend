@@ -9800,6 +9800,16 @@
   .text-gray-900 {
     color: #3a3b45 !important;
   }
+
+  .text-blue {
+    color: #0c43f8 !important;
+    font-weight: bold !important;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  .text-blue2 {
+    color: #3366ff !important;
+  }
   
   .icon-circle {
     height: 2.5rem;
