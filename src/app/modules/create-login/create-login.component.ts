@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RestApiService } from '../../core/services/rest-api.service';
+import { RestApiService } from '../../core/services/rest-api/rest-api.service';
 import { User } from '../../core/models/User';
 
 @Component({

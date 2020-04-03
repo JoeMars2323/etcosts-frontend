@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 
-import { RestApiService } from '../../core/services/rest-api.service';
+import { RestApiService } from '../../core/services/rest-api/rest-api.service';
+import { InteractionService } from 'src/app/core/services/interaction/interaction.service';
 import { User } from '../../core/models/User';
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   response: boolean;
 
   constructor(private api: RestApiService,
+              private interaction: InteractionService,
               private router: Router) {
                 this.user = new User();
                }
@@ -32,7 +34,6 @@ export class LoginComponent implements OnInit {
     this.api.login(this.user).subscribe(
       data => {
         this.response = data;
-        //alert('---> ' + data);
         if(this.response === true) {
           this.gotoPersonalArea();
         } else
@@ -50,6 +51,10 @@ export class LoginComponent implements OnInit {
 
   gotoPersonalArea() {
     this.router.navigate(['/personal']);
+  }
+
+  sendUserName() {
+    this.interaction.sendUserName('tv');
   }
 
 }

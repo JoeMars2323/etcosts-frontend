@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { User } from '../models/User';
-import { ExpenseType } from '../models/ExpenseType';
-import { Currency } from '../models/Currency';
-import { Expense } from '../models/Expense';
-import { ItemType } from '../models/ItemType';
+import { User } from '../../models/User';
+import { ExpenseType } from '../../models/ExpenseType';
+import { Currency } from '../../models/Currency';
+import { Expense } from '../../models/Expense';
+import { ItemType } from '../../models/ItemType';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
+  
   private usersUrl: String;
 
   constructor(private http: HttpClient) { 

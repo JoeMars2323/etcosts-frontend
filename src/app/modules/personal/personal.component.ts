@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {NgbDateStruct, NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
-import { RestApiService } from '../../core/services/rest-api.service';
+import { RestApiService } from '../../core/services/rest-api/rest-api.service';
 import { ItemExpense } from '../../core/models/ItemExpense';
+import { User } from 'src/app/core/models/User';
+import { InteractionService } from 'src/app/core/services/interaction/interaction.service';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -37,6 +40,12 @@ import { ItemExpense } from '../../core/models/ItemExpense';
 })
 export class PersonalComponent implements OnInit {
 
+  @Input() Message: string;
+
+  // get userdata from login component
+  username: String;
+  text: String;
+
   // range datepicker
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
@@ -57,9 +66,6 @@ export class PersonalComponent implements OnInit {
   expenseDate: NgbDateStruct;
   paymentDate: NgbDateStruct;
 
-  // get username
-  user: String = 'tv';
-
   // flags
   expenses: boolean = false;
   search: boolean = false;
@@ -70,7 +76,8 @@ export class PersonalComponent implements OnInit {
   content2: boolean = false;
   utilities: boolean = false;
   
-  constructor(private api: RestApiService, private calendar: NgbCalendar, 
+  constructor(private api: RestApiService, private calendar: NgbCalendar,
+    private interaction: InteractionService,
     public formatter: NgbDateParserFormatter) { 
       this.fromDate = calendar.getToday();
       this.toDate = calendar.getNext(calendar.getToday(), 'd', 0);
@@ -80,6 +87,7 @@ export class PersonalComponent implements OnInit {
     this.getExpenseType();
     this.getCurrency();
     this.dataArray.push(this.item); 
+    this.getUsername();
     
   }
 
@@ -128,6 +136,19 @@ export class PersonalComponent implements OnInit {
 
       }
     )
+  }
+
+  // interaction with login component
+  getUsername() {
+    this.interaction.login$.subscribe(
+      user => {
+        this.username = user;
+      }
+    )
+  }
+
+  xpto() {
+    alert('batatas e ' + this.username);
   }
 
   // side barr
@@ -180,8 +201,7 @@ export class PersonalComponent implements OnInit {
     this.dataArray.splice(index);
   }
 
- 
-
+  // submit button
   onSubmit() {
 
   }
