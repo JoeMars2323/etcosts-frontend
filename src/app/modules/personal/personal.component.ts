@@ -3,9 +3,7 @@ import {NgbDateStruct, NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-b
 
 import { RestApiService } from '../../core/services/rest-api/rest-api.service';
 import { ItemExpense } from '../../core/models/ItemExpense';
-import { User } from 'src/app/core/models/User';
 import { InteractionService } from 'src/app/core/services/interaction/interaction.service';
-import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -40,22 +38,14 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class PersonalComponent implements OnInit {
 
-  @Input() Message: string;
-
-  // get userdata from login component
-  username: String;
-  text: String;
-
   // range datepicker
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
 
-
   // add and remove items
   item = new ItemExpense();
   dataArray = [];
-
 
   // lists
   expenseType: String[];
@@ -83,13 +73,13 @@ export class PersonalComponent implements OnInit {
       this.toDate = calendar.getNext(calendar.getToday(), 'd', 0);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getExpenseType();
     this.getCurrency();
-    this.dataArray.push(this.item); 
-    this.getUsername();
+    this.dataArray.push(this.item);
     
   }
+
 
   // datepicker range functions
   onDateSelection(date: NgbDate) {
@@ -119,8 +109,8 @@ export class PersonalComponent implements OnInit {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
-  // end datepicker functions
 
+  // load dropdowns
   getExpenseType() {
     this.api.getExpenseType().subscribe(
       data => {
@@ -138,39 +128,25 @@ export class PersonalComponent implements OnInit {
     )
   }
 
-  // interaction with login component
-  getUsername() {
-    this.interaction.login$.subscribe(
-      user => {
-        this.username = user;
-      }
-    )
-  }
-
-  xpto() {
-    alert('batatas e ' + this.username);
-  }
-
-  // side barr
+  // open and close components
   callAll1() {
     this.content1 = true;
     this.content2 = false;
     this.dashbord = false;
   }
+
   callAll2() {
     this.content2 = true;
     this.content1 = false;
     this.dashbord = false;
   }
 
-  // dashboard
   callDashboard() {
     this.dashbord = true;
     this.content1 = false;
     this.content2 = false;
   }
 
-  // side bar functions
   newExpenses() {
     this.expenses = ! this.expenses;
   }

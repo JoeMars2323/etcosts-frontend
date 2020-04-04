@@ -15,6 +15,7 @@ import { AboutComponent } from './modules/about/about.component';
 import { ServicesComponent } from './modules/services/services.component';
 import { ContactsComponent } from './modules/contacts/contacts.component';
 import { FaqComponent } from './modules/faq/faq.component';
+import { AuthenticationService } from './core/services/authentication/authentication.service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { FaqComponent } from './modules/faq/faq.component';
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

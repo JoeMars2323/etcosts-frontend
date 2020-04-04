@@ -23,7 +23,6 @@
           id="username" name="username" placeholder="Username" required #username="ngModel">
           <span class="focus-input100"></span>
         </div>
-        <!--<div [hidden]="!username.pristine" class="alert alert-danger">Username is required</div>-->
         
         <!--password-->
         <div class="wrap-input100 validate-input m-b-16">
@@ -31,7 +30,6 @@
           name="password" placeholder="Password">
           <span class="focus-input100"></span>
         </div>
-        <!--<div [hidden]="!password.pristine" class="alert alert-danger">Password is required</div>-->
         
         <div class="flex-sb-m w-full p-t-3 p-b-24">
           <div class="contact100-form-checkbox">
@@ -49,18 +47,13 @@
         </div>
 
         <div class="container-login100-form-btn m-t-17">
-          <!--<button class="login100-form-btn" type="submit" [disabled]="!userForm.form.valid"> Login </button>-->
-          <button (click)="sendUserName()" class="login100-form-btn" type="submit"> Login </button>
+          <button (click)="login()" class="login100-form-btn" type="submit"> Login </button>
           
         </div>
-
       </form>
     </div>
   </div>
 </div>
-<app-personal></app-personal>
-
-
 <div id="dropDownSelect1"></div>
 
 

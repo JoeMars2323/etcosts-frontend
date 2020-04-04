@@ -8,7 +8,7 @@ export class InteractionService {
 
   private loginSource = new Subject<String>();
   // observable var ends with $
-  login$ = this.loginSource.asObservable();
+  public login$ = this.loginSource.asObservable();
 
   constructor() { }
 
