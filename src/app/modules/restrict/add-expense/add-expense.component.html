@@ -1,0 +1,165 @@
+<!-- create new expense-->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-blue">Criar nova despesa</h1>
+    </div>
+
+    <!--form expenses-->
+    <form #itemForm="ngForm" name="form" ngSubmit="onSubmit()">
+
+      <!-- expense type -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <select class="form-control" (change)="getExpenseType()">
+              <option value="0">Tipo de despesa...</option>
+              <option *ngFor="let et of expenseType"[value]="et">{{et}}</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <label>Data de despesa e do pagamento:</label>
+        <br>
+
+        <!-- dates -->
+        <div class="form-inline">
+          <div class="form-group hidden">
+            <div class="input-group">
+              <input name="datepicker" class="form-control" ngbDatepicker
+                #datepicker="ngbDatepicker" [autoClose]="'outside'"
+                (dateSelect)="onDateSelection($event)"
+                [displayMonths]="2" [dayTemplate]="t"
+                outsideDays="hidden" [startDate]="fromDate!" [(ngModel)]="expenseDate">
+              <ng-template #t let-date let-focused="focused">
+                <span class="custom-day" [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                   (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                </span>
+              </ng-template>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+                <input #dpFromDate
+                    class="form-control" placeholder="yyyy-mm-dd"
+                    name="dpFromDate" [value]="formatter.format(fromDate)"
+                    (input)="fromDate = validateInput(fromDate, dpFromDate.value)" >
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" 
+                    (click)="datepicker.toggle()" type="button">
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group ml-2">
+              <div class="input-group">
+                <input #dpToDate
+                  class="form-control" placeholder="yyyy-mm-dd"
+                  name="dpToDate"
+                  [value]="formatter.format(toDate)"
+                  (input)="toDate = validateInput(toDate, dpToDate.value)">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- end dates -->
+      </div>
+
+      <br>
+      <hr>
+
+      <!-- items -->
+      <div class="container-fluid" *ngFor="let obj of dataArray; let i = index">
+        <h4 class="mb-2 text-blue2">Items da despesa</h4><br>
+        <h5 class="mb-2 text-gray-800">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5><br>
+         <div class="row">
+           <!--item name-->
+            <div class="col-sm-6" [class.has-error]="item.invalid && item.touched"
+            [class.has-success]="item.valid">
+              <label for="itemName" class="control-label">Nome do item:</label>
+              <input required id="itemName" name="itemName{{i}}" type="text" class="form-control" 
+                [(ngModel)]="obj.itemName" #item="ngModel">
+              <span class="help-block" *ngIf="item.invalid && item.touched">
+                O nome do item é obrigatório
+              </span>
+            </div>
+            <!--item description-->
+            <div class="col-sm-6">
+              <label for="description">Descrição:</label>
+              <textarea id="description" name="description{{i}}" type="text" rows="1" class="form-control" 
+                [(ngModel)]="obj.description" ></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <!--currency-->
+            <div class="col-sm-6">
+              <label for="currency">Moeda:</label>
+              <select id="currency" name="currency{{i}}" class="form-control" [(ngModel)]="obj.currency" (change)="getCurrency()">
+                <option value="0">Tipo de Moeda...</option>
+                <option *ngFor="let c of currency"[value]="c">{{c}}</option>
+              </select>
+            </div>
+            <!--value-->
+            <div class="col-sm-6" [class.has-error]="val.invalid && val.touched"
+              [class.has-success]="val.valid">
+              <label for="value" class="control-label">Valor:</label>
+              <input required id="value" name="value{{i}}" type="text" class="form-control" 
+                [(ngModel)]="obj.value" #val="ngModel">
+              <span class="help-block" *ngIf="val.invalid && val.touched">
+                O valor do item é obrigatório
+              </span>
+            </div>
+          </div>
+          <br>
+          <!--<label>Quer adicionar ficheiro?</label>-->
+          <button type="button" class="btn btn-primary" name="add{{i}}" *ngIf="!obj.toggle" (click) ="obj.getOpenFileChooser()">Adicionar ficheiro</button>
+          <button type="button" class="btn btn-primary" name="add{{i}}" *ngIf="obj.toggle" (click) ="obj.getOpenFileChooser()"> Fechar</button>
+          <br><br>
+          <div *ngIf="obj.toggle">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Escolher ficheiro</label>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <div class="col-0" *ngIf="i!=0">
+              <span (click)="removeItem(i)" class="btn btn-danger">-</span>
+            </div>
+            <div class="col-1">
+              <span (click)="addItem()" class="btn btn-success" >+</span>
+            </div>
+          </div>
+          <hr>
+        </div>
+      <!--end of item-->
+      <br>
+      <br>
+
+
+      <!--total value-->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="value">Valor total: </label>
+            <input id="value" type="text" class="form-control" readonly>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-primary" [disabled]="itemForm.invalid">Submeter</button>
+      </div>
+     
+    </form>
+    <!-- end form expenses -->
+  

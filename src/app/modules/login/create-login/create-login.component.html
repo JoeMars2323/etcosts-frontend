@@ -1,0 +1,46 @@
+<a a routerLink="/main" class="btn btn-info">Voltar</a>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-t-20 p-b-85">
+      <form class="login100-form validate-form flex-sb flex-w" 
+      (ngSubmit)="onSubmit()" #userForm="ngForm">
+        <span class="login100-form-title p-b-31"> Criar Conta </span>
+
+        <!--Username-->
+        <div class="wrap-input100 validate-input m-b-12">
+          <input type="text" class="input100" [(ngModel)]="user.username" 
+          id="username" name="username" placeholder="Username">
+          <span class="focus-input100"></span>
+        </div>
+
+        <!--password-->
+        <div class="wrap-input100 validate-input m-b-12">
+          <input type="password" class="input100" [(ngModel)]="user.password"
+          id="password" name="password" placeholder="Password">
+          <span class="focus-input100"></span>
+        </div>
+
+        <!--email-->
+        <div class="wrap-input100 validate-input m-b-12">
+          <input type="text" class="input100" [(ngModel)]="user.email"
+          id="email" name="email" placeholder="E-Mail">
+          <span class="focus-input100"></span>
+        </div>
+
+        <!--confirm password-->
+        <div class="wrap-input100 validate-input m-b-12">
+          <input type="password" class="input100" [(ngModel)]="user.passConfirm"
+          id="confirmpass" name="confirmpass" placeholder="Confirm Password">
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="container-login100-form-btn m-t-15">
+          <button class="login100-form-btn" type="submit"> Criar Conta </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
