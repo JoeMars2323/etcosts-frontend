@@ -1,7 +1,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-blue">Listar todas as despesas</h1>
-  </div>
-  <table class="table table-striped">
+</div>
+  <!--<table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Despesa</th>
@@ -37,5 +37,31 @@
         <td>12.50 €</td>
         <td><i class="far fa-edit"></i>&nbsp;&nbsp;<i class="fas fa-trash"></i></td>
       </tr>
+    </tbody>
+  </table>-->
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Despesa</th>
+        <th scope="col">Tipo de Despesa</th>
+        <th scope="col">Data da Despesa</th>
+        <th scope="col">Data do Pagamento</th>
+        <th scope="col">Valor Total</th>
+        <th scope="col">Acções</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of expense">
+          <td>{{ item.expenseName }}</td>
+          <td>{{ item.espenseType }}</td>
+          <td>{{ item.expenseDate }}</td>
+          <td>{{ item.paymentDate }}</td>
+          <td>{{ item.total }}</td>
+          <td>
+             <button type="button" ><i class="far fa-edit"></i></button>
+             <button type="button" ><i class="fas fa-trash"></i></button>
+          </td>
+       </tr>
     </tbody>
   </table>

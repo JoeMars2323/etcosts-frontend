@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
+import { User } from '../../../core/models/User';
+
 @Component({
   selector: 'app-personal-main',
   templateUrl: './personal-main.component.html',
   styleUrls: ['./personal-main.component.css']
 })
 export class PersonalMainComponent implements OnInit {
+
+  user: User;
+
+  // get username
+  username: String
+  answer: any
 
   // flags
   expenses: boolean = false;
@@ -17,9 +26,19 @@ export class PersonalMainComponent implements OnInit {
   newExpense: boolean = false;
   searchAll: boolean = false;
 
-  constructor() { }
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.getUsername();
+    this.getExpenses();
+  }
+
+  getUsername() {
+    this.username = this.auth.getUser().username;
+  }
+
+  getExpenses() {
+    this.answer = this.auth.getUserInformation();
   }
 
   // open and close components

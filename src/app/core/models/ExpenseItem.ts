@@ -1,8 +1,7 @@
 import { Expense } from './Expense';
 import { Item } from './Item';
 import { Currency } from './Currency';
-import { StateType } from './StateType'
-import { Settings } from 'http2';
+import { StateType } from './StateType';
 
 export class ExpenseItem {
 
@@ -13,6 +12,5 @@ export class ExpenseItem {
     stateType: StateType;
     value: String;
     comments: String;
-
 
 }

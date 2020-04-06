@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { RestApiService } from '../rest-api/rest-api.service';
 import { User } from '../../models/User';
+import { Expense } from '../../models/Expense';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthenticationService {
 
   private user: User;
   private response: boolean;
+  private expense: Expense[];
 
   constructor(private api: RestApiService, private router: Router) { 
 
@@ -38,10 +40,15 @@ export class AuthenticationService {
     this.router.navigate(['/personal']);
   }
 
+  public getUser():User {
+    return this.user;
+  }
+
   public getUserInformation() {
-    // 0- use this.login
-    // 1- create the java service
-    // 2- create observable
-    // 3- put info available
+    this.api.getExpensesByUser(this.user).subscribe(
+      data => {
+        this.expense = data;
+        //console.log(this.expense);
+      });
   }
 }
