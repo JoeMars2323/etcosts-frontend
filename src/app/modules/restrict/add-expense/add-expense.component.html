@@ -12,13 +12,17 @@
 
           <div class="col-sm-6">
             <label for="expenseName" class="control-label">Nome da despesa:</label>
-            <input required id="expenseName" name="expenseName" type="text" class="form-control" >
+            <input required id="expenseName" name="expenseName" type="text" class="form-control" 
+            [(ngModel)]="expense.expenseName">
           </div>
 
           <div class="col-sm-6">
-            <label for="itemName" class="control-label">Tipo da despesa:</label>
-            <select class="form-control" (change)="getExpenseType()" >
-              <option *ngFor="let et of expenseType" [ngValue]="et">{{et}}</option>
+            <label for="itemName">Tipo da despesa:</label>
+            <select id="itemName" name="itemName" class="form-control ml-1" 
+            [(ngModel)]="expense.expenseType" (change)="getExpenseType()">
+              <option *ngFor="let type of expenseType" [ngValue]="type">
+                {{type}}
+              </option>
             </select>
           </div>
 
@@ -29,52 +33,12 @@
         <br>
 
         <!-- dates -->
-        <div class="form-inline">
-          <div class="form-group hidden">
-            <div class="input-group">
-              <input name="datepicker" class="form-control" ngbDatepicker
-                #datepicker="ngbDatepicker" [autoClose]="'outside'"
-                (dateSelect)="onDateSelection($event)"
-                [displayMonths]="2" [dayTemplate]="t"
-                outsideDays="hidden" [startDate]="fromDate!">
-              <ng-template #t let-date let-focused="focused">
-                <span class="custom-day" [class.focused]="focused"
-                    [class.range]="isRange(date)"
-                    [class.faded]="isHovered(date) || isInside(date)"
-                   (mouseenter)="hoveredDate = date"
-                    (mouseleave)="hoveredDate = null">
-                    {{ date.day }}
-                </span>
-              </ng-template>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-                <input #dpFromDate
-                    class="form-control" placeholder="yyyy-mm-dd"
-                    name="dpFromDate" [value]="formatter.format(fromDate)"
-                    (input)="fromDate = validateInput(fromDate, dpFromDate.value)" >
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary calendar" 
-                    (click)="datepicker.toggle()" type="button">
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="form-group ml-2">
-              <div class="input-group">
-                <input #dpToDate
-                  class="form-control" placeholder="yyyy-mm-dd"
-                  name="dpToDate"
-                  [value]="formatter.format(toDate)"
-                  (input)="toDate = validateInput(toDate, dpToDate.value)">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary calendar" 
-                  (click)="datepicker.toggle()" type="button"></button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-sm-6">
+          <label for="expenseDate" class="control-label">Data:</label>
+          <input required id="expenseDate" name="expenseDate" type="text" class="form-control" 
+          [(ngModel)]="datepickerRange" bsDaterangepicker>
+        </div>
+
         <!-- end dates -->
       </div>
 
@@ -108,9 +72,11 @@
             <!--currency-->
             <div class="col-sm-6">
               <label for="currency">Moeda:</label>
-              <select id="currency" name="currency{{i}}" class="form-control" [(ngModel)]="obj.currency" (change)="getCurrency()">
-                <option value="0">Tipo de Moeda...</option>
-                <option *ngFor="let c of currency"[value]="c">{{c}}</option>
+              <select id="currency" name="currency{{i}}" class="form-control ml-1" 
+              [(ngModel)]="obj.currency" (change)="getCurrency()">
+                <option *ngFor="let c of currency"[value]="c">
+                  {{c}}
+                </option>
               </select>
             </div>
             <!--value-->
@@ -162,13 +128,21 @@
         <div class="row">
           <div class="col-sm-4">
             <label for="value">Valor total: </label>
-            <input id="value" type="text" class="form-control" readonly 
-            placeholder="{{10.00}}" >
+            <input id="value" type="text" class="form-control" readonly
+            value="10.00" placeholder="{{10.00}}" >
           </div>
         </div>
+
+
+        
+
+
+
+
         <br>
         <button class="btn btn-primary" type="submit" [disabled]="itemForm.invalid"(click)="onSubmit()">Submeter</button>
       </div>
+      <br><br>
      
     </form>
     <!-- end form expenses -->

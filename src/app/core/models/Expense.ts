@@ -1,7 +1,7 @@
 export class Expense {
     
     expenseId: number;
-    userId: String;
+    username: String;
     expenseName: String;
     expenseType: String;
     expenseDate: String;

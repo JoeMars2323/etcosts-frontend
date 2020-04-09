@@ -33,12 +33,6 @@ export class PersonalMainComponent implements OnInit {
   ngOnInit(): void {
     this.getUsername();
     this.getExpenseList();
-    //this. putExpense();
-  }
-
-  onSubmit() {
-    this.putExpense();
-    
   }
 
   getUsername() {
@@ -53,30 +47,11 @@ export class PersonalMainComponent implements OnInit {
       });
   }
 
-  // expense from back-end
-  public putExpense() {
-    //this.expense.userId = '1';
-    //this.expense.expenseName ='Hotel em Helsinquia';
-    //this.expense.expenseType = 'Estadia';
-    //this.expense.expenseDate = '08-04-2020';
-    //this.expense.paymentDate = '08-04-2020';
-    //this.expense.total = '800.00';
-
-    this.api.putExpense(this.expense).subscribe(() =>{
-      //alert('entrou');
-    }
-    );
-  }
-
-  // receive expense from add-expendse component
+  // receive expense from add-expendse component and send to back-end
   expenseToReceive($event) {
     this.expense = $event;
-    this.api.putExpense(this.expense).subscribe(() =>{
-      //alert('entrou');
-    }
-    );
-    //alert(this.expense.expenseName)
-
+    this.expense.username = this.user.username;
+    this.api.putExpense(this.expense).subscribe(() =>{ });
   }
 
   // open and close components

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,11 +43,13 @@ import { AuthenticationService } from './core/services/authentication/authentica
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
