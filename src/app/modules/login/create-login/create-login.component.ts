@@ -32,12 +32,11 @@ export class CreateLoginComponent implements OnInit {
     this.api.createAccount(this.user).subscribe(
       data => {
         this.response = data;
-        //alert('---> ' + data);
         if(this.response === true && (this.user.password === this.user.passConfirm)) {
           this.gotoMainArea();
         }
         else 
-        alert ('correu mal');
+        alert ('Já existe esse username');
          
       },
       err => {

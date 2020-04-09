@@ -25,21 +25,16 @@
               </option>
             </select>
           </div>
-
-
         </div>
-        <br>
-        <label>Data de despesa e do pagamento:</label>
+        
         <br>
 
         <!-- dates -->
         <div class="col-sm-6">
           <label for="expenseDate" class="control-label">Data:</label>
           <input required id="expenseDate" name="expenseDate" type="text" class="form-control" 
-          [(ngModel)]="datepickerRange" bsDaterangepicker>
+          [(ngModel)]="datepickerRange" bsDaterangepicker [bsConfig]="bsConfig">
         </div>
-
-        <!-- end dates -->
       </div>
 
       <br>

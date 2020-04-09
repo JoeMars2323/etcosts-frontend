@@ -13,23 +13,20 @@ import { Expense } from 'src/app/core/models/Expense';
 })
 export class AddExpenseComponent implements OnInit {
 
-  // datepicker properties
-  locale = 'pt-br';
-  datepickerRange: String[];
-
-  //
-
-  //expense
   expense: Expense;
+  item: ItemExpense;
+  
+  // datepicker properties
+  locale = 'en';
+  locales = listLocales();
+  datepickerRange: String[];
+  bsConfig: Partial<BsDatepickerConfig>;
+  colorTheme = 'theme-dark-blue';
 
   // event emiter
   @Output() expenseToSend;
 
-  // datepicker
-  bsConfig: Partial<BsDatepickerConfig>;
-
   // add and remove items
-  item = new ItemExpense();
   expenseName: String;
   dataArray = [];
 
@@ -40,18 +37,27 @@ export class AddExpenseComponent implements OnInit {
 
   constructor(private api: RestApiService, private localeService: BsLocaleService) {
     this.expense = new Expense();
+    this.item = new ItemExpense();
     this.expenseToSend = new EventEmitter<Expense>();
 
   }
   ngOnInit(): void {
-    this.datepickerConfig;
     this.getExpenseType();
     this.getCurrency();
     this.dataArray.push(this.item);
+    this.applyTheme();
+    this.applyLocale();
   }
 
+  // change datepicker properties
   applyLocale() {
     this.localeService.use(this.locale);
+  }
+
+  applyTheme() {
+    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
+    setTimeout(() => {
+    });
   }
   
 
@@ -93,13 +99,6 @@ export class AddExpenseComponent implements OnInit {
     this.expense.total = '10.00';
     this.expenseToSend.emit(this.expense);
 
-  }
-
-  // datepicker config
-  datepickerConfig() {
-    this.bsConfig = {
-      containerClass: 'theme-red'
-    };
   }
 
 

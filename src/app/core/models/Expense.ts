@@ -1,3 +1,4 @@
+import {ItemExpense} from '../models/ItemExpense';
 export class Expense {
     
     expenseId: number;
@@ -7,6 +8,7 @@ export class Expense {
     expenseDate: String;
     paymentDate: String;
     total: String;
+    item: ItemExpense[];
 
  
 }
