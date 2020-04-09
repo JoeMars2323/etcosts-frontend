@@ -9,12 +9,20 @@
       <!-- expense type -->
       <div class="container-fluid">
         <div class="row">
+
           <div class="col-sm-6">
-            <select class="form-control" (change)="getExpenseType()">
-              <option value="0">Tipo de despesa...</option>
-              <option *ngFor="let et of expenseType"[value]="et">{{et}}</option>
+            <label for="expenseName" class="control-label">Nome da despesa:</label>
+            <input required id="expenseName" name="expenseName" type="text" class="form-control" >
+          </div>
+
+          <div class="col-sm-6">
+            <label for="itemName" class="control-label">Tipo da despesa:</label>
+            <select class="form-control" (change)="getExpenseType()" >
+              <option *ngFor="let et of expenseType" [ngValue]="et">{{et}}</option>
             </select>
           </div>
+
+
         </div>
         <br>
         <label>Data de despesa e do pagamento:</label>
@@ -28,7 +36,7 @@
                 #datepicker="ngbDatepicker" [autoClose]="'outside'"
                 (dateSelect)="onDateSelection($event)"
                 [displayMonths]="2" [dayTemplate]="t"
-                outsideDays="hidden" [startDate]="fromDate!" [(ngModel)]="expenseDate">
+                outsideDays="hidden" [startDate]="fromDate!">
               <ng-template #t let-date let-focused="focused">
                 <span class="custom-day" [class.focused]="focused"
                     [class.range]="isRange(date)"
@@ -61,7 +69,8 @@
                   [value]="formatter.format(toDate)"
                   (input)="toDate = validateInput(toDate, dpToDate.value)">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+                  <button class="btn btn-outline-secondary calendar" 
+                  (click)="datepicker.toggle()" type="button"></button>
                 </div>
               </div>
             </div>
@@ -153,11 +162,12 @@
         <div class="row">
           <div class="col-sm-4">
             <label for="value">Valor total: </label>
-            <input id="value" type="text" class="form-control" readonly>
+            <input id="value" type="text" class="form-control" readonly 
+            placeholder="{{10.00}}" >
           </div>
         </div>
         <br>
-        <button class="btn btn-primary" [disabled]="itemForm.invalid">Submeter</button>
+        <button class="btn btn-primary" type="submit" [disabled]="itemForm.invalid"(click)="onSubmit()">Submeter</button>
       </div>
      
     </form>

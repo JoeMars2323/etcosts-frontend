@@ -44,7 +44,7 @@
           </a>
         </div>
         <div class="collapse" *ngIf="search">
-          <div class="bg-white py-2 collapse-inner rounded">
+          <div class="bg-white py-2 collapse-inner rounded pointerCursor">
             <h6 class="collapse-header">Tipo de procura:</h6>
             <a class="collapse-item" (click)="searchAlExpenses()">Todas as despesas</a>
           </div>
@@ -112,7 +112,8 @@
         <!-- Topbar Search -->
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <input type="text" class="form-control bg-light border-0 small" 
+            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
               <button class="btn btn-primary" type="button">
                 <i class="fas fa-search fa-sm"></i>
@@ -124,14 +125,17 @@
         <ul class="navbar-nav ml-auto">
           <!-- Nav Item - Search Dropdown (Visible Only XS) -->
           <li class="nav-item dropdown no-arrow d-sm-none">
-            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" 
+            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-search fa-fw"></i>
             </a>
             <!-- Dropdown - Messages -->
-            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" 
+            aria-labelledby="searchDropdown">
               <form class="form-inline mr-auto w-100 navbar-search">
                 <div class="input-group">
-                  <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                  <input type="text" class="form-control bg-light border-0 small" 
+                  placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="button">
                       <i class="fas fa-search fa-sm"></i>
@@ -145,7 +149,8 @@
           <div class="row">
             <div class="col">
               <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-dark" id="dropdownBasic1" ngbDropdownToggle>Ben-Vindo {{this.username}} &nbsp;&nbsp;<i class="far fa-user-circle"></i>&nbsp;</button>
+                <button class="btn btn-dark" id="dropdownBasic1" 
+                ngbDropdownToggle>Ben-Vindo {{this.user.username}} &nbsp;&nbsp;<i class="far fa-user-circle"></i>&nbsp;</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem ><i class="fas fa-user"></i> Perfil</button>
                   <button ngbDropdownItem><i class="fas fa-cog"></i> Definições</button>
@@ -159,19 +164,17 @@
       <!-- End of Topbar -->
 
 
-
-
       <!-- Begin Pges Content -->
       <div class="container-fluid">
 
         <!-- change to add expense page -->
         <div *ngIf="newExpense">
-          <app-add-expense></app-add-expense>
+          <app-add-expense (expenseToSend)="expenseToReceive($event)"></app-add-expense>
         </div>
 
         <!-- change to list expense page -->
         <div *ngIf="searchAll">
-          <app-list-expenses></app-list-expenses>
+          <app-list-expenses [expense]="expenseList" ></app-list-expenses>
 
         </div>
 

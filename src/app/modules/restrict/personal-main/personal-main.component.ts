@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
 import { User } from '../../../core/models/User';
+import { Expense } from '../../../core/models/Expense';
+import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
 
 @Component({
   selector: 'app-personal-main',
@@ -11,10 +13,8 @@ import { User } from '../../../core/models/User';
 export class PersonalMainComponent implements OnInit {
 
   user: User;
-
-  // get username
-  username: String
-  answer: any
+  expenseList: Expense[];
+  expense: Expense = null;
 
   // flags
   expenses: boolean = false;
@@ -26,19 +26,57 @@ export class PersonalMainComponent implements OnInit {
   newExpense: boolean = false;
   searchAll: boolean = false;
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private api: RestApiService, private auth: AuthenticationService) { 
+    this.expense = new Expense();
+  }
 
   ngOnInit(): void {
     this.getUsername();
-    this.getExpenses();
+    this.getExpenseList();
+    //this. putExpense();
+  }
+
+  onSubmit() {
+    this.putExpense();
+    
   }
 
   getUsername() {
-    this.username = this.auth.getUser().username;
+    this.user = this.auth.getUser();
   }
 
-  getExpenses() {
-    this.answer = this.auth.getUserInformation();
+  public getExpenseList() {
+    this.user = this.auth.getUser();
+    this.api.getExpensesByUser(this.user).subscribe(
+      data => {
+        this.expenseList = data;
+      });
+  }
+
+  // expense from back-end
+  public putExpense() {
+    //this.expense.userId = '1';
+    //this.expense.expenseName ='Hotel em Helsinquia';
+    //this.expense.expenseType = 'Estadia';
+    //this.expense.expenseDate = '08-04-2020';
+    //this.expense.paymentDate = '08-04-2020';
+    //this.expense.total = '800.00';
+
+    this.api.putExpense(this.expense).subscribe(() =>{
+      //alert('entrou');
+    }
+    );
+  }
+
+  // receive expense from add-expendse component
+  expenseToReceive($event) {
+    this.expense = $event;
+    this.api.putExpense(this.expense).subscribe(() =>{
+      //alert('entrou');
+    }
+    );
+    //alert(this.expense.expenseName)
+
   }
 
   // open and close components

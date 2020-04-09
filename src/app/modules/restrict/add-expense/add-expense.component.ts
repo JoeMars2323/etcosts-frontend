@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {NgbDateStruct, NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
 import { ItemExpense } from '../../../core/models/ItemExpense';
+import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
   selector: 'app-add-expense',
@@ -36,6 +37,13 @@ import { ItemExpense } from '../../../core/models/ItemExpense';
 })
 export class AddExpenseComponent implements OnInit {
 
+  //expense
+  expense: Expense;
+
+  // event emiter
+  @Output() expenseToSend;
+
+
   // range datepicker
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
@@ -47,6 +55,7 @@ export class AddExpenseComponent implements OnInit {
 
   // add and remove items
   item = new ItemExpense();
+  expenseName: String;
   dataArray = [];
 
   // lists
@@ -60,8 +69,13 @@ export class AddExpenseComponent implements OnInit {
 
                 this.fromDate = calendar.getToday();
                 this.toDate = calendar.getNext(calendar.getToday(), 'd', 0);
+                this.expense = new Expense();
+                this.expenseToSend = new EventEmitter<Expense>();
 
                }
+              
+
+               
 
   ngOnInit(): void {
     this.getExpenseType();
@@ -69,8 +83,70 @@ export class AddExpenseComponent implements OnInit {
     this.dataArray.push(this.item);
   }
 
-   // datepicker range functions
-   onDateSelection(date: NgbDate) {
+  // load dropdowns
+  getExpenseType() {
+    this.api.getExpenseType().subscribe(
+      data => {
+        this.expenseType = data;
+        console.log(this.expenseType)
+      }
+    )
+  }
+
+  getCurrency() {
+    this.api.getCurrency().subscribe(
+      data => {
+        this.currency = data;
+
+      }
+    )
+  }
+
+   // add and remove items
+   addItem() {
+    this.item = new ItemExpense();
+    this.dataArray.push(this.item);
+  }
+
+  removeItem(index) {
+    this.dataArray.splice(index);
+  }
+
+  // expense from back-end
+  public putExpense() {
+    //this.expense.userId = '1';
+    //this.expense.expenseName ='Hotel em Helsinquia';
+    //this.expense.expenseType = 'Estadia';
+    //this.expense.expenseDate = '08-04-2020';
+    //this.expense.paymentDate = '08-04-2020';
+    //this.expense.total = '800.00';
+
+    this.api.putExpense(this.expense).subscribe(() =>{
+      //alert('entrou');
+    }
+    );
+  }
+
+  // submit button
+  onSubmit() {
+
+    alert('entrou2');
+    this.expense.userId = '2';
+    this.expense.expenseName ='Hotel em Pequim';
+    this.expense.expenseType = 'Estadia';
+    this.expense.expenseDate = '08-04-2020';
+    this.expense.paymentDate = '08-04-2020';
+    this.expense.total = '2800.00';
+    //this.expenseToSend.emit(this.expense);
+    this.api.putExpense(this.expense).subscribe(() =>{
+      alert('entrou2');
+    }
+    );
+
+  }
+
+  // datepicker range functions
+  onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
@@ -96,39 +172,6 @@ export class AddExpenseComponent implements OnInit {
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
-
-  // load dropdowns
-  getExpenseType() {
-    this.api.getExpenseType().subscribe(
-      data => {
-        this.expenseType = data;
-      }
-    )
-  }
-
-  getCurrency() {
-    this.api.getCurrency().subscribe(
-      data => {
-        this.currency = data;
-
-      }
-    )
-  }
-
-   // add and remove items
-   addItem() {
-    this.item = new ItemExpense();
-    this.dataArray.push(this.item);
-  }
-
-  removeItem(index) {
-    this.dataArray.splice(index);
-  }
-
-  // submit button
-  onSubmit() {
-
   }
 
 

@@ -20,14 +20,6 @@ export class RestApiService {
   }
 
   // rest functions
-  public getExpensesByUser(user: User): Observable<Expense[]> {
-    return this.http.post<Expense[]>(this.usersUrl + '/expensesByUser', user);
-  }
-
-  public getExpensesResume(user: User): Observable<Expense[]> {
-    return this.http.post<Expense[]>(this.usersUrl + '/expensesResume', user);
-  }
-
   public login(user: User): Observable<boolean> {
     return this.http.post<boolean>(this.usersUrl + '/login', user);
   }
@@ -36,12 +28,20 @@ export class RestApiService {
     return this.http.post<boolean>(this.usersUrl + '/createAccount', user);
   }
 
+  public getExpensesByUser(user: User): Observable<Expense[]> {
+    return this.http.post<Expense[]>(this.usersUrl + '/expensesByUser', user);
+  }
+
   public getExpenseType(): Observable<String[]> {
     return this.http.get<String[]>(this.usersUrl + '/expenseTypes');
   }
 
   public getCurrency(): Observable<String[]> {
     return this.http.get<String[]>(this.usersUrl + '/currency');
+  }
+
+  public putExpense(expense: Expense) {
+    return this.http.post(this.usersUrl + '/putExpense', expense);
   }
 
 
