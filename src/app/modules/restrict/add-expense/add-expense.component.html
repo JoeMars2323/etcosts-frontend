@@ -46,15 +46,15 @@
         <h5 class="mb-2 text-gray-800">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5><br>
          <div class="row">
            <!--item name-->
-            <div class="col-sm-6" [class.has-error]="item.invalid && item.touched"
-            [class.has-success]="item.valid">
-              <label for="itemName" class="control-label">Nome do item:</label>
-              <input required id="itemName" name="itemName{{i}}" type="text" class="form-control" 
-                [(ngModel)]="obj.itemName" #item="ngModel">
-              <span class="help-block" *ngIf="item.invalid && item.touched">
-                O nome do item é obrigatório
-              </span>
-            </div>
+           <div class="col-sm-6" [class.has-error]="item.invalid && item.touched"
+           [class.has-success]="item.valid">
+             <label for="itemName" class="control-label">Nome do item:</label>
+             <input required id="itemName" name="itemName{{i}}" type="text" class="form-control" 
+             [(ngModel)]="obj.itemName" #item="ngModel">
+             <span class="help-block" *ngIf="item.invalid && item.touched">
+               O nome do item é obrigatório
+             </span>
+           </div>
             <!--item description-->
             <div class="col-sm-6">
               <label for="description">Descrição:</label>

@@ -15,6 +15,7 @@ export class AddExpenseComponent implements OnInit {
 
   expense: Expense;
   item: ItemExpense;
+  itemList: ItemExpense[];
   
   // datepicker properties
   locale = 'en';
@@ -92,12 +93,13 @@ export class AddExpenseComponent implements OnInit {
 
   // submit button
   onSubmit() {
-    this.expense.expenseDate = this.datepickerRange[0];
-    this.expense.paymentDate = this.datepickerRange[1];
-    console.log(this.expense.expenseDate);
-    console.log(this.expense.paymentDate);
-    this.expense.total = '10.00';
-    this.expenseToSend.emit(this.expense);
+    //this.expense.expenseDate = this.datepickerRange[0];
+    //this.expense.paymentDate = this.datepickerRange[1];
+    //console.log(this.expense.expenseDate);
+    //console.log(this.expense.paymentDate);
+    //this.expense.total = '10.00';
+    //this.expenseToSend.emit(this.expense);
+    alert(this.dataArray[0].itemName);
 
   }
 
