@@ -3,10 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../../models/User';
-import { ExpenseType } from '../../models/ExpenseType';
-import { Currency } from '../../models/Currency';
 import { Expense } from '../../models/Expense';
-import { ItemType } from '../../models/ItemType';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +37,8 @@ export class RestApiService {
     return this.http.get<String[]>(this.usersUrl + '/currency');
   }
 
-  public putExpense(expense: Expense) {
-    return this.http.post(this.usersUrl + '/putExpense', expense);
+  public saveExpense(expense: Expense) {
+    return this.http.post(this.usersUrl + '/saveExpense', expense);
   }
 
 

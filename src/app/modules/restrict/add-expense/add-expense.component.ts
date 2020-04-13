@@ -16,11 +16,11 @@ export class AddExpenseComponent implements OnInit {
   expense: Expense;
   item: ItemExpense;
   itemList: ItemExpense[];
+  total: number = 0;
   
   // datepicker properties
   locale = 'en';
   locales = listLocales();
-  datepickerRange: String[];
   bsConfig: Partial<BsDatepickerConfig>;
   colorTheme = 'theme-dark-blue';
 
@@ -91,15 +91,16 @@ export class AddExpenseComponent implements OnInit {
     this.dataArray.splice(index);
   }
 
+  // sum all items
+  sum(num): number {
+    this.total = num;
+    return this.total;
+  }
+
   // submit button
   onSubmit() {
-    //this.expense.expenseDate = this.datepickerRange[0];
-    //this.expense.paymentDate = this.datepickerRange[1];
-    //console.log(this.expense.expenseDate);
-    //console.log(this.expense.paymentDate);
-    //this.expense.total = '10.00';
-    //this.expenseToSend.emit(this.expense);
-    alert(this.dataArray[0].itemName);
+    this.expenseToSend.emit(this.expense);
+    this.total = 0
 
   }
 

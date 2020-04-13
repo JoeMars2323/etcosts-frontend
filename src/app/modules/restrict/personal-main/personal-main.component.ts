@@ -51,7 +51,7 @@ export class PersonalMainComponent implements OnInit {
   expenseToReceive($event) {
     this.expense = $event;
     this.expense.username = this.user.username;
-    this.api.putExpense(this.expense).subscribe(() =>{ });
+    this.api.saveExpense(this.expense).subscribe(() =>{ });
   }
 
   // open and close components

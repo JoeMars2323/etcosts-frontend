@@ -1,7 +1,7 @@
 export class ItemExpense {
     
     toggle: boolean = false;
-    itemName: String;
+    item: String;
     description: String;
     currency: String;
     value: String;
