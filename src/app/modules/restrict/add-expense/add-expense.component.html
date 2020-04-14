@@ -51,8 +51,8 @@
            <!--item name-->
            <div class="col-sm-6" [class.has-error]="item.invalid && item.touched"
            [class.has-success]="item.valid">
-             <label for="itemName" class="control-label">Nome do item:</label>
-             <input required id="itemName" name="itemName{{i}}" type="text" class="form-control" 
+             <label [attr.for]="'itemName'+i" class="control-label">Nome do item:</label>
+             <input required [id]="'itemName'+i" name="itemName{{i}}" type="text" class="form-control" 
              [(ngModel)]="obj.item" #item="ngModel">
              <span class="help-block" *ngIf="item.invalid && item.touched">
                O nome do item é obrigatório
@@ -82,10 +82,13 @@
               [class.has-success]="val.valid">
               <label for="value" class="control-label">Valor:</label>
               <input required id="value" name="value{{i}}" type="text" class="form-control" 
-                [(ngModel)]="obj.value" #val="ngModel"  (keyup)="sum(obj.value)">
+                [(ngModel)]="obj.value" #val="ngModel" >
               <span class="help-block" *ngIf="val.invalid && val.touched">
                 O valor do item é obrigatório
               </span>
+              <br>
+              <input name="valueTest{{i}}" type="text" class="form-control" 
+              [(ngModel)]="valueArray[i]" value="{{obj.value}}">
             </div>
           </div>
           <br>
@@ -116,10 +119,6 @@
           </div>
           <hr>
 
-
-
-
-          
         </div>
       <!--end of item-->
       <br>
@@ -132,7 +131,7 @@
           <div class="col-sm-4">
             <label for="value">Valor total: </label>
             <input id="value" type="text" class="form-control" readonly
-            placeholder="{{total}}" >
+            [(ngModel)]="total">
           </div>
         </div>
 

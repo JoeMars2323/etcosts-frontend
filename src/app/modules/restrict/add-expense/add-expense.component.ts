@@ -13,10 +13,14 @@ import { Expense } from 'src/app/core/models/Expense';
 })
 export class AddExpenseComponent implements OnInit {
 
+  valueArray = [];
+  total: number = 0;
+  value: number[];
+
   expense: Expense;
   item: ItemExpense;
   itemList: ItemExpense[];
-  total: number = 0;
+  
   
   // datepicker properties
   locale = 'en';
@@ -46,6 +50,7 @@ export class AddExpenseComponent implements OnInit {
     this.getExpenseType();
     this.getCurrency();
     this.dataArray.push(this.item);
+    this.valueArray.push(0);
     this.applyTheme();
     this.applyLocale();
   }
@@ -61,7 +66,6 @@ export class AddExpenseComponent implements OnInit {
     });
   }
   
-
   // load dropdowns
   getExpenseType() {
     this.api.getExpenseType().subscribe(
@@ -84,17 +88,16 @@ export class AddExpenseComponent implements OnInit {
    // add and remove items
    addItem() {
     this.item = new ItemExpense();
-    this.dataArray.push(this.item);
+    this.dataArray.push(this.item); 
   }
 
   removeItem(index) {
     this.dataArray.splice(index);
   }
 
-  // sum all items
-  sum(num): number {
-    this.total = num;
-    return this.total;
+  public dataArraySum() {
+    return this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
+
   }
 
   // submit button
