@@ -12,15 +12,13 @@ import { Expense } from 'src/app/core/models/Expense';
   styleUrls: ['./add-expense.component.css']
 })
 export class AddExpenseComponent implements OnInit {
+  // test var
+  tot: string;
 
-  valueArray = [];
+  // calculate total
   total: number = 0;
-  value: number[];
-
   expense: Expense;
   item: ItemExpense;
-  itemList: ItemExpense[];
-  
   
   // datepicker properties
   locale = 'en';
@@ -32,13 +30,13 @@ export class AddExpenseComponent implements OnInit {
   @Output() expenseToSend;
 
   // add and remove items
-  expenseName: String;
   dataArray = [];
+  expenseName: String;
+ 
 
   // lists
   expenseType: String[];
   currency: String[];
-  currencyList: String[];
 
   constructor(private api: RestApiService, private localeService: BsLocaleService) {
     this.expense = new Expense();
@@ -50,7 +48,6 @@ export class AddExpenseComponent implements OnInit {
     this.getExpenseType();
     this.getCurrency();
     this.dataArray.push(this.item);
-    this.valueArray.push(0);
     this.applyTheme();
     this.applyLocale();
   }
@@ -71,7 +68,6 @@ export class AddExpenseComponent implements OnInit {
     this.api.getExpenseType().subscribe(
       data => {
         this.expenseType = data;
-        console.log(this.expenseType)
       }
     )
   }
@@ -88,7 +84,7 @@ export class AddExpenseComponent implements OnInit {
    // add and remove items
    addItem() {
     this.item = new ItemExpense();
-    this.dataArray.push(this.item); 
+    this.dataArray.push(this.item);
   }
 
   removeItem(index) {
@@ -96,7 +92,16 @@ export class AddExpenseComponent implements OnInit {
   }
 
   public dataArraySum() {
-    return this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
+    //this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
+    //console.log(this.dataArray.map(obj => obj.value).reduce((a, b) => a + b));
+    //this.tot = "10";
+    //console.log(this.dataArray.map(obj => obj.value).reduce((a, b) => a + b) === "number");
+    //Number.parseInt(this.tot) + Number.parseInt(this.tot);
+    //console.log(Number.parseInt(this.tot));
+    //return Number.parseInt(this.tot);
+    for (let i = 0; i < this.dataArray.length; i++) {
+      this.dataArray[i].itemValue
+    }
 
   }
 

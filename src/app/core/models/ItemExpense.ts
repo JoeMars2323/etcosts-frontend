@@ -4,7 +4,7 @@ export class ItemExpense {
     item: String;
     description: String;
     currency: String;
-    value: number;
+    itemValue: number;
 
     getOpenFileChooser() {
         this.toggle = !this.toggle;
