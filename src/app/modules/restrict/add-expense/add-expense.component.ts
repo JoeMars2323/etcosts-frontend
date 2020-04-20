@@ -12,13 +12,14 @@ import { Expense } from 'src/app/core/models/Expense';
   styleUrls: ['./add-expense.component.css']
 })
 export class AddExpenseComponent implements OnInit {
-  // test var
-  tot: string;
 
-  // calculate total
-  total: number = 0;
+  // expense declaration
   expense: Expense;
+  dataArray = [];
   item: ItemExpense;
+
+  // event emiter
+  @Output() expenseToSend;
   
   // datepicker properties
   locale = 'en';
@@ -26,17 +27,12 @@ export class AddExpenseComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   colorTheme = 'theme-dark-blue';
 
-  // event emiter
-  @Output() expenseToSend;
-
-  // add and remove items
-  dataArray = [];
-  expenseName: String;
- 
-
   // lists
   expenseType: String[];
   currency: String[];
+
+  // calculate total
+  total: number = 0;
 
   constructor(private api: RestApiService, private localeService: BsLocaleService) {
     this.expense = new Expense();
@@ -91,22 +87,19 @@ export class AddExpenseComponent implements OnInit {
     this.dataArray.splice(index);
   }
 
-  public dataArraySum() {
-    //this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
-    //console.log(this.dataArray.map(obj => obj.value).reduce((a, b) => a + b));
-    //this.tot = "10";
-    //console.log(this.dataArray.map(obj => obj.value).reduce((a, b) => a + b) === "number");
-    //Number.parseInt(this.tot) + Number.parseInt(this.tot);
-    //console.log(Number.parseInt(this.tot));
-    //return Number.parseInt(this.tot);
-    for (let i = 0; i < this.dataArray.length; i++) {
-      this.dataArray[i].itemValue
+  public valueSum() {
+    this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
+    for(let i = 0; i < this.dataArray.length; i++) {
+      console.log(this.dataArray[i].itemValue);
+      console.log(typeof this.dataArray[i].itemValue === "string");
     }
 
   }
 
   // submit button
   onSubmit() {
+    // add item array to expense
+    this.expense.itemArray = this.dataArray;
     this.expenseToSend.emit(this.expense);
     this.total = 0
 
