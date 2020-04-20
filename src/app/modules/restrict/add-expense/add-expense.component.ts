@@ -87,12 +87,13 @@ export class AddExpenseComponent implements OnInit {
     this.dataArray.splice(index);
   }
 
-  public valueSum() {
-    this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
+  valueSum() {
+    //this.total = this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
     for(let i = 0; i < this.dataArray.length; i++) {
-      console.log(this.dataArray[i].itemValue);
-      console.log(typeof this.dataArray[i].itemValue === "string");
+      this.total += this.dataArray[i].itemValue;
+      console.log(typeof this.total === "number");
     }
+    return this.total;
 
   }
 

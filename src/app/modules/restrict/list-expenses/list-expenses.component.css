@@ -46,6 +46,11 @@
   *::after {
     box-sizing: border-box;
   }
+
+  thead {
+    background-color: #0c43f8;
+    color: white;
+} 
   
   html {
     font-family: sans-serif;
