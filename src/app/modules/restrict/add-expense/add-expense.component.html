@@ -8,15 +8,20 @@
   <div class="container-fluid">
     <div class="row">
       <!-- expense name -->
-      <div class="col-sm-6">
-        <label for="expenseName" class="control-label">Nome da despesa:</label>
-        <input required id="expenseName" name="expenseName" type="text" class="form-control" [(ngModel)]="expense.expenseName">
+      <div class="col-sm-6" [class.has-error]="name.invalid && name.touched" [class.has-success]="name.valid">
+        <label [attr.for]="name" class="control-label">Nome da despesa:</label>
+        <input required [id]="name" name="expenseName" type="text" class="form-control" 
+        [(ngModel)]="expense.expenseName" #name="ngModel">
+        <span class="help-block" *ngIf="name.invalid && name.touched"> O nome da despesa é obrigatório</span>
       </div>
+
       <!-- expense type -->
-      <div class="col-sm-6">
-        <label for="itemName">Tipo da despesa:</label>
-        <select required id="itemName" name="itemName" class="form-control ml-1" [(ngModel)]="expense.expenseType" (change)="getExpenseType()">
+      <div class="col-sm-6" [class.has-error]="type.touched" [class.has-success]="type.valid">
+        <label [attr.for]="type">Tipo da despesa:</label>
+        <select required [id]="type" name="itemName" class="form-control ml-1" 
+        [(ngModel)]="expense.expenseType" #type="ngModel" (change)="getExpenseType()">
           <option *ngFor="let type of expenseType" [ngValue]="type">{{type}}</option>
+          <span class="help-block" *ngIf="type.touched"> O tipo de despesa é obrigatório</span>
         </select>
       </div>
     </div>
@@ -25,7 +30,8 @@
       <!-- date -->
       <div class="col-sm-6">
         <label for="expenseDate" class="control-label">Data:</label>
-        <input required id="expenseDate" name="expenseDate" type="text" class="form-control" [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig">
+        <input required id="expenseDate" name="expenseDate" type="text" class="form-control" 
+        [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig">
       </div>
     </div>
   </div>
@@ -60,7 +66,8 @@
       <!--value-->
       <div class="col-sm-6" [class.has-error]="val.invalid && val.touched" [class.has-success]="val.valid">
         <label for="value" class="control-label">Valor:</label>
-        <input required id="value" name="value{{i}}" type="number" class="form-control"  [(ngModel)]="obj.itemValue" #val="ngModel" >
+        <input required id="value" name="value{{i}}" type="number" class="form-control"  
+        [(ngModel)]="obj.itemValue" #val="ngModel" (blur)="valueSum()">
         <span class="help-block" *ngIf="val.invalid && val.touched"> O valor do item é obrigatório </span>
         <br>
       </div>
@@ -100,16 +107,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-4">
-        <input id="value" type="text" class="form-control" readonly value="{{ total }}">
-      </div>
-      <div class="col-sm-4">
-        <button class="btn btn-primary" type="button" (click)="valueSum()">Total</button>
+        <input id="value" type="number" class="form-control" readonly value="{{ total }}">
       </div>
     </div>
 
     <br>
     <!--<br>-->
-    
     <br><br>
     <button class="btn btn-primary" type="submit" [disabled]="itemForm.invalid"(click)="onSubmit()">Submeter</button>
   </div>

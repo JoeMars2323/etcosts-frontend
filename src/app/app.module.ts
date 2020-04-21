@@ -22,6 +22,7 @@ import { AddExpenseComponent } from './modules/restrict/add-expense/add-expense.
 import { ListExpensesComponent } from './modules/restrict/list-expenses/list-expenses.component';
 import { OverallComponent } from './modules/restrict/overall/overall.component';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
+import { UpdateExpenseComponent } from './modules/restrict/update-expense/update-expense.component';
 
 
 
@@ -39,7 +40,8 @@ import { AuthenticationService } from './core/services/authentication/authentica
     ListExpensesComponent,
     OverallComponent,
     PublicMainComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateExpenseComponent
   ],
   imports: [
     BrowserModule,

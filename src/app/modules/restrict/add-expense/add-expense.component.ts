@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BsDatepickerConfig, BsLocaleService  } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 
 import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
@@ -20,7 +20,7 @@ export class AddExpenseComponent implements OnInit {
 
   // event emiter
   @Output() expenseToSend;
-  
+
   // datepicker properties
   locale = 'en';
   locales = listLocales();
@@ -58,7 +58,7 @@ export class AddExpenseComponent implements OnInit {
     setTimeout(() => {
     });
   }
-  
+
   // load dropdowns
   getExpenseType() {
     this.api.getExpenseType().subscribe(
@@ -77,22 +77,28 @@ export class AddExpenseComponent implements OnInit {
     )
   }
 
-   // add and remove items
-   addItem() {
+  // add and remove items
+  addItem() {
     this.item = new ItemExpense();
+    this.valueSum();
     this.dataArray.push(this.item);
   }
 
   removeItem(index) {
     this.dataArray.splice(index);
+    this.valueSum();
   }
 
   valueSum() {
-    //this.total = this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
-    for(let i = 0; i < this.dataArray.length; i++) {
-      this.total += this.dataArray[i].itemValue;
-      console.log(typeof this.total === "number");
-    }
+    //return this.total = this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
+    this.total = 0;
+    for (let i = 0; i < this.dataArray.length; i++) {
+      if(this.dataArray[i].itemValue !== undefined) {
+        this.total += this.dataArray[i].itemValue;
+        console.log(typeof this.total === "number");
+      }
+       
+     }
     return this.total;
 
   }

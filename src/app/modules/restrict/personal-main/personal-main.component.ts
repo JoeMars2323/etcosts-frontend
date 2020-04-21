@@ -25,6 +25,7 @@ export class PersonalMainComponent implements OnInit {
   content: boolean = false;
   newExpense: boolean = false;
   searchAll: boolean = false;
+  update: boolean = false;
 
   constructor(private api: RestApiService, private auth: AuthenticationService) { 
     this.expense = new Expense();
@@ -76,22 +77,37 @@ export class PersonalMainComponent implements OnInit {
   // open sidebar menus
   newExpenses() {
     this.expenses = ! this.expenses;
+    this.search = false;
+    this.revenue = false;
+    this.utilities = false;
+
   }
 
   newSearch() {
     this.search = !this.search;
+    this.expenses = false;
+    this.revenue = false;
+    this.utilities = false;
   }
 
   newRevenue() {
     this.revenue = !this.revenue;
+    this.expenses = false;
+    this.search = false;
+    this.utilities = false;
   }
 
   callUtilies(){
     this.utilities = !this.utilities;
+    this.expenses = false;
+    this.search = false;
+    this.revenue = false;
   }
 
   callexpenses(){
     this.utilities = !this.utilities;
+    
   }
+
 
 }
