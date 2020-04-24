@@ -1,0 +1,64 @@
+<!-- create new expense-->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-blue">Criar despesa corrente fixa</h1>
+</div>
+  
+<!--form expenses-->
+<form #itemForm="ngForm" name="form" ngSubmit="onSubmit()">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- expense name -->
+            <div class="col-sm-6">
+                <label>Nome da despesa:</label>
+                <input name="expenseName" type="text" class="form-control" >
+            </div>
+            <!-- expense type -->
+            <div class="col-sm-6" >
+                <label>Tipo da despesa:</label>
+                <select name="itemName" class="form-control ml-1" >
+                    <option>Prestação</option>
+                    <option>Tipo de despesa</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <!--month/year of reference -->
+        <p>Referente a:</p>
+        <div class="row">
+            <div class="col-sm-6">
+                <select class="form-control" >
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <select class="form-control ml-1" >
+                    <option>2019</option>
+                    <option>2020</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!-- expense name -->
+            <div class="col-sm-12">
+                <label>Observações:</label>
+                <textarea name="expenseName" type="text" rows="2" class="form-control" ></textarea>
+            </div>
+        </div>
+        <br>
+        <!--total value-->
+        <div class="row">
+            <div class="col-sm-6">
+                <label>Valor da despesa:</label>
+                <input type="Number" class="form-control" >
+            </div>
+        </div>
+        <br>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" type="submit">Submeter</button>
+        </div>
+    </div>
+</form>
+    
+  

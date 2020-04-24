@@ -23,6 +23,10 @@ import { ListExpensesComponent } from './modules/restrict/list-expenses/list-exp
 import { OverallComponent } from './modules/restrict/overall/overall.component';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { UpdateExpenseComponent } from './modules/restrict/update-expense/update-expense.component';
+import { FixedExpenseComponent } from './modules/restrict/add-expenses/fixed-expense/fixed-expense.component';
+import { VariableExpenseComponent } from './modules/restrict/add-expenses/variable-expense/variable-expense.component';
+import { ShortExpenseComponent } from './modules/restrict/add-expenses/short-expense/short-expense.component';
+import { LongExpenseComponent } from './modules/restrict/add-expenses/long-expense/long-expense.component';
 
 
 
@@ -41,7 +45,11 @@ import { UpdateExpenseComponent } from './modules/restrict/update-expense/update
     OverallComponent,
     PublicMainComponent,
     HomeComponent,
-    UpdateExpenseComponent
+    UpdateExpenseComponent,
+    FixedExpenseComponent,
+    VariableExpenseComponent,
+    ShortExpenseComponent,
+    LongExpenseComponent
   ],
   imports: [
     BrowserModule,

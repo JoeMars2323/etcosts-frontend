@@ -27,9 +27,14 @@
         </div>
         <div class="collapse" *ngIf="expenses">
           <div class="bg-white py-2 collapse-inner rounded" >
-            <h6 class="collapse-header">Tipo de despesa:</h6>
-            <a class="collapse-item pointerCursor" (click)="addNewExpense()">Nova</a>
-            <a class="collapse-item pointerCursor" >Existente</a>
+            <h6 class="collapse-header">Despensas Correntes:</h6>
+            <a class="collapse-item pointerCursor" (click)="addNewExpense()">Nova Despesa</a>
+            <a class="collapse-item pointerCursor" (click)="addFixedExpense()">Fixa</a>
+            <a class="collapse-item pointerCursor" (click)="addVariableExpense()" >Variável</a>
+            <hr>
+            <h6 class="collapse-header">Despensas Não Correntes:</h6>
+            <a class="collapse-item pointerCursor" (click)="addShortExpense()">Periodo Curto</a>
+            <a class="collapse-item pointerCursor" (click)="addLongExpense()">Periodo Longo</a>
           </div>
         </div>
       </li>
@@ -167,10 +172,27 @@
       <!-- Begin Pges Content -->
       <div class="container-fluid">
 
-        <!-- change to add expense page -->
+        <!-- change to add expense  -->
         <div *ngIf="newExpense">
           <app-add-expense (expenseToSend)="expenseToReceive($event)"></app-add-expense>
         </div>
+
+        <div *ngIf="fixedExpense">
+          <app-fixed-expense></app-fixed-expense>
+        </div>
+
+        <div *ngIf="variableExpense">
+          <app-variable-expense></app-variable-expense>
+        </div>
+
+        <div *ngIf="shortExpense">
+          <app-short-expense></app-short-expense>
+        </div>
+
+        <div *ngIf="longExpense">
+          <app-long-expense ></app-long-expense>
+        </div>
+
 
         <!-- change to list expense page -->
         <div *ngIf="searchAll">

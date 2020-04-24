@@ -17,15 +17,23 @@ export class PersonalMainComponent implements OnInit {
   expense: Expense = null;
   expenseUpdate: Expense = null;
 
-  // flags
+  // flags add expenses
   expenses: boolean = false;
+  fixedExpense: boolean = false;
+  variableExpense: boolean = false;
+  shortExpense: boolean = false;
+  longExpense: boolean = false;
+
+  // flags search expenses
   search: boolean = false;
+  searchAll: boolean = false;
+
   revenue: boolean = false;
   dashbord: boolean = true;
   utilities: boolean = false;
   content: boolean = false;
   newExpense: boolean = false;
-  searchAll: boolean = false;
+  
   update: boolean = false;
 
   constructor(private api: RestApiService, private auth: AuthenticationService) { 
@@ -57,23 +65,76 @@ export class PersonalMainComponent implements OnInit {
     this.api.saveExpense(this.expense).subscribe(() =>{ });
   }
 
-  // open and close components
+  // open and close components - add expenses
   addNewExpense() {
     this.newExpense = true;
+    this.fixedExpense = false;
+    this.variableExpense = false;
+    this.shortExpense = false;
+    this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
   }
 
-  searchAlExpenses() {
-    this.searchAll = true;
+  addFixedExpense() {
     this.newExpense = false;
+    this.fixedExpense = true;
+    this.variableExpense = false;
+    this.shortExpense = false;
+    this.longExpense = false;
+    this.searchAll = false;
+    this.dashbord = false;
+  }
+
+  addVariableExpense() {
+    this.newExpense = false;
+    this.fixedExpense = false;
+    this.variableExpense = true;
+    this.shortExpense = false;
+    this.longExpense = false;
+    this.searchAll = false;
+    this.dashbord = false;
+  }
+
+  addShortExpense() {
+    this.newExpense = false;
+    this.fixedExpense = false;
+    this.variableExpense = false;
+    this.shortExpense = true;
+    this.longExpense = false;
+    this.searchAll = false;
+    this.dashbord = false;
+  }
+
+  addLongExpense() {
+    this.newExpense = false;
+    this.fixedExpense = false;
+    this.variableExpense = false;
+    this.shortExpense = false;
+    this.longExpense = true;
+    this.searchAll = false;
+    this.dashbord = false;
+  }
+
+  // open and close components - search expenses
+  searchAlExpenses() {
+    this.newExpense = false;
+    this.fixedExpense = false;
+    this.variableExpense = false;
+    this.shortExpense = false;
+    this.longExpense = false;
+    this.searchAll = true;
     this.dashbord = false;
   }
 
   callDashboard() {
-    this.dashbord = true;
     this.newExpense = false;
+    this.fixedExpense = false;
+    this.variableExpense = false;
+    this.shortExpense = false;
+    this.longExpense = false;
     this.searchAll = false;
+    this.dashbord = true;
   }
 
   // open sidebar menus
