@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
   selector: 'app-update-expense',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateExpenseComponent implements OnInit {
 
+  @Input() expenseUpdated: Expense;
+
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+
+  expenseUpdate() {
+    console.log('O resultado é ' + this.expenseUpdated.expenseName);
+
   }
 
 }

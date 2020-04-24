@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
 import { User } from '../../../core/models/User';
@@ -15,6 +15,7 @@ export class PersonalMainComponent implements OnInit {
   user: User;
   expenseList: Expense[];
   expense: Expense = null;
+  expenseUpdate: Expense = null;
 
   // flags
   expenses: boolean = false;
@@ -29,6 +30,7 @@ export class PersonalMainComponent implements OnInit {
 
   constructor(private api: RestApiService, private auth: AuthenticationService) { 
     this.expense = new Expense();
+    this.expenseUpdate = new Expense();
   }
 
   ngOnInit(): void {
@@ -107,6 +109,22 @@ export class PersonalMainComponent implements OnInit {
   callexpenses(){
     this.utilities = !this.utilities;
     
+  }
+
+  callUpdate(){
+    this.update = true;
+    this.searchAll = false;
+  }
+
+
+  // get expense id by list expenses
+  getExpensId(id: number) {
+    this.api.getExpenseInf(id).subscribe(
+      data => {
+        this.expenseUpdate = data;
+      }
+    )
+    this.callUpdate();
   }
 
 

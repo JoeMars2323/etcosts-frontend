@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../../models/User';
@@ -39,6 +39,13 @@ export class RestApiService {
 
   public saveExpense(expense: Expense) {
     return this.http.post(this.usersUrl + '/saveExpense', expense);
+  }
+
+  public getExpenseInf(id: number): Observable<Expense> {
+    let params = new HttpParams().set('id', id.toString());
+
+    return this.http.get<Expense>(this.usersUrl + '/expenseInfo', { params: params });
+  
   }
 
 

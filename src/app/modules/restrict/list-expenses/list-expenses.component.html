@@ -1,31 +1,32 @@
 <!-- List all expenses -->
-<div *ngIf="table">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-blue">Listar todas as despesas</h1>
-  </div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Despesa</th>
-        <th scope="col">Tipo de Despesa</th>
-        <th scope="col">Data da Despesa</th>
-        <th scope="col">Data do Pagamento</th>
-        <th scope="col">Valor Total</th>
-        <th scope="col">Acções</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of expense">
-          <td>{{ item.expenseName }}</td>
-          <td>{{ item.espenseType }}</td>
-          <td>{{ item.expenseDate }}</td>
-          <td>{{ item.paymentDate }}</td>
-          <td>{{ item.total }}</td>
-          <td>
-             <button class="btn btn-primary" type="button" (click)="onEdit()"><i class="far fa-edit"></i></button> &nbsp;
-             <button class="btn btn-primary" type="button" ><i class="fas fa-trash"></i></button>
-          </td>
-       </tr>
-    </tbody>
-  </table>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-blue">Listar todas as despesas</h1>
 </div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col" style="display:none;">ID</th>
+      <th scope="col">Despesa</th>
+      <th scope="col">Tipo de Despesa</th>
+      <th scope="col">Data da Despesa</th>
+      <th scope="col">Data do Pagamento</th>
+      <th scope="col">Valor Total</th>
+      <th scope="col">Acções</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of expense">
+        <td style="display:none;">{{ item.id }}</td>
+        <td>{{ item.expenseName }}</td>
+        <td>{{ item.espenseType }}</td>
+        <td>{{ item.expenseDate }}</td>
+        <td>{{ item.paymentDate }}</td>
+        <td>{{ item.total }}</td>
+        <td>
+            <button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button> &nbsp;
+            <button class="btn btn-primary" type="button" ><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+  </tbody>
+</table>

@@ -1335,7 +1335,7 @@ section {
   position: absolute;
   right: 0;
   left: 20px;
-  color: #ffb8a1;
+  color: #3366ff;
 }
 
 .faq .faq-list .icon-show, .faq .faq-list .icon-close {
@@ -1359,7 +1359,7 @@ section {
 }
 
 .faq .faq-list a.collapsed:hover {
-  color: #ff5821;
+  color: #3366ff;
 }
 
 .faq .faq-list a.collapsed .icon-show {

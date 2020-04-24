@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Expense } from '../../../core/models/Expense';
 
@@ -8,47 +8,22 @@ import { Expense } from '../../../core/models/Expense';
   styleUrls: ['./list-expenses.component.css']
 })
 export class ListExpensesComponent implements OnInit {
-  
-  table: boolean = true;
-  view: boolean = false;
-  update: boolean = false;
-  delete: boolean = false;
-
-  
+    
 
   @Input() expense: Expense; 
+  @Output() expenseId = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onTable() {
-    this.update = false;
-    this.table = true;
-    this.view = false;
-    this.delete = false;   
+
+  // send id expense choosed by id to personal main
+  onEdit(ex: Expense) {
+    this.expenseId.emit(ex.id);
+     
   }
 
-  onEdit() {
-    this.update = true;
-    this.table = false;
-    this.view = false;
-    this.delete = false;   
-  }
-
-  onView() {
-    this.update = false;
-      this.table = false;
-      this.view = true;
-      this.delete = false; 
-  }
-
-  onDelete() {
-    this.update = false;
-      this.table = false;
-      this.view = false;
-      this.delete = true; 
-  }
 
 }
