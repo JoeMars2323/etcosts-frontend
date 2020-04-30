@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./public-main.component.css']
 })
 export class PublicMainComponent implements OnInit {
+
+  selectedItem: boolean = true;
   // screan variables
   home: boolean = true;
   about: boolean = false;

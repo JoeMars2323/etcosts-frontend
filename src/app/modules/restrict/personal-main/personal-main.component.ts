@@ -55,17 +55,46 @@ export class PersonalMainComponent implements OnInit {
     this.api.getExpensesByUser(this.user).subscribe(
       data => {
         this.expenseList = data;
+        // assign for now expensedate withe the first date in item array
+        for(let i = 0; i < this.expenseList.length; i++) {
+          if(this.expenseList[i].hasItems) {
+            this.expenseList[i].expenseDate = this.expenseList[i].itemArray[0].expenseDate;
+            // do the comparisson between dates later
+            for(let j = 0; j < this.expenseList[i].itemArray.length; j++) {
+            }
+          }
+        }
       });
+  }
+
+  // get expense id by list expenses
+  getExpensId(id: number) {
+    this.api.getExpenseInf(id).subscribe(
+      data => {
+        this.expenseUpdate = data;
+      }
+    )
+    this.callUpdate();
   }
 
   // receive expense from add-expendse component and send to back-end
   expenseToReceive($event) {
     this.expense = $event;
     this.expense.username = this.user.username;
-    this.api.saveExpense(this.expense).subscribe(() =>{ });
+    this.api.saveExpense(this.expense).subscribe(x =>{
+      if(x) {
+        this.callDashboard();
+      } else {
+        alert('erro na inserção');
+        this.addVariableExpense();
+      }
+      
+     });
   }
+  
 
   // open and close components - add expenses
+  // delete this one
   addNewExpense() {
     this.newExpense = true;
     this.fixedExpense = false;
@@ -175,17 +204,6 @@ export class PersonalMainComponent implements OnInit {
   callUpdate(){
     this.update = true;
     this.searchAll = false;
-  }
-
-
-  // get expense id by list expenses
-  getExpensId(id: number) {
-    this.api.getExpenseInf(id).subscribe(
-      data => {
-        this.expenseUpdate = data;
-      }
-    )
-    this.callUpdate();
   }
 
 

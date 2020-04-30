@@ -33,6 +33,11 @@ export class RestApiService {
     return this.http.get<String[]>(this.usersUrl + '/expenseTypes');
   }
 
+  public getExpenseSubtype(id: number): Observable<String[]> {
+    let params = new HttpParams().set('id', id.toString());
+    return this.http.get<String[]>(this.usersUrl + '/expenseSubtypes', { params: params });
+  }
+
   public getCurrency(): Observable<String[]> {
     return this.http.get<String[]>(this.usersUrl + '/currency');
   }

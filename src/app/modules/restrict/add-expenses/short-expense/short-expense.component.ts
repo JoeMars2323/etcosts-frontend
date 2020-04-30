@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShortExpenseComponent implements OnInit {
 
+  hasItem: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addItems(){
+    this.hasItem = !this.hasItem;
   }
 
 }

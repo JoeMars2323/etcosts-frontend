@@ -9,7 +9,7 @@ import { PersonalMainComponent } from '../app/modules/restrict/personal-main/per
 
 
 const routes: Routes = [
-  { path: 'main', component: PublicMainComponent },
+  { path: '', component: PublicMainComponent },
   { path: 'login', component: LoginComponent },
   { path: 'createAccount', component: CreateLoginComponent },
   { path: 'personal', component: PersonalMainComponent }

@@ -22,16 +22,16 @@
     <div class="container d-flex">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>ET-COSTS</span></a></h1>
+        <h1 class="text-light"><a (click)="goToHome()" style="cursor: pointer;"><span>ET-COSTS</span></a></h1>
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a (click)="goToHome()">Principal</a></li>
-          <li><a (click)="goToAbout()">Sobre nós</a></li>
-          <li><a (click)="goToServices()">Serviços</a></li>
-          <li><a (click)="goToFaq()">FAQs</a></li>
-          <li><a (click)="goToContacts()">Contactos</a></li>
+          <li [ngClass]="{'active': selectedItem == home}"><a (click)="goToHome()" style="cursor: pointer;">Principal</a></li>
+          <li [ngClass]="{'active': selectedItem == about}"><a (click)="goToAbout()" style="cursor: pointer;">Sobre nós</a></li>
+          <li [ngClass]="{'active': selectedItem == services}"><a (click)="goToServices()" style="cursor: pointer;">Serviços</a></li>
+          <li [ngClass]="{'active': selectedItem == faq}"><a (click)="goToFaq()" style="cursor: pointer;">FAQs</a></li>
+          <li [ngClass]="{'active': selectedItem == contacts}"><a (click)="goToContacts()" style="cursor: pointer;">Contactos</a></li>
         </ul>
       </nav>
     </div>

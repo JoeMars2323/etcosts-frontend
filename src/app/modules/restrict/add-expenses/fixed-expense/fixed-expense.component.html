@@ -8,16 +8,36 @@
     <div class="container-fluid">
         <div class="row">
             <!-- expense name -->
-            <div class="col-sm-6">
-                <label>Nome da despesa:</label>
-                <input name="expenseName" type="text" class="form-control" >
+            <div class="col-sm-6" [class.has-error]="name.invalid && name.touched" 
+            [class.has-success]="name.valid">
+                <label [attr.for]="name" class="control-label">Nome da despesa:</label>
+                <input required [id]="name" name="expenseName" type="text" class="form-control ml-1" 
+                [(ngModel)]="expense.expenseName" #name="ngModel">
+                <span class="help-block" *ngIf="name.invalid && name.touched"> 
+                    O nome da despesa é obrigatório</span>
             </div>
             <!-- expense type -->
             <div class="col-sm-6" >
                 <label>Tipo da despesa:</label>
-                <select name="itemName" class="form-control ml-1" >
-                    <option>Prestação</option>
-                    <option>Tipo de despesa</option>
+                <select required name="expenseSubtype" class="form-control ml-1" [(ngModel)]="expense.expenseSubtype" >
+                    <option *ngFor="let e of expenseSubtype"[value]="e">{{e}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!--expense date-->
+            <div class="col-sm-6" >
+                <label>Data da despesa:</label>
+                <input required name="expenseDate" type="text" class="form-control ml-1" 
+                [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig">
+            </div>
+            <!-- currency -->
+            <div class="col-sm-6" >
+                <label>Moeda:</label>
+                <select required id="currency" name="currency" class="form-control ml-1" 
+                [(ngModel)]="expense.currency" (change)="getCurrency()" >
+                        <option *ngFor="let c of currency"[value]="c"> {{c}} </option>
                 </select>
             </div>
         </div>
@@ -26,15 +46,26 @@
         <p>Referente a:</p>
         <div class="row">
             <div class="col-sm-6">
-                <select class="form-control" >
+                <select name="expenseMonth" class="form-control ml-1" [(ngModel)]="expense.month">
                     <option>Janeiro</option>
                     <option>Fevereiro</option>
+                    <option>Março</option>
+                    <option>Abril</option>
+                    <option>Maio</option>
+                    <option>Junho</option>
+                    <option>Julho</option>
+                    <option>Agosto</option>
+                    <option>Setembro</option>
+                    <option>Outubro</option>
+                    <option>Novembro</option>
+                    <option>Dezembro</option>
                 </select>
             </div>
+            <!--year reference-->
             <div class="col-sm-6">
-                <select class="form-control ml-1" >
-                    <option>2019</option>
-                    <option>2020</option>
+                <select name="expenseYear" class="form-control ml-1" [(ngModel)]="expense.year"
+                (change)="getYears()">
+                    <option *ngFor="let y of years"[value]="y"> {{y}} </option>
                 </select>
             </div>
         </div>
@@ -43,7 +74,8 @@
             <!-- expense name -->
             <div class="col-sm-12">
                 <label>Observações:</label>
-                <textarea name="expenseName" type="text" rows="2" class="form-control" ></textarea>
+                <textarea name="expenseName" type="text" rows="2" class="form-control ml-1" 
+                [(ngModel)]="expense.expenseDescription"></textarea>
             </div>
         </div>
         <br>
@@ -51,12 +83,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <label>Valor da despesa:</label>
-                <input type="Number" class="form-control" >
+                <input required type="Number" name="value" class="form-control ml-1" [(ngModel)]="expense.value">
             </div>
         </div>
         <br>
+        <!--value-->
         <div class="col-sm-6">
-            <button class="btn btn-primary" type="submit">Submeter</button>
+            <button class="btn btn-primary" type="submit" [disabled]="itemForm.invalid"
+             (click)="onSubmit()">Submeter</button>
         </div>
     </div>
 </form>

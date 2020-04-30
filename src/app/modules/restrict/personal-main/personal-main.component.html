@@ -15,7 +15,7 @@
       </li>
 
       <!-- Expenses-->
-      <hr class="sidebar-divider">
+      <hr class="sidebar-divider" >
       <div class="sidebar-heading text-white">Despesas</div>
       <li class="nav-item">
         <div class="pointerCursor" (click)="newExpenses()">
@@ -28,7 +28,7 @@
         <div class="collapse" *ngIf="expenses">
           <div class="bg-white py-2 collapse-inner rounded" >
             <h6 class="collapse-header">Despensas Correntes:</h6>
-            <a class="collapse-item pointerCursor" (click)="addNewExpense()">Nova Despesa</a>
+            <!-- <a class="collapse-item pointerCursor" (click)="addNewExpense()">Nova Despesa</a> -->
             <a class="collapse-item pointerCursor" (click)="addFixedExpense()">Fixa</a>
             <a class="collapse-item pointerCursor" (click)="addVariableExpense()" >Variável</a>
             <hr>
@@ -159,7 +159,7 @@
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem ><i class="fas fa-user"></i> Perfil</button>
                   <button ngbDropdownItem><i class="fas fa-cog"></i> Definições</button>
-                  <button ngbDropdownItem routerLink="/main"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                  <button ngbDropdownItem routerLink="/"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </div>
               </div>
             </div>
@@ -173,16 +173,16 @@
       <div class="container-fluid">
 
         <!-- change to add expense  -->
-        <div *ngIf="newExpense">
+        <!-- <div *ngIf="newExpense">
           <app-add-expense (expenseToSend)="expenseToReceive($event)"></app-add-expense>
-        </div>
+        </div> -->
 
         <div *ngIf="fixedExpense">
-          <app-fixed-expense></app-fixed-expense>
+          <app-fixed-expense (expenseToSend)="expenseToReceive($event)"></app-fixed-expense>
         </div>
 
         <div *ngIf="variableExpense">
-          <app-variable-expense></app-variable-expense>
+          <app-variable-expense (expenseToSend)="expenseToReceive($event)"></app-variable-expense>
         </div>
 
         <div *ngIf="shortExpense">
