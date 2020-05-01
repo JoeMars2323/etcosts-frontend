@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
@@ -19,6 +19,11 @@ export class UpdateExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkTypeExpense();
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.checkTypeExpense()
 
   }
 

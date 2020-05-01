@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UpdateExpenseService } from './update-expense.service';
+import { WindowsChangeService } from './windows-change.service';
 
-describe('UpdateExpenseService', () => {
-  let service: UpdateExpenseService;
+describe('WindowsChangeService', () => {
+  let service: WindowsChangeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UpdateExpenseService);
+    service = TestBed.inject(WindowsChangeService);
   });
 
   it('should be created', () => {
