@@ -1,1 +1,132 @@
-<p>long-expense works!</p>
+<!-- create new expense-->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-blue">Criar despesa não corrente de longa duração</h1>
+</div> <hr>
+    
+<!--form expenses-->
+<form #itemForm="ngForm" name="form">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- expense name -->
+            <div class="col-sm-6">
+                <label>Nome da despesa:</label>
+                <input type="text" class="form-control">
+            </div>
+            <!-- expense type -->
+            <div class="col-sm-6">
+                <label>Tipo da despesa:</label>
+                <select class="form-control ml-1" >
+                    <option>Carro</option>
+                    <option>Mota</option>
+                    <option>Casa</option>
+                    <option>Barco</option>
+                    <option>Avião</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!-- date  -->
+            <div class="col-sm-6">
+                <label>Data da despesa:</label>
+                <input type="text" class="form-control" >
+            </div>
+            <!--payment date-->
+            <div class="col-sm-6">
+                <label>Data Limite do pagamento:</label>
+                <input type="text" class="form-control" >
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!-- value  -->
+            <div class="col-sm-6">
+                <label>Valor da despesa:</label>
+                <input type="text" class="form-control" >
+            </div>
+        </div>
+        <!-- <br>
+        <div class="row">
+            <div class="custom-control custom-checkbox col-sm-6">>
+                <input id="payed" type="checkbox" class="custom-control-input" (change)="checkValue()" />
+                <label class="custom-control-label" for="payed">Já esta pago?</label>
+            </div>
+        </div> -->
+    </div>
+    <br>
+    <!-- items -->
+    <div *ngIf="hasRender">
+        <hr><br>
+        <h4 class="mb-2 text-blue2">Items da prestação</h4><br>
+        <div class="container-fluid" *ngFor="let obj of dataArray; let i = index">
+            <h5 class="mb-2 text-gray-800">&nbsp;&nbsp;&nbsp;Prestação #{{i + 1}}</h5><br>
+            <p>Referente a:</p>
+            <div class="row">
+                <!-- date  -->
+                <div class="col-sm-4">  
+                    <label>Mês:</label>
+                    <select class="form-control ml-1" >
+                        <option>Janeiro</option>
+                        <option>Fevereiro</option>
+                        <option>Março</option>
+                        <option>Abril</option>
+                        <option>Maio</option>
+                        <option>Julho</option>
+                        <option>Junho</option>
+                        <option>Agosto</option>
+                        <option>Setembro</option>
+                        <option>Outubro</option>
+                        <option>Novembro</option>
+                        <option>Dezembro</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label>Ano:</label>
+                    <input class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    <label>Data da prestação:</label>
+                    <input type="text" class="form-control" >
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                 <!--value-->
+                 <div class="col-sm-4">
+                     <label>Valor da prestação:</label>
+                     <input class="form-control">
+                 </div>
+             </div> <br>
+             <div class="row">
+                <div class="col-0" *ngIf="i!=0">
+                  <span (click)="removeItem(i)" class="btn btn-danger">-</span>
+                </div>
+                <div class="col-1">
+                  <span (click)="addItem()" class="btn btn-success" >+</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row" *ngIf="hasRender">
+            <div class="col-sm-4">
+                <label>Total já pago:</label>
+                <input id="value" type="number" class="form-control" readonly>
+            </div>
+         </div>
+    </div>
+    <!--end of render-->
+    <br>
+    <br>
+  
+    <!--total value-->
+    <div class="container-fluid">
+      <br>
+      <br><br>
+      <button class="btn btn-primary" disabled type="submit">Submeter</button>
+    </div>
+    <br>
+    <br>
+  </form>
+    
+  

@@ -1,0 +1,82 @@
+<form #itemForm="ngForm" name="form">
+    <div class="container-fluid">
+      <div class="row">
+          <!-- expense name -->
+          <div class="col-sm-6" >
+              <label class="control-label">Nome da despesa:</label>
+              <input name="expenseName" type="text" class="form-control ml-1">
+          </div>
+          <!-- expense type -->
+          <div class="col-sm-6" >
+              <label>Tipo da despesa:</label>
+              <select required name="expenseSubtype" class="form-control ml-1" >
+                  <option>Tipo</option>
+              </select>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+          <!--expense date-->
+          <div class="col-sm-6" >
+              <label>Data da despesa:</label>
+              <input name="expenseDate" type="text" class="form-control ml-1">
+          </div>
+          <!-- currency -->
+          <div class="col-sm-6" >
+              <label>Moeda:</label>
+              <select required id="currency" name="currency" class="form-control ml-1" >
+                      <option>Moeda</option>
+              </select>
+          </div>
+      </div>
+      <br>
+      <!--month/year of reference -->
+      <p>Referente a:</p>
+      <div class="row">
+          <div class="col-sm-6">
+              <select name="expenseMonth" class="form-control ml-1">
+                  <option>Janeiro</option>
+                  <option>Fevereiro</option>
+                  <option>Março</option>
+                  <option>Abril</option>
+                  <option>Maio</option>
+                  <option>Junho</option>
+                  <option>Julho</option>
+                  <option>Agosto</option>
+                  <option>Setembro</option>
+                  <option>Outubro</option>
+                  <option>Novembro</option>
+                  <option>Dezembro</option>
+              </select>
+          </div>
+          <!--year reference-->
+          <div class="col-sm-6">
+              <select name="expenseYear" class="form-control ml-1" >
+                  <option> ano </option>
+              </select>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+          <!-- expense name -->
+          <div class="col-sm-12">
+              <label>Observações:</label>
+              <textarea name="expenseName" type="text" rows="2" class="form-control ml-1" ></textarea>
+          </div>
+      </div>
+      <br>
+      <!--total value-->
+      <div class="row">
+          <div class="col-sm-6">
+              <label>Valor da despesa:</label>
+              <input required type="Number" name="value" class="form-control ml-1" >
+          </div>
+      </div>
+      <br>
+      <!--value-->
+      <div class="col-sm-6">
+          <button class="btn btn-primary" type="submit">Submeter</button>
+      </div>
+  </div>
+    
+  </form>

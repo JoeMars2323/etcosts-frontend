@@ -27,6 +27,10 @@ import { FixedExpenseComponent } from './modules/restrict/add-expenses/fixed-exp
 import { VariableExpenseComponent } from './modules/restrict/add-expenses/variable-expense/variable-expense.component';
 import { ShortExpenseComponent } from './modules/restrict/add-expenses/short-expense/short-expense.component';
 import { LongExpenseComponent } from './modules/restrict/add-expenses/long-expense/long-expense.component';
+import { UpdateLongExpenseComponent } from './modules/restrict/update-expense/update-long-expense/update-long-expense.component';
+import { UpdateShortExpenseComponent } from './modules/restrict/update-expense/update-short-expense/update-short-expense.component';
+import { UpdateVariableExpenseComponent } from './modules/restrict/update-expense/update-variable-expense/update-variable-expense.component';
+import { UpdateFixedExpenseComponent } from './modules/restrict/update-expense/update-fixed-expense/update-fixed-expense.component';
 
 
 
@@ -49,7 +53,11 @@ import { LongExpenseComponent } from './modules/restrict/add-expenses/long-expen
     FixedExpenseComponent,
     VariableExpenseComponent,
     ShortExpenseComponent,
-    LongExpenseComponent
+    LongExpenseComponent,
+    UpdateLongExpenseComponent,
+    UpdateShortExpenseComponent,
+    UpdateVariableExpenseComponent,
+    UpdateFixedExpenseComponent
   ],
   imports: [
     BrowserModule,

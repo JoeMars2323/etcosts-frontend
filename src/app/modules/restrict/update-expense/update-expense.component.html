@@ -4,78 +4,30 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-blue">Alterar despesa</h1>
     </div>
-    <!--form expenses-->
+  
+    <!--fixed expenses-->
+    <div *ngIf="fixedExpense">
+      <app-update-fixed-expense></app-update-fixed-expense>
+  </div>
+
+  <!--variable expenses-->
+  <div *ngIf="variableExpense">
+    <app-update-variable-expense></app-update-variable-expense>
+  </div>
+
+  <!--short expenses-->
+  <div *ngIf="shortExpense">
     <form #itemForm="ngForm" name="form">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- expense name -->
-          <div class="col-sm-6">
-            <label for="expenseName" class="control-label">Nome da despesa:</label>
-            <input required id="expenseName" name="expenseName" type="text" class="form-control">
-          </div>
-          <!-- expense type -->
-          <div class="col-sm-6">
-            <label for="itemName">Tipo da despesa:</label>
-            <select required id="itemName" name="itemName" class="form-control ml-1" >
-              <option></option>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <!-- date -->
-          <div class="col-sm-6">
-            <label for="expenseDate" class="control-label">Data:</label>
-            <input id="expenseDate" name="expenseDate" type="text" class="form-control" >
-          </div>
-        </div>
-      </div>
-      <br>
-      <hr>
-      <!-- items -->
-      <div class="container-fluid" >
-        <h4 class="mb-2 text-blue2">Items da despesa</h4><br>
-         <div class="row">
-           <!--item name-->
-           <div class="col-sm-6">
-             <label >Nome do item:</label>
-             <input id="itemName" type="text" class="form-control" >
-           </div>
-           <!--item description-->
-           <div class="col-sm-6">
-             <label for="description">Descrição:</label>
-             <textarea id="description" type="text" rows="1" class="form-control" ></textarea>
-           </div>
-         </div>
-         <br>
-         <div class="row">
-           <!--currency-->
-           <div class="col-sm-6">
-             <label for="currency">Moeda:</label>
-             <select required id="currency" class="form-control ml-1" >
-                <option > </option>
-             </select>
-           </div>
-           <!--value-->
-           <div class="col-sm-6">
-             <label for="value" class="control-label">Valor:</label>
-             <input required id="value" type="number" class="form-control" >
-           </div>
-         </div>
-         <br>
-         <!--total value-->
-         <div class="container-fluid">
-           <div class="row">
-             <div class="col-sm-4">
-               <input id="value" type="text" class="form-control" readonly>
-             </div>
-            <div class="col-sm-4">
-               <button class="btn btn-primary" type="button" (click)="expenseUpdate()" >Confirmar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br><br><br><br>
+      <app-update-short-expense></app-update-short-expense>
     </form>
   </div>
+
+  <!--long expenses-->
+  <div *ngIf="longExpense">
+    <form #itemForm="ngForm" name="form">
+      <app-update-long-expense></app-update-long-expense>
+    </form>
+  </div>
+
+</div>
   

@@ -196,8 +196,7 @@
 
         <!-- change to list expense page -->
         <div *ngIf="searchAll">
-          <app-list-expenses [expense]="expenseList" 
-            (expenseId)="getExpensId($event)"></app-list-expenses>
+          <app-list-expenses (expenseId)="getExpensId($event)"></app-list-expenses>
 
         </div>
 

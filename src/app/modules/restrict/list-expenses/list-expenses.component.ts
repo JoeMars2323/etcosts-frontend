@@ -1,6 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
+import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
 import { Expense } from '../../../core/models/Expense';
+import { User } from '../../../core/models/User';
 
 @Component({
   selector: 'app-list-expenses',
@@ -8,9 +11,10 @@ import { Expense } from '../../../core/models/Expense';
   styleUrls: ['./list-expenses.component.css']
 })
 export class ListExpensesComponent implements OnInit {
-    
 
-  @Input() expense: Expense; 
+  user: User;
+  expenseList: Expense[];
+
   @Output() expenseId = new EventEmitter<number>();
 
   // flags
@@ -19,11 +23,31 @@ export class ListExpensesComponent implements OnInit {
   years: boolean = false;
   states: boolean = false;
 
-  constructor() { }
+  constructor(private api: RestApiService, private auth: AuthenticationService) { 
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.getExpenseList();
+  }
+
+  public getExpenseList() {
+    this.user = this.auth.getUser();
+    this.api.getExpensesByUser(this.user).subscribe(
+      data => {
+        this.expenseList = data;
+        console.log(this.expenseList);
+        //assign for now expensedate withe the first date in item array
+        for(let i = 0; i < this.expenseList.length; i++) {
+          if(this.expenseList[i].hasItems) {
+            this.expenseList[i].expenseDate = this.expenseList[i].itemArray[0].expenseDate;
+            // do the comparisson between dates later
+            for(let j = 0; j < this.expenseList[i].itemArray.length; j++) {
+            }
+          }
+        }
+      });
+  }
 
   // send id expense choosed by id to personal main
   onEdit(expense: Expense) {
