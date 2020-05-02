@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
   selector: 'app-update-long-expense',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update-long-expense.component.css']
 })
 export class UpdateLongExpenseComponent implements OnInit {
+
+  @Input() updateLong: Expense;
 
   constructor() { }
 

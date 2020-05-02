@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+
+import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
   selector: 'app-update-fixed-expense',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateFixedExpenseComponent implements OnInit {
 
+  @Input() updateFixed: Expense;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.updateFixed);
+
   }
 
 }

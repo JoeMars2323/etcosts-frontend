@@ -31,12 +31,12 @@ export class ListExpensesComponent implements OnInit {
     this.getExpenseList();
   }
 
+  // get the expense list to pass to the table
   public getExpenseList() {
     this.user = this.auth.getUser();
     this.api.getExpensesByUser(this.user).subscribe(
       data => {
         this.expenseList = data;
-        console.log(this.expenseList);
         //assign for now expensedate withe the first date in item array
         for(let i = 0; i < this.expenseList.length; i++) {
           if(this.expenseList[i].hasItems) {

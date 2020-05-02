@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+
 import { Expense } from 'src/app/core/models/Expense';
+
+import { WindowsChangeService } from '../../../core/services/windows-change/windows-change.service';
 
 @Component({
   selector: 'app-update-expense',
@@ -8,49 +11,42 @@ import { Expense } from 'src/app/core/models/Expense';
 })
 export class UpdateExpenseComponent implements OnInit {
 
-  @Input() expenseUpdated: Expense;
+  @Input() updatedExpense: Expense;
 
-  fixedExpense: boolean = false;
-  variableExpense: boolean = false;
-  shortExpense: boolean = false;
-  longExpense: boolean = false;
-
-  constructor() { }
+  constructor(public windowService: WindowsChangeService) { }
 
   ngOnInit(): void {
     this.checkTypeExpense();
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.checkTypeExpense()
-
+    this.checkTypeExpense();
   }
 
   checkTypeExpense() {
-    if(this.expenseUpdated.expenseType === 'Despesa corrente fixa') {
-      this.fixedExpense = true;
-      this.variableExpense = false;
-      this.shortExpense = false;
-      this.longExpense = false;
+    if(this.updatedExpense.expenseType === 'Despesa corrente fixa') {
+      this.windowService.fixedExpense = true;
+      this.windowService.variableExpense = false;
+      this.windowService.shortExpense = false;
+      this.windowService.longExpense = false;
     }
-    if(this.expenseUpdated.expenseType === 'Despesa corrente variável') {
-      this.fixedExpense = false;
-      this.variableExpense = true;
-      this.shortExpense = false;
-      this.longExpense = false;
+    if(this.updatedExpense.expenseType === 'Despesa corrente variável') {
+      this.windowService.fixedExpense = false;
+      this.windowService.variableExpense = true;
+      this.windowService.shortExpense = false;
+      this.windowService.longExpense = false;
     }
-    if(this.expenseUpdated.expenseType === 'Despesa não corrente de curta duração') {
-      this.fixedExpense = false;
-      this.variableExpense = false;
-      this.shortExpense = true;
-      this.longExpense = false;
+    if(this.updatedExpense.expenseType === 'Despesa não corrente de curta duração') {
+      this.windowService.fixedExpense = false;
+      this.windowService.variableExpense = false;
+      this.windowService.shortExpense = true;
+      this.windowService.longExpense = false;
     }
-    if(this.expenseUpdated.expenseType === 'Despesa não corrente de longa duração') {
-      this.fixedExpense = false;
-      this.variableExpense = false;
-      this.shortExpense = false;
-      this.longExpense = true;
+    if(this.updatedExpense.expenseType === 'Despesa não corrente de longa duração') {
+      this.windowService.fixedExpense = false;
+      this.windowService.variableExpense = false;
+      this.windowService.shortExpense = false;
+      this.windowService.longExpense = true;
     }
   }
 

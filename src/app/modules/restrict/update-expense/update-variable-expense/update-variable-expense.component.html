@@ -1,16 +1,20 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-blue">Alterar despesa corrente variável</h1>
+</div>
 <form #itemForm="ngForm" name="form">
     <div class="container-fluid">
       <div class="row">
         <!-- expense name -->
         <div class="col-sm-6">
           <label for="expenseName" class="control-label">Nome da despesa:</label>
-          <input required id="expenseName" name="expenseName" type="text" class="form-control">
+          <input required id="expenseName" name="expenseName" type="text" class="form-control"
+          value="{{ updateVariable.expenseName }}">
         </div>
         <!-- expense type -->
         <div class="col-sm-6">
           <label for="itemName">Tipo da despesa:</label>
           <select required id="itemName" name="itemName" class="form-control ml-1" >
-            <option></option>
+            <option value="0"> {{ updateVariable.expenseSubtype }}</option>
           </select>
         </div>
       </div>
@@ -19,7 +23,8 @@
         <!-- date -->
         <div class="col-sm-6">
           <label for="expenseDate" class="control-label">Data:</label>
-          <input id="expenseDate" name="expenseDate" type="text" class="form-control" >
+          <input id="expenseDate" name="expenseDate" type="text" class="form-control" 
+          value="{{updateVariable.expenseDate}}">
         </div>
       </div>
     </div>

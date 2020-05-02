@@ -1,16 +1,20 @@
-<form #itemForm="ngForm" name="form">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-blue">Alterar despesa corrente fixa</h1>
+</div>
+<form #itemForm="ngForm" name="form" id="form">
     <div class="container-fluid">
       <div class="row">
           <!-- expense name -->
           <div class="col-sm-6" >
               <label class="control-label">Nome da despesa:</label>
-              <input name="expenseName" type="text" class="form-control ml-1">
+              <input name="expenseName" type="text" class="form-control ml-1"
+              value="{{ updateFixed.expenseName }}">
           </div>
           <!-- expense type -->
           <div class="col-sm-6" >
               <label>Tipo da despesa:</label>
               <select required name="expenseSubtype" class="form-control ml-1" >
-                  <option>Tipo</option>
+                  <option value="0">{{ updateFixed.expenseSubtype }}</option>
               </select>
           </div>
       </div>
@@ -19,13 +23,14 @@
           <!--expense date-->
           <div class="col-sm-6" >
               <label>Data da despesa:</label>
-              <input name="expenseDate" type="text" class="form-control ml-1">
+              <input name="expenseDate" type="text" class="form-control ml-1"
+              value="{{ updateFixed.expenseDate }}">
           </div>
           <!-- currency -->
           <div class="col-sm-6" >
               <label>Moeda:</label>
               <select required id="currency" name="currency" class="form-control ml-1" >
-                      <option>Moeda</option>
+                      <option value="0">{{ updateFixed.currency }}</option>
               </select>
           </div>
       </div>
@@ -35,6 +40,7 @@
       <div class="row">
           <div class="col-sm-6">
               <select name="expenseMonth" class="form-control ml-1">
+                  <option value="0">{{ updateFixed.month }}</option>
                   <option>Janeiro</option>
                   <option>Fevereiro</option>
                   <option>Março</option>
@@ -52,7 +58,7 @@
           <!--year reference-->
           <div class="col-sm-6">
               <select name="expenseYear" class="form-control ml-1" >
-                  <option> ano </option>
+                  <option value="0"> {{ updateFixed.year }} </option>
               </select>
           </div>
       </div>
@@ -61,7 +67,8 @@
           <!-- expense name -->
           <div class="col-sm-12">
               <label>Observações:</label>
-              <textarea name="expenseName" type="text" rows="2" class="form-control ml-1" ></textarea>
+              <textarea name="expenseName" type="text" rows="2" class="form-control ml-1" 
+              value="{{ updateFixed.expenseDescription }}"></textarea>
           </div>
       </div>
       <br>
@@ -69,7 +76,8 @@
       <div class="row">
           <div class="col-sm-6">
               <label>Valor da despesa:</label>
-              <input required type="Number" name="value" class="form-control ml-1" >
+              <input required type="Number" name="value" class="form-control ml-1" 
+              value="{{ updateFixed.value }}">
           </div>
       </div>
       <br>
@@ -78,5 +86,6 @@
           <button class="btn btn-primary" type="submit">Submeter</button>
       </div>
   </div>
+  <br><br><br><br>
     
   </form>

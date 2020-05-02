@@ -1,31 +1,26 @@
 <!-- update -->
-<div (change)="checkTypeExpense()">
-    <!-- create new expense-->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-blue">Alterar despesa</h1>
-    </div>
-  
+<div (change)="checkTypeExpense()">  
     <!--fixed expenses-->
-    <div *ngIf="fixedExpense">
-      <app-update-fixed-expense></app-update-fixed-expense>
+    <div *ngIf="windowService.fixedExpense">
+      <app-update-fixed-expense [updateFixed]="updatedExpense"></app-update-fixed-expense>
   </div>
 
   <!--variable expenses-->
-  <div *ngIf="variableExpense">
-    <app-update-variable-expense></app-update-variable-expense>
+  <div *ngIf="windowService.variableExpense">
+    <app-update-variable-expense [updateVariable]="updatedExpense"></app-update-variable-expense>
   </div>
 
   <!--short expenses-->
-  <div *ngIf="shortExpense">
+  <div *ngIf="windowService.shortExpense">
     <form #itemForm="ngForm" name="form">
-      <app-update-short-expense></app-update-short-expense>
+      <app-update-short-expense [updateShort]="updatedExpense"></app-update-short-expense>
     </form>
   </div>
 
   <!--long expenses-->
-  <div *ngIf="longExpense">
+  <div *ngIf="windowService.longExpense">
     <form #itemForm="ngForm" name="form">
-      <app-update-long-expense></app-update-long-expense>
+      <app-update-long-expense [updateLong]="updatedExpense"></app-update-long-expense>
     </form>
   </div>
 

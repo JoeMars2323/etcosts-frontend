@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
   selector: 'app-update-variable-expense',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update-variable-expense.component.css']
 })
 export class UpdateVariableExpenseComponent implements OnInit {
+
+  @Input() updateVariable: Expense;
 
   constructor() { }
 

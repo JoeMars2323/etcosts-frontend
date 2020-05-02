@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -68,6 +69,7 @@ import { UpdateFixedExpenseComponent } from './modules/restrict/update-expense/u
     NgbModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
+    ChartsModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

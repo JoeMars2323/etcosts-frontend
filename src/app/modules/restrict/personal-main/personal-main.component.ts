@@ -4,18 +4,20 @@ import { AuthenticationService } from '../../../core/services/authentication/aut
 import { User } from '../../../core/models/User';
 import { Expense } from '../../../core/models/Expense';
 import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
+import { WindowsChangeService } from '../../../core/services/windows-change/windows-change.service';
 
 @Component({
   selector: 'app-personal-main',
   templateUrl: './personal-main.component.html',
-  styleUrls: ['./personal-main.component.css']
+  styleUrls: ['./personal-main.component.css'],
+  providers: [WindowsChangeService]
 })
 export class PersonalMainComponent implements OnInit {
 
   user: User;
   expenseList: Expense[];
   expense: Expense = null;
-  expenseUpdate: Expense = null;
+  updateExpense: Expense = null;
 
   // flags add expenses
   expenses: boolean = false;
@@ -36,9 +38,9 @@ export class PersonalMainComponent implements OnInit {
   
   update: boolean = false;
 
-  constructor(private api: RestApiService, private auth: AuthenticationService) { 
+  constructor(private api: RestApiService, private auth: AuthenticationService, private windowService: WindowsChangeService) { 
     this.expense = new Expense();
-    this.expenseUpdate = new Expense();
+    this.updateExpense = new Expense();
   }
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class PersonalMainComponent implements OnInit {
   getExpensId(id: number) {
     this.api.getExpenseInf(id).subscribe(
       data => {
-        this.expenseUpdate = data;
+        this.updateExpense = data;
       }
     )
     this.callUpdate();
@@ -85,6 +87,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
+    this.windowService.closeUpdates();
   }
 
   addFixedExpense() {
@@ -95,6 +98,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
+    this.windowService.closeUpdates();
   }
 
   addVariableExpense() {
@@ -105,6 +109,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
+    this.windowService.closeUpdates();
   }
 
   addShortExpense() {
@@ -115,6 +120,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
+    this.windowService.closeUpdates();
   }
 
   addLongExpense() {
@@ -125,6 +131,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = true;
     this.searchAll = false;
     this.dashbord = false;
+    this.windowService.closeUpdates();
   }
 
   // open and close components - search expenses
@@ -136,6 +143,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = true;
     this.dashbord = false;
+    this.windowService.closeUpdates();
   }
 
   callDashboard() {
@@ -146,6 +154,7 @@ export class PersonalMainComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = true;
+    this.windowService.closeUpdates();
   }
 
   // open sidebar menus
@@ -154,6 +163,7 @@ export class PersonalMainComponent implements OnInit {
     this.search = false;
     this.revenue = false;
     this.utilities = false;
+    this.windowService.closeUpdates();
 
   }
 
@@ -162,6 +172,7 @@ export class PersonalMainComponent implements OnInit {
     this.expenses = false;
     this.revenue = false;
     this.utilities = false;
+    this.windowService.closeUpdates();
   }
 
   newRevenue() {
@@ -169,6 +180,7 @@ export class PersonalMainComponent implements OnInit {
     this.expenses = false;
     this.search = false;
     this.utilities = false;
+    this.windowService.closeUpdates();
   }
 
   callUtilies(){
@@ -176,16 +188,19 @@ export class PersonalMainComponent implements OnInit {
     this.expenses = false;
     this.search = false;
     this.revenue = false;
+    this.windowService.closeUpdates();
   }
 
   callexpenses(){
     this.utilities = !this.utilities;
+    this.windowService.closeUpdates();
     
   }
 
   callUpdate(){
     this.update = true;
     this.searchAll = false;
+    this.windowService.closeUpdates();
   }
 
 

@@ -30,7 +30,7 @@
         <th scope="col">Subtipo</th>
         <th scope="col">Data</th>
         <th scope="col">Total</th>
-        <th scope="col">Acções</th>
+        <td scope="col" colspan="3">Ações</td>
       </tr>
     </thead>
     <tbody>
@@ -41,11 +41,9 @@
         <td>{{ item.expenseSubtype }}</td>
         <td>{{ item.expenseDate }}</td>
         <td>{{ item.value }}</td>
-        <td>
-          <button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button>
-          &nbsp;
-          <button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button>
-        </td>
+        <td><button class="btn btn-primary" type="button"><i class="far fa-eye"></i></button></td>
+        <td><button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button></td>
+        <td><button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button></td>
       </tr>
     </tbody>
   </table>
