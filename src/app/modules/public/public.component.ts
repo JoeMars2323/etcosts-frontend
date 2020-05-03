@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { WindowsChangeService } from '../../core/services/windows-change/windows-change.service'
+
 @Component({
   selector: 'app-public-main',
   templateUrl: './public.component.html',
@@ -8,61 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class PublicMainComponent implements OnInit {
 
   selectedItem: boolean = true;
-  // screan variables
-  home: boolean = true;
-  about: boolean = false;
-  contacts: boolean = false;
-  faq: boolean = false;
-  services: boolean = false;
 
-  constructor() { }
+  constructor(public windowsChangeService: WindowsChangeService) { }
 
   ngOnInit(): void {
-  }
-
-  goToHome() {
-    this.home = true;
-    this.about = false;
-    this.contacts = false;
-    this.faq = false;
-    this.services = false;
-
-  }
-
-  goToAbout() {
-    this.home = false;
-    this.about = true;
-    this.contacts = false;
-    this.faq = false;
-    this.services = false;
-
-  }
-
-  goToContacts() {
-    this.home = false;
-    this.about = false;
-    this.contacts = true;
-    this.faq = false;
-    this.services = false;
-
-  }
-
-  goToFaq() {
-    this.home = false;
-    this.about = false;
-    this.contacts = false;
-    this.faq = true;
-    this.services = false;
-
-  }
-
-  goToServices() {
-    this.home = false;
-    this.about = false;
-    this.contacts = false;
-    this.faq = false;
-    this.services = true;
-
   }
 
 }

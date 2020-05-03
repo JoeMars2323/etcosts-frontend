@@ -10,8 +10,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { RestApiService } from './core/services/rest-api/rest-api.service';
 import { AuthenticationService } from './core/services/authentication/authentication.service';
+import { WindowsChangeService } from './core/services/windows-change/windows-change.service';
+import { RestApiService } from './core/services/rest-api/rest-api.service';
 
 import { AppComponent } from './app.component';
 import { PublicMainComponent } from './modules/public/public.component';
@@ -73,7 +74,8 @@ import { UpdateFixedExpenseComponent } from './modules/restrict/update-expense/u
     ChartsModule
   ],
   providers: [AuthenticationService,
-              RestApiService
+              RestApiService,
+              WindowsChangeService
   ],
   bootstrap: [AppComponent]
 })

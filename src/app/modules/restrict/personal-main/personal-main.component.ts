@@ -9,8 +9,7 @@ import { WindowsChangeService } from '../../../core/services/windows-change/wind
 @Component({
   selector: 'app-personal-main',
   templateUrl: './personal-main.component.html',
-  styleUrls: ['./personal-main.component.css'],
-  providers: [WindowsChangeService]
+  styleUrls: ['./personal-main.component.css']
 })
 export class PersonalMainComponent implements OnInit {
 
