@@ -1,9 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
-import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
-import { Expense } from '../../../core/models/Expense';
-import { User } from '../../../core/models/User';
+import { User } from '../../../../core/models/User';
+import { Expense } from '../../../../core/models/Expense';
+
+import { RestApiService } from '../../../../core/services/rest-api/rest-api.service';
+import { AuthenticationService } from '../../../../core/services/authentication/authentication.service';
+
+
 
 @Component({
   selector: 'app-list-expenses',

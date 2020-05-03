@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ItemExpense } from '../../../../core/models/ItemExpense';
+import { ItemExpense } from '../../../../../core/models/ItemExpense';
 
 @Component({
   selector: 'app-long-expense',
-  templateUrl: './long-expense.component.html',
-  styleUrls: ['./long-expense.component.css']
+  templateUrl: './add-long-expense.component.html',
+  styleUrls: ['./add-long-expense.component.css']
 })
-export class LongExpenseComponent implements OnInit {
+export class AddLongExpenseComponent implements OnInit {
 
   isChecked: boolean = false;
   hasRender: boolean = true;

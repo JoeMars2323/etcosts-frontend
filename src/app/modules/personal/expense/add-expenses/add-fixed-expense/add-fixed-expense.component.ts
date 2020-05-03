@@ -2,15 +2,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 
-import { Expense } from '../../../../core/models/Expense';
-import { RestApiService } from '../../../../core/services/rest-api/rest-api.service';
+import { RestApiService } from '../../../../../core/services/rest-api/rest-api.service';
+
+import { Expense } from '../../../../../core/models/Expense';
 
 @Component({
   selector: 'app-fixed-expense',
-  templateUrl: './fixed-expense.component.html',
-  styleUrls: ['./fixed-expense.component.css']
+  templateUrl: './add-fixed-expense.component.html',
+  styleUrls: ['./add-fixed-expense.component.css']
 })
-export class FixedExpenseComponent implements OnInit {
+export class AddFixedExpenseComponent implements OnInit {
   
   expense: Expense;
 

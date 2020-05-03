@@ -1,17 +1,19 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
-import { User } from '../../../core/models/User';
-import { Expense } from '../../../core/models/Expense';
-import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
-import { WindowsChangeService } from '../../../core/services/windows-change/windows-change.service';
+import { RestApiService } from '../../core/services/rest-api/rest-api.service';
+import { WindowsChangeService } from '../../core/services/windows-change/windows-change.service';
+import { AuthenticationService } from '../../core/services/authentication/authentication.service';
+
+import { User } from '../../core/models/User';
+import { Expense } from '../../core/models/Expense';
+
 
 @Component({
-  selector: 'app-personal-main',
-  templateUrl: './personal-main.component.html',
-  styleUrls: ['./personal-main.component.css']
+  selector: 'app-personal',
+  templateUrl: './personal.component.html',
+  styleUrls: ['./personal.component.css']
 })
-export class PersonalMainComponent implements OnInit {
+export class PersonalComponent implements OnInit {
 
   user: User;
   expenseList: Expense[];

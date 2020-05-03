@@ -2,7 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 
 import { Expense } from 'src/app/core/models/Expense';
 
-import { WindowsChangeService } from '../../../core/services/windows-change/windows-change.service';
+import { WindowsChangeService } from '../../../../core/services/windows-change/windows-change.service';
 
 @Component({
   selector: 'app-update-expense',

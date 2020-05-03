@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonalMainComponent } from './personal-main.component';
+import { AddLongExpenseComponent } from './add-long-expense.component';
 
-describe('PersonalMainComponent', () => {
-  let component: PersonalMainComponent;
-  let fixture: ComponentFixture<PersonalMainComponent>;
+describe('LongExpenseComponent', () => {
+  let component: AddLongExpenseComponent;
+  let fixture: ComponentFixture<AddLongExpenseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonalMainComponent ]
+      declarations: [ AddLongExpenseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PersonalMainComponent);
+    fixture = TestBed.createComponent(AddLongExpenseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

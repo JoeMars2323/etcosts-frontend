@@ -5,9 +5,9 @@ import { WindowsChangeService } from '../../core/services/windows-change/windows
 @Component({
   selector: 'app-public-main',
   templateUrl: './public.component.html',
-  styleUrls: ['./public.component.css']
+  styleUrls: ['./public.component.css'],
 })
-export class PublicMainComponent implements OnInit {
+export class PublicComponent implements OnInit {
 
   selectedItem: boolean = true;
 

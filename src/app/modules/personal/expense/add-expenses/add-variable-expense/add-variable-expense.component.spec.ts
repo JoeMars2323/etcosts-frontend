@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VariableExpenseComponent } from './variable-expense.component';
+import { AddVariableExpenseComponent } from './add-variable-expense.component';
 
 describe('VariableExpenseComponent', () => {
-  let component: VariableExpenseComponent;
-  let fixture: ComponentFixture<VariableExpenseComponent>;
+  let component: AddVariableExpenseComponent;
+  let fixture: ComponentFixture<AddVariableExpenseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VariableExpenseComponent ]
+      declarations: [ AddVariableExpenseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VariableExpenseComponent);
+    fixture = TestBed.createComponent(AddVariableExpenseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

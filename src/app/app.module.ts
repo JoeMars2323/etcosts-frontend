@@ -10,53 +10,52 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { AuthenticationService } from './core/services/authentication/authentication.service';
-import { WindowsChangeService } from './core/services/windows-change/windows-change.service';
 import { RestApiService } from './core/services/rest-api/rest-api.service';
+import { WindowsChangeService } from './core/services/windows-change/windows-change.service';
+import { AuthenticationService } from './core/services/authentication/authentication.service';
+
 
 import { AppComponent } from './app.component';
-import { PublicMainComponent } from './modules/public/public.component';
+import { PublicComponent } from './modules/public/public.component';
+import { PersonalComponent } from './modules/personal/personal.component';
+import { LoginComponent } from './modules/login/do-login/login.component';
+import { CreateLoginComponent } from './modules/login/create-login/create-login.component';
 import { HomeComponent } from './modules/public/home/home.component';
 import { ServicesComponent } from './modules/public/services/services.component';
 import { FaqComponent } from './modules/public/faq/faq.component';
 import { ContactsComponent } from './modules/public/contacts/contacts.component';
 import { AboutComponent } from './modules/public/about/about.component';
-import { LoginComponent } from './modules/login/do-login/login.component';
-import { CreateLoginComponent } from './modules/login/create-login/create-login.component';
-import { PersonalMainComponent } from './modules/restrict/personal-main/personal-main.component';
-import { AddExpenseComponent } from './modules/restrict/add-expense/add-expense.component';
-import { ListExpensesComponent } from './modules/restrict/list-expenses/list-expenses.component';
-import { OverallComponent } from './modules/restrict/overall/overall.component';
-import { UpdateExpenseComponent } from './modules/restrict/update-expense/update-expense.component';
-import { FixedExpenseComponent } from './modules/restrict/add-expenses/fixed-expense/fixed-expense.component';
-import { VariableExpenseComponent } from './modules/restrict/add-expenses/variable-expense/variable-expense.component';
-import { ShortExpenseComponent } from './modules/restrict/add-expenses/short-expense/short-expense.component';
-import { LongExpenseComponent } from './modules/restrict/add-expenses/long-expense/long-expense.component';
-import { UpdateLongExpenseComponent } from './modules/restrict/update-expense/update-long-expense/update-long-expense.component';
-import { UpdateShortExpenseComponent } from './modules/restrict/update-expense/update-short-expense/update-short-expense.component';
-import { UpdateVariableExpenseComponent } from './modules/restrict/update-expense/update-variable-expense/update-variable-expense.component';
-import { UpdateFixedExpenseComponent } from './modules/restrict/update-expense/update-fixed-expense/update-fixed-expense.component';
+import { ListExpensesComponent } from './modules/personal/expense/list-expenses/list-expenses.component';
+import { OverallComponent } from './modules/personal/overall/overall.component';
+import { AddFixedExpenseComponent } from './modules/personal/expense/add-expenses/add-fixed-expense/add-fixed-expense.component';
+import { AddVariableExpenseComponent } from './modules/personal/expense/add-expenses/add-variable-expense/add-variable-expense.component';
+import { AddShortExpenseComponent } from './modules/personal/expense/add-expenses/add-short-expense/add-short-expense.component';
+import { AddLongExpenseComponent } from './modules/personal/expense/add-expenses/add-long-expense/add-long-expense.component';
+import { UpdateExpenseComponent } from './modules/personal/expense/update-expense/update-expense.component';
+import { UpdateLongExpenseComponent } from './modules/personal/expense/update-expense/update-long-expense/update-long-expense.component';
+import { UpdateShortExpenseComponent } from './modules/personal/expense/update-expense/update-short-expense/update-short-expense.component';
+import { UpdateVariableExpenseComponent } from './modules/personal/expense/update-expense/update-variable-expense/update-variable-expense.component';
+import { UpdateFixedExpenseComponent } from './modules/personal/expense/update-expense/update-fixed-expense/update-fixed-expense.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PublicComponent,
+    PersonalComponent,
     LoginComponent,
     CreateLoginComponent,
     AboutComponent,
     ServicesComponent,
     ContactsComponent,
     FaqComponent,
-    PersonalMainComponent,
-    AddExpenseComponent,
     ListExpensesComponent,
     OverallComponent,
-    PublicMainComponent,
     HomeComponent,
     UpdateExpenseComponent,
-    FixedExpenseComponent,
-    VariableExpenseComponent,
-    ShortExpenseComponent,
-    LongExpenseComponent,
+    AddFixedExpenseComponent,
+    AddVariableExpenseComponent,
+    AddShortExpenseComponent,
+    AddLongExpenseComponent,
     UpdateLongExpenseComponent,
     UpdateShortExpenseComponent,
     UpdateVariableExpenseComponent,

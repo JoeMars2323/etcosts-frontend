@@ -2,16 +2,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 
-import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
-import { ItemExpense } from '../../../core/models/ItemExpense';
+import { RestApiService } from '../../../../../core/services/rest-api/rest-api.service';
+import { ItemExpense } from '../../../../../core/models/ItemExpense';
 import { Expense } from 'src/app/core/models/Expense';
 
 @Component({
-  selector: 'app-add-expense',
-  templateUrl: './add-expense.component.html',
-  styleUrls: ['./add-expense.component.css']
+  selector: 'app-variable-expense',
+  templateUrl: './add-variable-expense.component.html',
+  styleUrls: ['./add-variable-expense.component.css']
 })
-export class AddExpenseComponent implements OnInit {
+export class AddVariableExpenseComponent implements OnInit {
 
   // expense declaration
   expense: Expense;
@@ -29,17 +29,18 @@ export class AddExpenseComponent implements OnInit {
 
   // lists
   expenseType: String[];
+  expenseSubtype: String[];
   currency: String[];
 
   // calculate total
   total: number = 0;
 
-  constructor(private api: RestApiService, private localeService: BsLocaleService) {
+  constructor(private api: RestApiService, private localeService: BsLocaleService) { 
     this.expense = new Expense();
     this.item = new ItemExpense();
     this.expenseToSend = new EventEmitter<Expense>();
-
   }
+
   ngOnInit(): void {
     this.getExpenseType();
     this.getCurrency();
@@ -48,22 +49,11 @@ export class AddExpenseComponent implements OnInit {
     this.applyLocale();
   }
 
-  // change datepicker properties
-  applyLocale() {
-    this.localeService.use(this.locale);
-  }
-
-  applyTheme() {
-    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
-    setTimeout(() => {
-    });
-  }
-
   // load dropdowns
   getExpenseType() {
-    this.api.getExpenseType().subscribe(
+    this.api.getExpenseSubtype(2).subscribe(
       data => {
-        this.expenseType = data;
+        this.expenseSubtype = data;
       }
     )
   }
@@ -75,6 +65,17 @@ export class AddExpenseComponent implements OnInit {
 
       }
     )
+  }
+
+  // change datepicker properties
+  applyLocale() {
+    this.localeService.use(this.locale);
+  }
+
+  applyTheme() {
+    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
+    setTimeout(() => {
+    });
   }
 
   // add and remove items
@@ -93,9 +94,9 @@ export class AddExpenseComponent implements OnInit {
     //return this.total = this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
     this.total = 0;
     for (let i = 0; i < this.dataArray.length; i++) {
-      if(this.dataArray[i].itemValue !== undefined) {
-        this.total += this.dataArray[i].itemValue;
-        console.log(typeof this.total === "number");
+      if(this.dataArray[i].valueNumber !== undefined) {
+        this.total += this.dataArray[i].valueNumber;
+        //console.log(typeof this.total === "number");
       }
        
      }
@@ -106,11 +107,18 @@ export class AddExpenseComponent implements OnInit {
   // submit button
   onSubmit() {
     // add item array to expense
+    this.expense.expenseType = "Despesa corrente variável";
+    this.expense.hasItems = true;
     this.expense.itemArray = this.dataArray;
+    for(let i = 0; i < this.expense.itemArray.length; i++) {
+      this.expense.itemArray[i].stateType = "Pago";
+      this.expense.itemArray[i].value = this.expense.itemArray[i].valueNumber.toString();
+
+    }
+    console.log(this.expense);
     this.expenseToSend.emit(this.expense);
     this.total = 0
 
   }
-
 
 }

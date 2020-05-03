@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-short-expense',
-  templateUrl: './short-expense.component.html',
-  styleUrls: ['./short-expense.component.css']
+  templateUrl: './add-short-expense.component.html',
+  styleUrls: ['./add-short-expense.component.css']
 })
-export class ShortExpenseComponent implements OnInit {
+export class AddShortExpenseComponent implements OnInit {
 
   hasItem: boolean = false;
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LongExpenseComponent } from './long-expense.component';
+import { AddShortExpenseComponent } from './add-short-expense.component';
 
-describe('LongExpenseComponent', () => {
-  let component: LongExpenseComponent;
-  let fixture: ComponentFixture<LongExpenseComponent>;
+describe('ShortExpenseComponent', () => {
+  let component: AddShortExpenseComponent;
+  let fixture: ComponentFixture<AddShortExpenseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LongExpenseComponent ]
+      declarations: [ AddShortExpenseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LongExpenseComponent);
+    fixture = TestBed.createComponent(AddShortExpenseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
