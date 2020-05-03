@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-public-main',
-  templateUrl: './public-main.component.html',
-  styleUrls: ['./public-main.component.css']
+  templateUrl: './public.component.html',
+  styleUrls: ['./public.component.css']
 })
 export class PublicMainComponent implements OnInit {
 

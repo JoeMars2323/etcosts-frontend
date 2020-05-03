@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublicMainComponent } from './public-main.component';
+import { PublicMainComponent } from './public.component';
 
 describe('PublicMainComponent', () => {
   let component: PublicMainComponent;

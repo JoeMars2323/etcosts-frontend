@@ -14,8 +14,7 @@ export class CreateLoginComponent implements OnInit {
   user: User;
   response: boolean;
 
-  constructor(private api: RestApiService,
-    private router: Router) { 
+  constructor(private api: RestApiService, private router: Router) { 
       this.user = new User();
     }
 

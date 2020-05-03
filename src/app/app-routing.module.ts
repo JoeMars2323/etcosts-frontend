@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PublicMainComponent } from '../app/modules/public/public-main/public-main.component';
+import { PublicMainComponent } from '../app/modules/public/public.component';
 import { LoginComponent } from '../app/modules/login/do-login/login.component';
 import { CreateLoginComponent } from '../app/modules/login/create-login/create-login.component';
 import { PersonalMainComponent } from '../app/modules/restrict/personal-main/personal-main.component';

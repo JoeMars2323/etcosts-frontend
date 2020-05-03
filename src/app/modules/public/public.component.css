@@ -1,7 +1,3 @@
-/**
-* CSS - main
-*/
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -369,7 +365,7 @@ h1, h2, h3, h4, h5, h6 {
 #welcome {
   width: 100%;
   height: 60vh;
-  background: url("../../../../assets/images/expenses.png") center center;
+  background: url("../../../assets/images/expenses.png") center center;
   background-size: cover;
   position: relative;
   z-index: 1;

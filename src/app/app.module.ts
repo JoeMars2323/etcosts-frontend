@@ -9,10 +9,14 @@ import { ChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
+
+import { RestApiService } from './core/services/rest-api/rest-api.service';
+import { AuthenticationService } from './core/services/authentication/authentication.service';
+
 import { AppComponent } from './app.component';
-import { PublicMainComponent } from './modules/public/public-main/public-main.component';
+import { PublicMainComponent } from './modules/public/public.component';
 import { HomeComponent } from './modules/public/home/home.component';
-import { ServicesComponent } from './modules/public//services/services.component';
+import { ServicesComponent } from './modules/public/services/services.component';
 import { FaqComponent } from './modules/public/faq/faq.component';
 import { ContactsComponent } from './modules/public/contacts/contacts.component';
 import { AboutComponent } from './modules/public/about/about.component';
@@ -22,7 +26,6 @@ import { PersonalMainComponent } from './modules/restrict/personal-main/personal
 import { AddExpenseComponent } from './modules/restrict/add-expense/add-expense.component';
 import { ListExpensesComponent } from './modules/restrict/list-expenses/list-expenses.component';
 import { OverallComponent } from './modules/restrict/overall/overall.component';
-import { AuthenticationService } from './core/services/authentication/authentication.service';
 import { UpdateExpenseComponent } from './modules/restrict/update-expense/update-expense.component';
 import { FixedExpenseComponent } from './modules/restrict/add-expenses/fixed-expense/fixed-expense.component';
 import { VariableExpenseComponent } from './modules/restrict/add-expenses/variable-expense/variable-expense.component';
@@ -32,8 +35,6 @@ import { UpdateLongExpenseComponent } from './modules/restrict/update-expense/up
 import { UpdateShortExpenseComponent } from './modules/restrict/update-expense/update-short-expense/update-short-expense.component';
 import { UpdateVariableExpenseComponent } from './modules/restrict/update-expense/update-variable-expense/update-variable-expense.component';
 import { UpdateFixedExpenseComponent } from './modules/restrict/update-expense/update-fixed-expense/update-fixed-expense.component';
-
-
 
 @NgModule({
   declarations: [
@@ -71,7 +72,9 @@ import { UpdateFixedExpenseComponent } from './modules/restrict/update-expense/u
     BsDatepickerModule.forRoot(),
     ChartsModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService,
+              RestApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
