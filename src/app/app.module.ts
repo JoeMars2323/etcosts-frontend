@@ -25,8 +25,8 @@ import { ServicesComponent } from './modules/public/services/services.component'
 import { FaqComponent } from './modules/public/faq/faq.component';
 import { ContactsComponent } from './modules/public/contacts/contacts.component';
 import { AboutComponent } from './modules/public/about/about.component';
-import { ListExpensesComponent } from './modules/personal/expense/list-expenses/list-expenses.component';
 import { OverallComponent } from './modules/personal/overall/overall.component';
+import { ListExpensesComponent } from './modules/personal/expense/list-expenses/list-expenses.component';
 import { AddFixedExpenseComponent } from './modules/personal/expense/add-expenses/add-fixed-expense/add-fixed-expense.component';
 import { AddVariableExpenseComponent } from './modules/personal/expense/add-expenses/add-variable-expense/add-variable-expense.component';
 import { AddShortExpenseComponent } from './modules/personal/expense/add-expenses/add-short-expense/add-short-expense.component';
@@ -36,6 +36,11 @@ import { UpdateLongExpenseComponent } from './modules/personal/expense/update-ex
 import { UpdateShortExpenseComponent } from './modules/personal/expense/update-expense/update-short-expense/update-short-expense.component';
 import { UpdateVariableExpenseComponent } from './modules/personal/expense/update-expense/update-variable-expense/update-variable-expense.component';
 import { UpdateFixedExpenseComponent } from './modules/personal/expense/update-expense/update-fixed-expense/update-fixed-expense.component';
+import { ViewExpenseComponent } from './modules/personal/expense/view-expense/view-expense.component';
+import { ViewFixedExpenseComponent } from './modules/personal/expense/view-expense/view-fixed-expense/view-fixed-expense.component';
+import { ViewLongExpenseComponent } from './modules/personal/expense/view-expense/view-long-expense/view-long-expense.component';
+import { ViewShortExpenseComponent } from './modules/personal/expense/view-expense/view-short-expense/view-short-expense.component';
+import { ViewVariableExpenseComponent } from './modules/personal/expense/view-expense/view-variable-expense/view-variable-expense.component';
 
 @NgModule({
   declarations: [
@@ -47,10 +52,10 @@ import { UpdateFixedExpenseComponent } from './modules/personal/expense/update-e
     AboutComponent,
     ServicesComponent,
     ContactsComponent,
-    FaqComponent,
-    ListExpensesComponent,
-    OverallComponent,
+    FaqComponent,    
     HomeComponent,
+    OverallComponent,
+    ListExpensesComponent,
     UpdateExpenseComponent,
     AddFixedExpenseComponent,
     AddVariableExpenseComponent,
@@ -59,22 +64,28 @@ import { UpdateFixedExpenseComponent } from './modules/personal/expense/update-e
     UpdateLongExpenseComponent,
     UpdateShortExpenseComponent,
     UpdateVariableExpenseComponent,
-    UpdateFixedExpenseComponent
+    UpdateFixedExpenseComponent,
+    ViewExpenseComponent,
+    ViewFixedExpenseComponent,
+    ViewLongExpenseComponent,
+    ViewShortExpenseComponent,
+    ViewVariableExpenseComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ChartsModule
   ],
-  providers: [AuthenticationService,
-              RestApiService,
-              WindowsChangeService
+  providers: [
+    AuthenticationService,
+    RestApiService,
+    WindowsChangeService
   ],
   bootstrap: [AppComponent]
 })

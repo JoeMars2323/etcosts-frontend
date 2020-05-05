@@ -14,31 +14,25 @@ import { Expense } from '../../../../../core/models/Expense';
 export class AddFixedExpenseComponent implements OnInit {
   
   expense: Expense;
+  @Output() expenseToSend;
+
+  bsConfig: Partial<BsDatepickerConfig>;
 
   // lists
   expenseSubtype: String[];
   currency: String[];
-  years: String[] = [];
+  years: String[] = []; 
 
-  // event emiter
-  @Output() expenseToSend;
-
-  // datepicker properties
-  locale = 'en';
-  locales = listLocales();
-  bsConfig: Partial<BsDatepickerConfig>;
-  colorTheme = 'theme-dark-blue';
-
-  constructor(private api: RestApiService, private localeService: BsLocaleService) { 
+  constructor(private api: RestApiService) { 
     this.expense = new Expense();
     this.expenseToSend = new EventEmitter<Expense>();
+    this.bsConfig = new BsDatepickerConfig();
+    this.bsConfig.containerClass = 'theme-dark-blue';
   }
 
   ngOnInit(): void {
     this.getExpenseSubtype();
     this.getCurrency();
-    this.applyTheme();
-    this.applyLocale();
     this.getYears();
   }
 
@@ -50,7 +44,6 @@ export class AddFixedExpenseComponent implements OnInit {
       }
     )
   }
-
   getCurrency() {
     this.api.getCurrency().subscribe(
       data => {
@@ -69,17 +62,6 @@ export class AddFixedExpenseComponent implements OnInit {
     this.years.push((current).toString());
     this.years.push((current + 1).toString());
 
-  }
-
-  // change datepicker properties
-  applyLocale() {
-    this.localeService.use(this.locale);
-  }
-
-  applyTheme() {
-    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
-    setTimeout(() => {
-    });
   }
 
    // submit button

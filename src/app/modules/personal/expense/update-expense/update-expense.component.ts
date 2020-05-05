@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { Expense } from 'src/app/core/models/Expense';
 
@@ -12,8 +12,11 @@ import { WindowsChangeService } from '../../../../core/services/windows-change/w
 export class UpdateExpenseComponent implements OnInit {
 
   @Input() updatedExpense: Expense;
+  @Output() expenseToUpdate;
 
-  constructor(public windowService: WindowsChangeService) { }
+  constructor(public windowService: WindowsChangeService) { 
+    this.expenseToUpdate = new EventEmitter<Expense>();
+  }
 
   ngOnInit(): void {
     this.checkTypeExpense();
@@ -48,6 +51,11 @@ export class UpdateExpenseComponent implements OnInit {
       this.windowService.shortExpense = false;
       this.windowService.longExpense = true;
     }
+  }
+
+  // receive from several expenses types and emit to personal component
+  expenseUpdated($event) {
+    this.expenseToUpdate.emit($event);
   }
 
 }

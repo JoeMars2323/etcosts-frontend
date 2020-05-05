@@ -2,7 +2,7 @@
 <div (change)="checkTypeExpense()">  
     <!--fixed expenses-->
     <div *ngIf="windowService.fixedExpense">
-      <app-update-fixed-expense [updateFixed]="updatedExpense"></app-update-fixed-expense>
+      <app-update-fixed-expense [updateFixed]="updatedExpense" (expenseToUpdate)="expenseUpdated($event)"></app-update-fixed-expense>
   </div>
 
   <!--variable expenses-->

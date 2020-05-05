@@ -17,6 +17,14 @@ export class Expense {
 	value: string;
 	hasItems: boolean;
 	itemArray: ItemExpense[];
+	update: boolean;
+
+
+	convertToDate(stringDate: string) {
+		let newDate = new Date(stringDate);
+		return newDate;
+
+	}
 
  
 }

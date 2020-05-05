@@ -41,7 +41,7 @@
         <td>{{ item.expenseSubtype }}</td>
         <td>{{ item.expenseDate }}</td>
         <td>{{ item.value }}</td>
-        <td><button class="btn btn-primary" type="button"><i class="far fa-eye"></i></button></td>
+        <td><button class="btn btn-primary" type="button" (click)="onView(item)"><i class="far fa-eye"></i></button></td>
         <td><button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button></td>
         <td><button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button></td>
       </tr>

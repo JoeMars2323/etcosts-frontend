@@ -38,8 +38,9 @@ export class PersonalComponent implements OnInit {
   newExpense: boolean = false;
   
   update: boolean = false;
+  view: boolean = false;
 
-  constructor(private api: RestApiService, private auth: AuthenticationService, private windowService: WindowsChangeService) { 
+  constructor(private api: RestApiService, private auth: AuthenticationService, public windowsChangeService: WindowsChangeService) { 
     this.expense = new Expense();
     this.updateExpense = new Expense();
   }
@@ -88,7 +89,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   addFixedExpense() {
@@ -99,7 +100,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   addVariableExpense() {
@@ -110,7 +111,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   addShortExpense() {
@@ -121,7 +122,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   addLongExpense() {
@@ -132,7 +133,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = true;
     this.searchAll = false;
     this.dashbord = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   // open and close components - search expenses
@@ -144,7 +145,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = true;
     this.dashbord = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   callDashboard() {
@@ -155,7 +156,7 @@ export class PersonalComponent implements OnInit {
     this.longExpense = false;
     this.searchAll = false;
     this.dashbord = true;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   // open sidebar menus
@@ -164,7 +165,7 @@ export class PersonalComponent implements OnInit {
     this.search = false;
     this.revenue = false;
     this.utilities = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
 
   }
 
@@ -173,7 +174,7 @@ export class PersonalComponent implements OnInit {
     this.expenses = false;
     this.revenue = false;
     this.utilities = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   newRevenue() {
@@ -181,7 +182,7 @@ export class PersonalComponent implements OnInit {
     this.expenses = false;
     this.search = false;
     this.utilities = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   callUtilies(){
@@ -189,19 +190,27 @@ export class PersonalComponent implements OnInit {
     this.expenses = false;
     this.search = false;
     this.revenue = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
   }
 
   callexpenses(){
     this.utilities = !this.utilities;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
     
   }
 
   callUpdate(){
     this.update = true;
+    this.view = false;
     this.searchAll = false;
-    this.windowService.closeUpdates();
+    this.windowsChangeService.closeUpdates();
+  }
+
+  callView(){
+    this.update = false;
+    this.view = true;
+    this.searchAll = false;
+    this.windowsChangeService.closeUpdates();
   }
 
 

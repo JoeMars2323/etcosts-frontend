@@ -1,0 +1,66 @@
+<!--view mode-->
+<form name="formView" *ngIf="updateFixed.update">
+    <div class="container-fluid">
+      <div class="row">
+          <!-- expense name -->
+          <div class="col-sm-6">
+              <label >Nome da despesa:</label>
+              <input name="expenseName" type="text" class="form-control ml-1" 
+              [(ngModel)]="updateFixed.expenseName" readonly>
+          </div>
+          <!-- expense type -->
+          <div class="col-sm-6" >
+              <label >Tipo da despesa:</label>
+              <input name="expenseSubtype" type="text" class="form-control ml-1" 
+              [(ngModel)]="updateFixed.expenseSubtype" readonly>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+          <!--expense date-->
+          <div class="col-sm-6" >
+            <label>Data da despesa:</label>
+            <input name="expenseDate" type="text" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.expenseDate" readonly >
+        </div>
+          <!-- currency -->
+          <div class="col-sm-6" >
+            <label >Moeda:</label>
+            <input name="currency" type="text" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.currency" readonly>
+        </div>
+      </div>
+      <br>
+      <!--month/year of reference -->
+      <p>Referente a:</p>
+      <div class="row">
+          <div class="col-sm-6">
+              <input name="expenseMonth" class="form-control ml-1" [(ngModel)]="updateFixed.month" readonly>
+          </div>
+          <!--year reference-->
+          <div class="col-sm-6">
+              <input name="year" type="text" class="form-control ml-1" [(ngModel)]="updateFixed.year" readonly>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+          <!-- expense name -->
+          <div class="col-sm-12">
+              <label>Observações:</label>
+              <textarea name="expenseDescription" type="text" rows="2" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.expenseDescription" readonly></textarea>
+          </div>
+      </div>
+      <br>
+      <!--total value-->
+      <div class="row">
+          <div class="col-sm-6">
+              <label>Valor da despesa:</label>
+              <input required type="number" name="text" class="form-control ml-1" 
+               [(ngModel)]="updateFixed.value" readonly>
+          </div>
+      </div>
+  </div>
+  <br><br><br><br>
+    
+</form>

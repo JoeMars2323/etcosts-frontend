@@ -209,6 +209,10 @@
           <app-update-expense [updatedExpense]="updateExpense"></app-update-expense>
 
         </div>
+
+        <div *ngIf="view">
+          <app-view-expense></app-view-expense>
+        </div>
      
 
     </div>

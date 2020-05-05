@@ -52,8 +52,15 @@ export class ListExpensesComponent implements OnInit {
       });
   }
 
-  // send id expense choosed by id to personal main
+  // send id expense choosed by id to personal main mode edit
   onEdit(expense: Expense) {
+    expense.update = true;
+    this.expenseId.emit(expense.expenseId);
+     
+  }
+  //send id expense choosed by id to personal main - mode view
+  onView(expense: Expense) {
+    expense.update = false;
     this.expenseId.emit(expense.expenseId);
      
   }

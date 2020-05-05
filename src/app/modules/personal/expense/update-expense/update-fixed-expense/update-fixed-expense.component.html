@@ -1,20 +1,29 @@
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-blue">Alterar despesa corrente fixa</h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4" >
+    <h1 class="h3 mb-0 text-blue"> Alterar - {{updateFixed.expenseType }} </h1>
 </div>
-<form #itemForm="ngForm" name="form" id="form">
+<!--view mode-->
+<!-- <div class="d-sm-flex align-items-center justify-content-between mb-4" *ngIf="!updateFixed.update">
+    <h1 class="h3 mb-0 text-blue"> Visualizar - {{updateFixed.expenseType }} </h1>
+</div> -->
+
+<form #itemForm="ngForm" name="form" ngSubmit="onSubmit()" >
     <div class="container-fluid">
       <div class="row">
           <!-- expense name -->
-          <div class="col-sm-6" >
-              <label class="control-label">Nome da despesa:</label>
-              <input name="expenseName" type="text" class="form-control ml-1"
-              value="{{ updateFixed.expenseName }}">
+          <div class="col-sm-6" [class.has-error]="name.invalid && name.touched" [class.has-success]="name.valid">
+              <label [attr.for]="name" class="control-label">Nome da despesa:</label>
+              <input required [id]="name" name="expenseName" type="text" class="form-control ml-1" 
+              [(ngModel)]="updateFixed.expenseName" #name="ngModel" >
+              <span class="help-block" *ngIf="name.invalid && name.touched"> O nome da despesa é obrigatório</span>
           </div>
+
           <!-- expense type -->
           <div class="col-sm-6" >
-              <label>Tipo da despesa:</label>
-              <select required name="expenseSubtype" class="form-control ml-1" >
+              <label for="subtype" class="control-label">Tipo da despesa:</label>
+              <select required id="subtype" required name="expenseSubtype" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.expenseSubtype">
                   <option value="0">{{ updateFixed.expenseSubtype }}</option>
+                  <option *ngFor="let e of expenseSubtype"[value]="e">{{e}}</option>
               </select>
           </div>
       </div>
@@ -22,24 +31,26 @@
       <div class="row">
           <!--expense date-->
           <div class="col-sm-6" >
-              <label>Data da despesa:</label>
-              <input name="expenseDate" type="text" class="form-control ml-1"
-              value="{{ updateFixed.expenseDate }}">
-          </div>
+            <label>Data da despesa:</label>
+            <input required name="expenseDate" type="text" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.expenseDate" bsDatepicker [bsConfig]="bsConfig" >
+        </div>
           <!-- currency -->
           <div class="col-sm-6" >
-              <label>Moeda:</label>
-              <select required id="currency" name="currency" class="form-control ml-1" >
-                      <option value="0">{{ updateFixed.currency }}</option>
-              </select>
-          </div>
+            <label for="currency" class="control-label">Moeda:</label>
+            <select required id="currency" name="currency" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.currency" (change)="getCurrency()">
+                    <option value="0">{{ updateFixed.currency }}</option>
+                    <option *ngFor="let c of currency"[value]="c"> {{c}} </option>
+            </select>
+        </div>
       </div>
       <br>
       <!--month/year of reference -->
       <p>Referente a:</p>
       <div class="row">
           <div class="col-sm-6">
-              <select name="expenseMonth" class="form-control ml-1">
+              <select name="expenseMonth" class="form-control ml-1" [(ngModel)]="updateFixed.month">
                   <option value="0">{{ updateFixed.month }}</option>
                   <option>Janeiro</option>
                   <option>Fevereiro</option>
@@ -57,9 +68,7 @@
           </div>
           <!--year reference-->
           <div class="col-sm-6">
-              <select name="expenseYear" class="form-control ml-1" >
-                  <option value="0"> {{ updateFixed.year }} </option>
-              </select>
+              <input name="year" type="text" class="form-control ml-1" [(ngModel)]="updateFixed.year">
           </div>
       </div>
       <br>
@@ -67,8 +76,8 @@
           <!-- expense name -->
           <div class="col-sm-12">
               <label>Observações:</label>
-              <textarea name="expenseName" type="text" rows="2" class="form-control ml-1" 
-              value="{{ updateFixed.expenseDescription }}"></textarea>
+              <textarea name="expenseDescription" type="text" rows="2" class="form-control ml-1" 
+                [(ngModel)]="updateFixed.expenseDescription"></textarea>
           </div>
       </div>
       <br>
@@ -76,16 +85,16 @@
       <div class="row">
           <div class="col-sm-6">
               <label>Valor da despesa:</label>
-              <input required type="Number" name="value" class="form-control ml-1" 
-              value="{{ updateFixed.value }}">
+              <input required type="number" name="value" class="form-control ml-1" 
+               [(ngModel)]="updateFixed.value">
           </div>
       </div>
       <br>
-      <!--value-->
-      <div class="col-sm-6">
-          <button class="btn btn-primary" type="submit">Submeter</button>
-      </div>
+     <!--value-->
+     <div class="col-sm-6">
+        <button class="btn btn-primary" type="submit" [disabled]="itemForm.invalid" (click)="onSubmit()">Submeter</button>
+    </div>
   </div>
   <br><br><br><br>
     
-  </form>
+</form>
