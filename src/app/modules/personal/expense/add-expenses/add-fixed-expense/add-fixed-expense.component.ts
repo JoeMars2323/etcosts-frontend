@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { RestApiService } from '../../../../../core/services/rest-api/rest-api.service';
 
@@ -23,17 +24,31 @@ export class AddFixedExpenseComponent implements OnInit {
   currency: String[];
   years: String[] = []; 
 
+  bsDate = new Date('01-05-2020');
+
+  bsValue = new Date();
+
+
   constructor(private api: RestApiService) { 
     this.expense = new Expense();
     this.expenseToSend = new EventEmitter<Expense>();
     this.bsConfig = new BsDatepickerConfig();
-    this.bsConfig.containerClass = 'theme-dark-blue';
   }
+
+  form = new FormGroup({
+    dateDMY: new FormControl(new Date())
+  });
 
   ngOnInit(): void {
     this.getExpenseSubtype();
     this.getCurrency();
     this.getYears();
+    this.bsConfiguration()
+  }
+
+  bsConfiguration() {
+    this.bsConfig.containerClass = 'theme-dark-blue';
+
   }
 
   // load dropdowns

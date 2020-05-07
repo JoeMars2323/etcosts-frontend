@@ -29,9 +29,17 @@
             <!--expense date-->
             <div class="col-sm-6" >
                 <label>Data da despesa:</label>
-                <input required name="expenseDate" type="text" class="form-control ml-1" 
-                [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig">
+                <!-- <input required name="expenseDate" type="text" class="form-control ml-1" 
+                [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig"
+                [bsValue]="bsDate"> -->
+                <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                #datepickerDMY="bsDatepicker" [bsValue]="bsValue"
+                formControlName="dateDMY" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
             </div>
+
+
+
+
             <!-- currency -->
             <div class="col-sm-6" >
                 <label>Moeda:</label>
