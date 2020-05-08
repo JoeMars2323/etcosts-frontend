@@ -11,7 +11,6 @@
     <div class="cta">
       <a routerLink="/login" class="btn btn-info">Login</a>&nbsp;&nbsp;&nbsp;
       <a routerLink="/createAccount" class="btn btn-info">Criar Conta</a>
-    <router-outlet></router-outlet>
     </div>
   </div>
 </section>
@@ -25,11 +24,11 @@
     </div>
     <nav class="nav-menu d-none d-lg-block">
       <ul>
-        <li [ngClass]="{'active': selectedItem == windowsChangeService.home}"><a (click)="windowsChangeService.goToHome()" style="cursor: pointer;">Principal</a></li>
-        <li [ngClass]="{'active': selectedItem == windowsChangeService.about}"><a (click)="windowsChangeService.goToAbout()" style="cursor: pointer;">Sobre nós</a></li>
-        <li [ngClass]="{'active': selectedItem == windowsChangeService.services}"><a (click)="windowsChangeService.goToServices()" style="cursor: pointer;">Serviços</a></li>
-        <li [ngClass]="{'active': selectedItem == windowsChangeService.faq}"><a (click)="windowsChangeService.goToFaq()" style="cursor: pointer;">FAQs</a></li>
-        <li [ngClass]="{'active': selectedItem == windowsChangeService.contacts}"><a (click)="windowsChangeService.goToContacts()" style="cursor: pointer;">Contactos</a></li>
+        <li routerLinkActive="active"><a routerLink="/home" style="cursor: pointer;">Principal</a></li>
+        <li routerLinkActive="active"><a routerLink="/sobre" style="cursor: pointer;">Sobre nós</a></li>
+        <li routerLinkActive="active"><a routerLink="/servicos" style="cursor: pointer;">Serviços</a></li>
+        <li routerLinkActive="active"><a routerLink="/faq" style="cursor: pointer;">FAQs</a></li>
+        <li routerLinkActive="active"><a routerLink="/contactos" style="cursor: pointer;">Contactos</a></li>
       </ul>
     </nav>
   </div>
@@ -46,23 +45,7 @@
 <!-- End Welcome -->
 
 <br><br><br>
-<!-- ======= Content Section ======= -->
-<div *ngIf="windowsChangeService.home">
-  <app-home></app-home>
-</div>
-<div *ngIf="windowsChangeService.about">
-  <app-about></app-about>
-</div>
-<div *ngIf="windowsChangeService.contacts">
-  <app-contacts></app-contacts>
-</div>
-<div *ngIf="windowsChangeService.faq">
-  <app-faq></app-faq>
-</div>
-<div *ngIf="windowsChangeService.services">
-  <app-services></app-services>
-</div>
-<!-- End conr«tent Section -->
+<router-outlet></router-outlet>
 <br><br><br>
 
 <!-- ======= Footer ======= -->

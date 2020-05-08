@@ -25,7 +25,7 @@ import { ServicesComponent } from './modules/public/services/services.component'
 import { FaqComponent } from './modules/public/faq/faq.component';
 import { ContactsComponent } from './modules/public/contacts/contacts.component';
 import { AboutComponent } from './modules/public/about/about.component';
-import { OverallComponent } from './modules/personal/overall/overall.component';
+import { OverallComponent } from './modules/personal/charts/overall.component';
 import { ListExpensesComponent } from './modules/personal/expense/list-expenses/list-expenses.component';
 import { AddFixedExpenseComponent } from './modules/personal/expense/add-expenses/add-fixed-expense/add-fixed-expense.component';
 import { AddVariableExpenseComponent } from './modules/personal/expense/add-expenses/add-variable-expense/add-variable-expense.component';
