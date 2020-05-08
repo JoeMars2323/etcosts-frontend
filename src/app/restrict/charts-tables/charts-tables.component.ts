@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ChartsModule } from 'ng2-charts';
-
 @Component({
-  selector: 'app-overall',
-  templateUrl: './overall.component.html',
-  styleUrls: ['./overall.component.css']
+  selector: 'app-charts-tables',
+  templateUrl: './charts-tables.component.html',
+  styleUrls: ['./charts-tables.component.css']
 })
-export class OverallComponent implements OnInit {
-
-  constructor() { }
+export class ChartsTablesComponent implements OnInit {
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -23,6 +19,8 @@ export class OverallComponent implements OnInit {
     {data: [59, 80, 81, 56, 55, 40], label: 'Gastos'},
     {data: [48, 40, 19, 86, 27, 90], label: 'Receitas'}
   ];
+
+  constructor() { }
 
   ngOnInit(): void {
   }

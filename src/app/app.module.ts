@@ -27,7 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateLoginComponent } from './login/create-login/create-login.component';
 
 import { RestrictComponent } from './restrict/restrict.component';
-import { OverallComponent } from './restrict/charts/overall.component';
+import { ChartsTablesComponent } from './restrict/charts-tables/charts-tables.component';
 import { ListExpensesComponent } from './restrict/expense/list-expenses/list-expenses.component';
 import { AddFixedExpenseComponent } from './restrict/expense/add-expenses/add-fixed-expense/add-fixed-expense.component';
 import { AddVariableExpenseComponent } from './restrict/expense/add-expenses/add-variable-expense/add-variable-expense.component';
@@ -43,6 +43,7 @@ import { ViewFixedExpenseComponent } from './restrict/expense/view-expense/view-
 import { ViewLongExpenseComponent } from './restrict/expense/view-expense/view-long-expense/view-long-expense.component';
 import { ViewShortExpenseComponent } from './restrict/expense/view-expense/view-short-expense/view-short-expense.component';
 import { ViewVariableExpenseComponent } from './restrict/expense/view-expense/view-variable-expense/view-variable-expense.component';
+import { AddExpensesComponent } from './restrict/expense/add-expenses/add-expenses.component';
 import { RevenueComponent } from './restrict/revenue/revenue.component';
 import { ExpenseComponent } from './restrict/expense/expense.component';
 
@@ -74,8 +75,9 @@ import { ExpenseComponent } from './restrict/expense/expense.component';
     ViewVariableExpenseComponent,
     RevenueComponent,
     ExpenseComponent,
-    OverallComponent,
-    RestrictComponent
+    ChartsTablesComponent,
+    RestrictComponent,
+    AddExpensesComponent
   ],
   imports: [
     AppRoutingModule,
