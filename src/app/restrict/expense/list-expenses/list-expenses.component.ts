@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { User } from '../../../shered/User';
+import { User } from '../../../shared/User';
 import { Expense } from '../Expense';
 
-import { RestApiService } from '../../../shered/rest-api-service/rest-api.service';
-import { AuthenticationService } from '../../../shered/authentication-service/authentication.service';
+import { RestApiService } from '../../../shared/rest-api-service/rest-api.service';
+import { AuthenticationService } from '../../../shared/authentication-service/authentication.service';
 
 @Component({
   selector: 'app-list-expenses',

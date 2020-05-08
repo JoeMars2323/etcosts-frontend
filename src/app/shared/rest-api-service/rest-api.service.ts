@@ -3,7 +3,7 @@ import { HttpClient, HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../User';
-import { Expense } from '../../personal/expense/Expense';
+import { Expense } from '../../restrict/expense/Expense';
 
 @Injectable({
   providedIn: 'root'

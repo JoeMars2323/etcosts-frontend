@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RestApiService } from '../../shered/rest-api-service/rest-api.service';
-import { User } from '../../shered/User';
+import { RestApiService } from '../../shared/rest-api-service/rest-api.service';
+import { User } from '../../shared/User';
 
 @Component({
   selector: 'app-create-login',

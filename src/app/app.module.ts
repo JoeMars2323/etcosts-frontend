@@ -10,53 +10,53 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { RestApiService } from './shered/rest-api-service/rest-api.service';
-import { WindowsChangeService } from './shered/windows-change-service/windows-change.service';
-import { AuthenticationService } from './shered/authentication-service/authentication.service';
-
+import { RestApiService } from './shared/rest-api-service/rest-api.service';
+import { WindowsChangeService } from './shared/windows-change-service/windows-change.service';
+import { AuthenticationService } from './shared/authentication-service/authentication.service';
 
 import { AppComponent } from './app.component';
+
 import { PublicComponent } from './public/public.component';
-import { PersonalComponent } from './personal/personal.component';
-import { LoginComponent } from './login/login.component';
-import { CreateLoginComponent } from './login/create-login/create-login.component';
 import { HomeComponent } from './public/home/home.component';
 import { ServicesComponent } from './public/services/services.component';
 import { FaqComponent } from './public/faq/faq.component';
 import { ContactsComponent } from './public/contacts/contacts.component';
 import { AboutComponent } from './public/about/about.component';
-import { OverallComponent } from './personal/charts/overall.component';
-import { ListExpensesComponent } from './personal/expense/list-expenses/list-expenses.component';
-import { AddFixedExpenseComponent } from './personal/expense/add-expenses/add-fixed-expense/add-fixed-expense.component';
-import { AddVariableExpenseComponent } from './personal/expense/add-expenses/add-variable-expense/add-variable-expense.component';
-import { AddShortExpenseComponent } from './personal/expense/add-expenses/add-short-expense/add-short-expense.component';
-import { AddLongExpenseComponent } from './personal/expense/add-expenses/add-long-expense/add-long-expense.component';
-import { UpdateExpenseComponent } from './personal/expense/update-expense/update-expense.component';
-import { UpdateLongExpenseComponent } from './personal/expense/update-expense/update-long-expense/update-long-expense.component';
-import { UpdateShortExpenseComponent } from './personal/expense/update-expense/update-short-expense/update-short-expense.component';
-import { UpdateVariableExpenseComponent } from './personal/expense/update-expense/update-variable-expense/update-variable-expense.component';
-import { UpdateFixedExpenseComponent } from './personal/expense/update-expense/update-fixed-expense/update-fixed-expense.component';
-import { ViewExpenseComponent } from './personal/expense/view-expense/view-expense.component';
-import { ViewFixedExpenseComponent } from './personal/expense/view-expense/view-fixed-expense/view-fixed-expense.component';
-import { ViewLongExpenseComponent } from './personal/expense/view-expense/view-long-expense/view-long-expense.component';
-import { ViewShortExpenseComponent } from './personal/expense/view-expense/view-short-expense/view-short-expense.component';
-import { ViewVariableExpenseComponent } from './personal/expense/view-expense/view-variable-expense/view-variable-expense.component';
-import { RevenueComponent } from './personal/revenue/revenue.component';
-import { ExpenseComponent } from './personal/expense/expense.component';
+
+import { LoginComponent } from './login/login.component';
+import { CreateLoginComponent } from './login/create-login/create-login.component';
+
+import { RestrictComponent } from './restrict/restrict.component';
+import { OverallComponent } from './restrict/charts/overall.component';
+import { ListExpensesComponent } from './restrict/expense/list-expenses/list-expenses.component';
+import { AddFixedExpenseComponent } from './restrict/expense/add-expenses/add-fixed-expense/add-fixed-expense.component';
+import { AddVariableExpenseComponent } from './restrict/expense/add-expenses/add-variable-expense/add-variable-expense.component';
+import { AddShortExpenseComponent } from './restrict/expense/add-expenses/add-short-expense/add-short-expense.component';
+import { AddLongExpenseComponent } from './restrict/expense/add-expenses/add-long-expense/add-long-expense.component';
+import { UpdateExpenseComponent } from './restrict/expense/update-expense/update-expense.component';
+import { UpdateLongExpenseComponent } from './restrict/expense/update-expense/update-long-expense/update-long-expense.component';
+import { UpdateShortExpenseComponent } from './restrict/expense/update-expense/update-short-expense/update-short-expense.component';
+import { UpdateVariableExpenseComponent } from './restrict/expense/update-expense/update-variable-expense/update-variable-expense.component';
+import { UpdateFixedExpenseComponent } from './restrict/expense/update-expense/update-fixed-expense/update-fixed-expense.component';
+import { ViewExpenseComponent } from './restrict/expense/view-expense/view-expense.component';
+import { ViewFixedExpenseComponent } from './restrict/expense/view-expense/view-fixed-expense/view-fixed-expense.component';
+import { ViewLongExpenseComponent } from './restrict/expense/view-expense/view-long-expense/view-long-expense.component';
+import { ViewShortExpenseComponent } from './restrict/expense/view-expense/view-short-expense/view-short-expense.component';
+import { ViewVariableExpenseComponent } from './restrict/expense/view-expense/view-variable-expense/view-variable-expense.component';
+import { RevenueComponent } from './restrict/revenue/revenue.component';
+import { ExpenseComponent } from './restrict/expense/expense.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PublicComponent,
-    PersonalComponent,
-    LoginComponent,
-    CreateLoginComponent,
+    HomeComponent,
     AboutComponent,
     ServicesComponent,
     ContactsComponent,
     FaqComponent,    
-    HomeComponent,
-    OverallComponent,
+    LoginComponent,
+    CreateLoginComponent,
     ListExpensesComponent,
     UpdateExpenseComponent,
     AddFixedExpenseComponent,
@@ -73,7 +73,9 @@ import { ExpenseComponent } from './personal/expense/expense.component';
     ViewShortExpenseComponent,
     ViewVariableExpenseComponent,
     RevenueComponent,
-    ExpenseComponent
+    ExpenseComponent,
+    OverallComponent,
+    RestrictComponent
   ],
   imports: [
     AppRoutingModule,

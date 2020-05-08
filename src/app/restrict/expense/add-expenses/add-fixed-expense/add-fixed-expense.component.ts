@@ -3,7 +3,7 @@ import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { RestApiService } from '../../../../shered/rest-api-service/rest-api.service';
+import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
 
 import { Expense } from '../../Expense';
 

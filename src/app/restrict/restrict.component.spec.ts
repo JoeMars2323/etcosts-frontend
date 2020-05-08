@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonalComponent } from './personal.component';
+import { RestrictComponent } from './restrict.component';
 
-describe('PersonalMainComponent', () => {
-  let component: PersonalComponent;
-  let fixture: ComponentFixture<PersonalComponent>;
+describe('RestrictComponent', () => {
+  let component: RestrictComponent;
+  let fixture: ComponentFixture<RestrictComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonalComponent ]
+      declarations: [ RestrictComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PersonalComponent);
+    fixture = TestBed.createComponent(RestrictComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

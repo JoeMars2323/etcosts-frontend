@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../shered/authentication-service/authentication.service';
-import { User } from '../shered/User';
+import { AuthenticationService } from '../shared/authentication-service/authentication.service';
+import { User } from '../shared/User';
 
 @Component({
   selector: 'app-login',

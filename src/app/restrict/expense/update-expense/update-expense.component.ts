@@ -2,7 +2,7 @@ import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@
 
 import { Expense } from '../Expense';
 
-import { WindowsChangeService } from '../../../shered/windows-change-service/windows-change.service';
+import { WindowsChangeService } from '../../../shared/windows-change-service/windows-change.service';
 
 @Component({
   selector: 'app-update-expense',

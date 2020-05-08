@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RestApiService } from '../shered/rest-api-service/rest-api.service';
-import { WindowsChangeService } from '../shered/windows-change-service/windows-change.service';
-import { AuthenticationService } from '../shered/authentication-service/authentication.service';
+import { RestApiService } from '../shared/rest-api-service/rest-api.service';
+import { WindowsChangeService } from '../shared/windows-change-service/windows-change.service';
+import { AuthenticationService } from '../shared/authentication-service/authentication.service';
 
-import { User } from '../shered/User';
-import { Expense } from '../personal/expense/Expense';
-
+import { User } from '../shared/User';
+import { Expense } from '../restrict/expense/Expense';
 
 @Component({
-  selector: 'app-personal',
-  templateUrl: './personal.component.html',
-  styleUrls: ['./personal.component.css']
+  selector: 'app-restrict',
+  templateUrl: './restrict.component.html',
+  styleUrls: ['./restrict.component.css']
 })
-export class PersonalComponent implements OnInit {
+export class RestrictComponent implements OnInit {
 
   user: User;
   expenseList: Expense[];
@@ -212,6 +211,5 @@ export class PersonalComponent implements OnInit {
     this.searchAll = false;
     this.windowsChangeService.closeUpdates();
   }
-
 
 }

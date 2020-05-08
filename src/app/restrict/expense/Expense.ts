@@ -1,4 +1,5 @@
 import { ExpenseItem } from './ExpenseItem';
+
 export class Expense {
     
     expenseId: number;

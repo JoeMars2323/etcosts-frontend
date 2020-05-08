@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RestApiService } from '../rest-api-service/rest-api.service';
-import { User } from '../../shered/User';
+import { User } from '../../shared/User';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class AuthenticationService {
   }
 
   private gotoPersonalArea() {
-    this.router.navigate(['/personal']);
+    this.router.navigate(['/restrito']);
   }
 
 }

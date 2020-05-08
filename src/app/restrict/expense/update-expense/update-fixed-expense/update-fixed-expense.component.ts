@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-import { RestApiService } from '../../../../shered/rest-api-service/rest-api.service';
+import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
 
 import { Expense } from '../../Expense';
 

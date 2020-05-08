@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WindowsChangeService } from '../shered/windows-change-service/windows-change.service'
+import { WindowsChangeService } from '../shared/windows-change-service/windows-change.service'
 
 @Component({
   selector: 'app-public-main',

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 
-import { RestApiService } from '../../../../shered/rest-api-service/rest-api.service';
+import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
 
