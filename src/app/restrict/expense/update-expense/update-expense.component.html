@@ -1,28 +1,3 @@
-<!-- update -->
-<div (change)="checkTypeExpense()">  
-    <!--fixed expenses-->
-    <div *ngIf="windowService.fixedExpense">
-      <app-update-fixed-expense [updateFixed]="updatedExpense" (expenseToUpdate)="expenseUpdated($event)"></app-update-fixed-expense>
-  </div>
+<h4>Alterar despesa</h4>
 
-  <!--variable expenses-->
-  <div *ngIf="windowService.variableExpense">
-    <app-update-variable-expense [updateVariable]="updatedExpense"></app-update-variable-expense>
-  </div>
-
-  <!--short expenses-->
-  <div *ngIf="windowService.shortExpense">
-    <form #itemForm="ngForm" name="form">
-      <app-update-short-expense [updateShort]="updatedExpense"></app-update-short-expense>
-    </form>
-  </div>
-
-  <!--long expenses-->
-  <div *ngIf="windowService.longExpense">
-    <form #itemForm="ngForm" name="form">
-      <app-update-long-expense [updateLong]="updatedExpense"></app-update-long-expense>
-    </form>
-  </div>
-
-</div>
-  
+<router-outlet></router-outlet> 
