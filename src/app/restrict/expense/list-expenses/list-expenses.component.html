@@ -4,144 +4,36 @@
   <div class="row">
     <div class="col-sm-6">
       <label>Tipo de procura:</label>
-      <select required name="searchType" class="form-control ml-1">
-        <option> Geral </option>
-        <option> Por Tipo </option>
-        <option> Por Ano </option>
-        <option> Por Estado </option>
+      <select required name="searchType" class="form-control ml-1" (change)="changeRoute($event.target.value)">
+        <option value="geral"> Geral </option>
+        <option value="por-tipo"> Por Tipo </option>
+        <option value="por-ano"> Por Ano </option>
+        <option value="por-estado"> Por Estado <button></button> </option>
       </select>
     </div>
   </div>
 </div>
 <br>
-
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-blue">Listar todas as despesas</h1>
-</div> 
-
-<!--overall search-->
-<div *ngIf="overall">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" style="display:none;">ID</th>
-        <th scope="col">Despesa</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Subtipo</th>
-        <th scope="col">Data</th>
-        <th scope="col">Total</th>
-        <td scope="col" colspan="3">Ações</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of expenseList">
-        <td style="display:none;">{{ item.id }}</td>
-        <td>{{ item.expenseName }}</td>
-        <td>{{ item.expenseType }}</td>
-        <td>{{ item.expenseSubtype }}</td>
-        <td>{{ item.expenseDate }}</td>
-        <td>{{ item.value }}</td>
-        <td><button class="btn btn-primary" type="button" (click)="onView(item)"><i class="far fa-eye"></i></button></td>
-        <td><button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button></td>
-        <td><button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button></td>
-      </tr>
-    </tbody>
-  </table>
+<hr>
+<br>
+<!-- <router-outlet></router-outlet> -->
+<div *ngIf="state">
+  <app-list-by-state [expenseList]="expenseList"></app-list-by-state>
+</div>
+<div *ngIf="type">
+  <app-list-by-types [expenseList]="expenseList"></app-list-by-types>
+</div>
+<div *ngIf="year">
+  <app-list-by-year [expenseList]="expenseList"></app-list-by-year>
+</div>
+<div *ngIf="standard">
+  <app-list-standard [expenseList]="expenseList"></app-list-standard>
 </div>
 
-<!--search by type-->
-<div *ngIf="types">
-  <p>Tipo de despesa: xxx</p>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" style="display:none;">ID</th>
-        <th scope="col">Despesa</th>
-        <th scope="col">Subtipo</th>
-        <th scope="col">Data</th>
-        <th scope="col">Total</th>
-        <th scope="col">Acções</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of expenseList">
-        <td style="display:none;">{{ item.id }}</td>
-        <td>{{ item.expenseName }}</td>
-        <td>{{ item.expenseSubtype }}</td>
-        <td>{{ item.expenseDate }}</td>
-        <td>{{ item.value }}</td>
-        <td>
-          <button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button>
-          &nbsp;
-          <button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-<!--search by year-->
-<div *ngIf="years">
-  <p>Ano: xxx</p>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" style="display:none;">ID</th>
-        <th scope="col">Despesa</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Subtipo</th>
-        <th scope="col">Data</th>
-        <th scope="col">Total</th>
-        <th scope="col">Acções</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of expenseList">
-        <td style="display:none;">{{ item.id }}</td>
-        <td>{{ item.expenseName }}</td>
-        <td>{{ item.expenseType }}</td>
-        <td>{{ item.expenseSubtype }}</td>
-        <td>{{ item.expenseDate }}</td>
-        <td>{{ item.value }}</td>
-        <td>
-          <button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button>
-          &nbsp;
-          <button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-<!-- search by state -->
-<div *ngIf="states">
-  <p>Estado: xxx</p>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col" style="display:none;">ID</th>
-        <th scope="col">Despesa</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Subtipo</th>
-        <th scope="col">Data</th>
-        <th scope="col">Total</th>
-        <th scope="col">Acções</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of expenseList">
-        <td style="display:none;">{{ item.id }}</td>
-        <td>{{ item.expenseName }}</td>
-        <td>{{ item.expenseType }}</td>
-        <td>{{ item.expenseSubtype }}</td>
-        <td>{{ item.expenseDate }}</td>
-        <td>{{ item.value }}</td>
-        <td>
-          <button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button>
-          &nbsp;
-          <button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
+
+
+
+

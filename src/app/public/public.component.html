@@ -1,16 +1,13 @@
 <!-- ======= Top Bar ======= -->
 <section id="topbar" class="d-none d-lg-block">
   <div class="container d-flex">
-    <div class="contact-info mr-auto">
-      <ul>
-        <li><i class="fas fa-envelope-square"></i><a href="mailto:contact@example.com">geral@etcosts.com</a></li>
-        <li><i class="fas fa-phone"></i> +351 214712119</li>
-        <li><i class="far fa-clock"></i> 2ª-6ª 9:00 - 18:00</li>
-      </ul>
-    </div>
-    <div class="cta">
-      <a routerLink="/login" class="btn btn-info">Login</a>&nbsp;&nbsp;
-      <a routerLink="/criar-conta" class="btn btn-info">Criar Conta</a>
+    <div class="cta mr-auto">
+      <a routerLink="/login" class="btn btn-info dropdown-toggle">Entrar <span class="caret"></span></a>
+      <!-- <a routerLink="/criar-conta" class="btn btn-info">Criar Conta</a> -->
+      <ul class="dropdown-menu">
+        <li><a style="cursor: pointer;">Login</a></li>
+        <li><a style="cursor: pointer;">Criar Conta</a></li>
+    </ul>
     </div>
   </div>
 </section>

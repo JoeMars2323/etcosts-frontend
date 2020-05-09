@@ -5,6 +5,7 @@ import { Expense } from '../Expense';
 
 import { RestApiService } from '../../../shared/rest-api-service/rest-api.service';
 import { AuthenticationService } from '../../../shared/authentication-service/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-expenses',
@@ -16,20 +17,57 @@ export class ListExpensesComponent implements OnInit {
   user: User;
   expenseList: Expense[];
 
+  // flags for type of lists
+  state: boolean = false;
+  type: boolean = false;
+  year: boolean = false;
+  standard: boolean = true;
+
   @Output() expenseId = new EventEmitter<number>();
 
-  // flags
-  overall: boolean = true;
-  types: boolean = false;
-  years: boolean = false;
-  states: boolean = false;
-
-  constructor(private api: RestApiService, private auth: AuthenticationService) { 
+  constructor(private api: RestApiService, private auth: AuthenticationService,
+              private router: Router, private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
+    // pass the general list when the page is loaded
     this.getExpenseList();
+    this.router.navigate(['geral'], {relativeTo: this.route});
+  }
+
+  changeRoute(value: string) {
+    switch(value) {
+      case 'geral':
+        this.state = false;
+        this.type = false;
+        this.year = false;
+        this.standard = true;
+        this.router.navigate([value], {relativeTo: this.route});
+         break;
+      case 'por-tipo':
+        this.resetFlags();
+        this.type = true;
+        this.router.navigate([value], {relativeTo: this.route});
+         break;
+      case 'por-ano':
+        this.resetFlags();
+        this.year = true;
+        this.router.navigate([value], {relativeTo: this.route});
+         break;
+      case 'por-estado':
+        this.resetFlags()
+        this.state = true;
+        this.router.navigate([value], {relativeTo: this.route});
+      break;
+    }
+
+  }
+  resetFlags() {
+    this.state = false;
+    this.type = false;
+    this.year = false;
+    this.standard = false;
   }
 
   // get the expense list to pass to the table
@@ -47,54 +85,7 @@ export class ListExpensesComponent implements OnInit {
             }
           }
         }
-      });
+      });      
   }
-
-  // send id expense choosed by id to personal main mode edit
-  onEdit(expense: Expense) {
-    expense.update = true;
-    this.expenseId.emit(expense.expenseId);
-     
-  }
-  //send id expense choosed by id to personal main - mode view
-  onView(expense: Expense) {
-    expense.update = false;
-    this.expenseId.emit(expense.expenseId);
-     
-  }
-
-  // show and hide screens
-  getOverall() {
-    this.overall = true;
-    this.types = false;
-    this.years = false;
-    this.states = false;
-
-  }
-
-  getTypes() {
-    this.overall = false;
-    this.types = true;
-    this.years = false;
-    this.states = false;
-
-  }
-
-  getYears() {
-    this.overall = false;
-    this.types = false;
-    this.years = true;
-    this.states = false;
-
-  }
-
-  getStates() {
-    this.overall = false;
-    this.types = false;
-    this.years = false;
-    this.states = true;
-
-  }
-
 
 }

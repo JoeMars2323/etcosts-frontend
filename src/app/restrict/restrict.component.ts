@@ -16,7 +16,6 @@ export class RestrictComponent implements OnInit {
   //flags add expenses
   homeDashboard: boolean = false;
   addExpense: boolean = false;
-  searchExpense: boolean = false;
   addRevenue: boolean = false;
   searchRevenue: boolean = false;
   graphic: boolean = false;
@@ -34,7 +33,6 @@ export class RestrictComponent implements OnInit {
   openHomeDashboard() {
     this.homeDashboard = !this.homeDashboard;
     this.addExpense = false;
-    this.searchExpense = false;
     this.addRevenue = false;
     this.searchRevenue = false;
     this.graphic = false;
@@ -45,17 +43,6 @@ export class RestrictComponent implements OnInit {
   openAddExpenses() {
     this.homeDashboard = false;
     this.addExpense = ! this.addExpense;
-    this.searchExpense = false;
-    this.addRevenue = false;
-    this.searchRevenue = false;
-    this.graphic = false;
-    this.table = false;
-  }
-
-  openSearchExpenses() {
-    this.homeDashboard = false;
-    this.addExpense = false;
-    this.searchExpense = !this.searchExpense;
     this.addRevenue = false;
     this.searchRevenue = false;
     this.graphic = false;
@@ -65,7 +52,6 @@ export class RestrictComponent implements OnInit {
    openAddRevenue() {
     this.homeDashboard = false;
     this.addExpense = false;
-    this.searchExpense = false;
     this.addRevenue = !this.addRevenue;
     this.searchRevenue = false;
     this.graphic = false;
@@ -75,7 +61,6 @@ export class RestrictComponent implements OnInit {
   openSearchRevenue() {
     this.homeDashboard = false;
     this.addExpense = false;
-    this.searchExpense = false;
     this.addRevenue = false;
     this.searchRevenue = !this.searchRevenue;
     this.graphic = false;
@@ -85,7 +70,6 @@ export class RestrictComponent implements OnInit {
   openGraphic() {
     this.homeDashboard = false;
     this.addExpense = false;
-    this.searchExpense = false;
     this.addRevenue = false;
     this.searchRevenue = false;
     this.graphic = !this.graphic;
@@ -95,11 +79,20 @@ export class RestrictComponent implements OnInit {
   openAddTable() {
     this.homeDashboard = false;
     this.addExpense = false;
-    this.searchExpense = false;
     this.addRevenue = false;
     this.searchRevenue = false;
     this.graphic = false;
     this.table = !this.table;
+  }
+
+  serch() {
+    this.homeDashboard = false;
+    this.addExpense = false;
+    this.addRevenue = false;
+    this.searchRevenue = false;
+    this.graphic = false;
+    this.table = false;
+
   }
 
   // capture username to identify the session

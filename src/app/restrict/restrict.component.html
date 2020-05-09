@@ -40,19 +40,13 @@
       </li>
       <!-- Search expenses -->
       <li class="nav-item">
-        <div class="pointerCursor" (click)="openSearchExpenses()">
-          <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <div class="pointerCursor">
+          <a routerLink="despesas/listar-despesa" class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities" 
+            aria-expanded="true" aria-controls="collapseUtilities" (click)="serch">
             <i class="fas fa-search-dollar"></i> <span>Procurar</span>
           </a>
         </div>
-        <div class="collapse" *ngIf="searchExpense">
-          <div class="bg-white py-2 collapse-inner rounded pointerCursor">
-            <h6 class="collapse-header">Tipo de procura:</h6>
-            <!-- <a class="collapse-item" (click)="searchAlExpenses()">Todas as despesas</a> -->
-            <a class="collapse-item" >Todas as despesas</a>
-          </div>
-        </div>
-      </li>
+      </li> 
       <hr class="sidebar-divider">
 
       <!-- Revenue -->

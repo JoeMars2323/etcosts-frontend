@@ -46,6 +46,10 @@ import { ViewVariableExpenseComponent } from './restrict/expense/view-expense/vi
 import { AddExpensesComponent } from './restrict/expense/add-expenses/add-expenses.component';
 import { RevenueComponent } from './restrict/revenue/revenue.component';
 import { ExpenseComponent } from './restrict/expense/expense.component';
+import { ListByTypesComponent } from './restrict/expense/list-expenses/list-by-types/list-by-types.component';
+import { ListByYearComponent } from './restrict/expense/list-expenses/list-by-year/list-by-year.component';
+import { ListByStateComponent } from './restrict/expense/list-expenses/list-by-state/list-by-state.component';
+import { ListStandardComponent } from './restrict/expense/list-expenses/list-standard/list-standard.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,11 @@ import { ExpenseComponent } from './restrict/expense/expense.component';
     ExpenseComponent,
     ChartsTablesComponent,
     RestrictComponent,
-    AddExpensesComponent
+    AddExpensesComponent,
+    ListByTypesComponent,
+    ListByYearComponent,
+    ListByStateComponent,
+    ListStandardComponent
   ],
   imports: [
     AppRoutingModule,

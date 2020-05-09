@@ -21,6 +21,14 @@ import { AddFixedExpenseComponent } from './restrict/expense/add-expenses/add-fi
 import { AddLongExpenseComponent } from './restrict/expense/add-expenses/add-long-expense/add-long-expense.component';
 import { AddShortExpenseComponent } from './restrict/expense/add-expenses/add-short-expense/add-short-expense.component';
 import { AddVariableExpenseComponent } from './restrict/expense/add-expenses/add-variable-expense/add-variable-expense.component';
+import { UpdateFixedExpenseComponent } from './restrict/expense/update-expense/update-fixed-expense/update-fixed-expense.component';
+import { UpdateLongExpenseComponent } from './restrict/expense/update-expense/update-long-expense/update-long-expense.component';
+import { UpdateShortExpenseComponent } from './restrict/expense/update-expense/update-short-expense/update-short-expense.component';
+import { UpdateVariableExpenseComponent } from './restrict/expense/update-expense/update-variable-expense/update-variable-expense.component';
+import { ListByStateComponent } from './restrict/expense/list-expenses/list-by-state/list-by-state.component';
+import { ListByTypesComponent } from './restrict/expense/list-expenses/list-by-types/list-by-types.component';
+import { ListByYearComponent } from './restrict/expense/list-expenses/list-by-year/list-by-year.component';
+import { ListStandardComponent } from './restrict/expense/list-expenses/list-standard/list-standard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
@@ -42,8 +50,18 @@ const routes: Routes = [
         { path: 'curta', component: AddShortExpenseComponent },
         { path: 'variavel', component: AddVariableExpenseComponent },
       ] },
-      { path: 'listar-despesa', component: ListExpensesComponent },
-      { path: 'alterar-despesa', component: UpdateExpenseComponent },
+      { path: 'listar-despesa', component: ListExpensesComponent, children: [
+        { path: 'por-estado', component: ListByStateComponent },
+        { path: 'por-tipo', component: ListByTypesComponent },
+        { path: 'por-ano', component: ListByYearComponent },
+        { path: 'geral', component: ListStandardComponent },
+      ]},
+      { path: 'alterar-despesa', component: UpdateExpenseComponent, children: [
+        { path: 'fixa', component: UpdateFixedExpenseComponent },
+        { path: 'longa', component: UpdateLongExpenseComponent },
+        { path: 'curta', component: UpdateShortExpenseComponent },
+        { path: 'variavel', component: UpdateVariableExpenseComponent },
+      ] },
       { path: 'ver-despesa', component: ViewExpenseComponent },
      ]},
      { path: 'receitas', component: RevenueComponent },    

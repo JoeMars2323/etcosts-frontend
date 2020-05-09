@@ -1,0 +1,31 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-blue">Listar todas as despesas</h1>
+</div> 
+  
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col" style="display:none;">ID</th>
+        <th scope="col">Despesa</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Subtipo</th>
+        <th scope="col">Data</th>
+        <th scope="col">Total</th>
+        <td scope="col" colspan="3">Ações</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of expenseList">
+        <td style="display:none;">{{ item.id }}</td>
+        <td>{{ item.expenseName }}</td>
+        <td>{{ item.expenseType }}</td>
+        <td>{{ item.expenseSubtype }}</td>
+        <td>{{ item.expenseDate }}</td>
+        <td>{{ item.value }}</td>
+        <td><button class="btn btn-primary" type="button" (click)="onView(item)"><i class="far fa-eye"></i></button></td>
+        <td><button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button></td>
+        <td><button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button></td>
+    </tr>
+    </tbody>
+</table>
+
