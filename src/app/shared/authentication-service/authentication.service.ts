@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { RestApiService } from '../rest-api-service/rest-api.service';
 import { User } from '../../shared/User';
@@ -12,7 +12,7 @@ export class AuthenticationService {
   private user: User;
   private response: boolean;
 
-  constructor(private api: RestApiService, private router: Router) { 
+  constructor(private api: RestApiService, private router: Router, private route: ActivatedRoute) { 
 
   }
 
@@ -37,9 +37,12 @@ export class AuthenticationService {
   public getUser():User {
     return this.user;
   }
+  public getUsername():string {
+    return this.user.username;
+  }
 
   private gotoPersonalArea() {
-    this.router.navigate(['/restrito']);
+    this.router.navigate(['/restrito'], { relativeTo: this.route });
   }
 
 }

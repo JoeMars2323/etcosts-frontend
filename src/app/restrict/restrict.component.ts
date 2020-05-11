@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from '../shared/authentication-service/authentication.service';
 
-import { User } from '../shared/User';
-
 @Component({
   selector: 'app-restrict',
   templateUrl: './restrict.component.html',
@@ -11,7 +9,7 @@ import { User } from '../shared/User';
 })
 export class RestrictComponent implements OnInit {
 
-  user: User;
+  username: string;
  
   //flags add expenses
   homeDashboard: boolean = false;
@@ -97,7 +95,9 @@ export class RestrictComponent implements OnInit {
 
   // capture username to identify the session
   getUsername() {
-    this.user = this.auth.getUser();
+    this.username = this.auth.getUsername();
   }
+
+
 
 }

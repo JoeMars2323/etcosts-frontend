@@ -11,8 +11,8 @@ export class ExpenseItem {
     currency: string;
     stateType: string;
     value: string;
-    valueNumber: number;
 
+    valueNumber: number;
     toggle: boolean = false;
 
     getOpenFileChooser() {

@@ -4,42 +4,36 @@
 <form #itemForm="ngForm" name="form">
     <div class="container-fluid">
       <div class="row">
-        <!-- expense name -->
         <div class="col-sm-6">
           <label for="expenseName" class="control-label">Nome da despesa:</label>
           <input required id="expenseName" name="expenseName" type="text" class="form-control"
-          value="{{ updateVariable.expenseName }}">
+          value="{{ expense.expenseName }}">
         </div>
-        <!-- expense type -->
         <div class="col-sm-6">
           <label for="itemName">Tipo da despesa:</label>
           <select required id="itemName" name="itemName" class="form-control ml-1" >
-            <option value="0"> {{ updateVariable.expenseSubtype }}</option>
+            <option value="0"> {{ expense.expenseSubtype }}</option>
           </select>
         </div>
       </div>
       <br>
       <div class="row">
-        <!-- date -->
         <div class="col-sm-6">
           <label for="expenseDate" class="control-label">Data:</label>
           <input id="expenseDate" name="expenseDate" type="text" class="form-control" 
-          value="{{updateVariable.expenseDate}}">
+          value="{{expense.expenseDate}}">
         </div>
       </div>
     </div>
     <br>
     <hr>
-    <!-- items -->
     <div class="container-fluid" >
       <h4 class="mb-2 text-blue2">Items da despesa</h4><br>
       <div class="row">
-        <!--item name-->
         <div class="col-sm-6">
           <label >Nome do item:</label>
           <input id="itemName" type="text" class="form-control" >
         </div>
-        <!--item description-->
         <div class="col-sm-6">
           <label for="description">Descrição:</label>
           <textarea id="description" type="text" rows="1" class="form-control" ></textarea>
@@ -47,21 +41,18 @@
       </div>
       <br>
       <div class="row">
-        <!--currency-->
         <div class="col-sm-6">
           <label for="currency">Moeda:</label>
           <select required id="currency" class="form-control ml-1" >
               <option > </option>
           </select>
         </div>
-        <!--value-->
         <div class="col-sm-6">
           <label for="value" class="control-label">Valor:</label>
           <input required id="value" type="number" class="form-control" >
         </div>
       </div>
       <br>
-      <!--total value-->
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-4">

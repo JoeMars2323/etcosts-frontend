@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams  } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { User } from '../User';
 import { Expense } from '../../restrict/expense/Expense';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,9 @@ import { Expense } from '../../restrict/expense/Expense';
 export class RestApiService {
   
   private usersUrl: String;
+  id : number;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
     this.usersUrl = 'http://localhost:8080/etcosts';
   }
 
@@ -42,15 +45,14 @@ export class RestApiService {
     return this.http.get<String[]>(this.usersUrl + '/currency');
   }
 
-  public saveExpense(expense: Expense) {
-    return this.http.post(this.usersUrl + '/saveExpense', expense);
-  }
-
-  public getExpenseInf(id: number): Observable<Expense> {
-    let params = new HttpParams().set('id', id.toString());
-
-    return this.http.get<Expense>(this.usersUrl + '/expenseInfo', { params: params });
+   public getExpenseInf(id: number): Observable<Expense> {
+     let params = new HttpParams().set('id', id.toString());
+     return this.http.get<Expense>(this.usersUrl + '/expenseInfo', { params: params });
   
+   }
+
+  public saveExpense(expense: Expense): Observable<boolean> {
+    return this.http.post<boolean>(this.usersUrl + '/saveExpense', expense);
   }
 
 

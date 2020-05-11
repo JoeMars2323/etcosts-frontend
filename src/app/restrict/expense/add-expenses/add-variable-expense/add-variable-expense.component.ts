@@ -5,6 +5,8 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
+import { SessionService } from 'src/app/shared/session-service/session.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-variable-expense',
@@ -13,13 +15,13 @@ import { Expense } from '../../Expense';
 })
 export class AddVariableExpenseComponent implements OnInit {
 
-  // expense declaration
-  expense: Expense;
-  dataArray = [];
-  item: ExpenseItem;
+  // return if data was or not inserted on database
+  status: boolean;
 
-  // event emiter
-  @Output() expenseToSend;
+  // expense declaration
+  dataArray = [];
+  expense: Expense;
+  item: ExpenseItem;
 
   // datepicker properties
   locale = 'en';
@@ -35,10 +37,10 @@ export class AddVariableExpenseComponent implements OnInit {
   // calculate total
   total: number = 0;
 
-  constructor(private api: RestApiService, private localeService: BsLocaleService) { 
+  constructor(private api: RestApiService, private localeService: BsLocaleService, private session: SessionService,
+              private router: Router, private route: ActivatedRoute) { 
     this.expense = new Expense();
     this.item = new ExpenseItem();
-    this.expenseToSend = new EventEmitter<Expense>();
   }
 
   ngOnInit(): void {
@@ -106,17 +108,28 @@ export class AddVariableExpenseComponent implements OnInit {
 
   // submit button
   onSubmit() {
-    // add item array to expense
+    // add username to expense
+    this.expense.username = this.session.getUsername();
     this.expense.expenseType = "Despesa corrente variável";
     this.expense.hasItems = true;
+    // add item array to expense
     this.expense.itemArray = this.dataArray;
     for(let i = 0; i < this.expense.itemArray.length; i++) {
       this.expense.itemArray[i].stateType = "Pago";
       this.expense.itemArray[i].value = this.expense.itemArray[i].valueNumber.toString();
 
     }
-    console.log(this.expense);
-    this.expenseToSend.emit(this.expense);
+    this.api.saveExpense(this.expense).subscribe(
+      data => {
+        this.status = data;
+        if(this.status === true) {
+          alert(' Dados inseridos com sucesso!');
+          this.router.navigate(['restrito'], { relativeTo: this.route })
+        } else {
+          alert('Não foi possivel fazer a inserção');
+        }
+      }
+    );
     this.total = 0
 
   }

@@ -57,7 +57,7 @@ const routes: Routes = [
         { path: 'geral', component: ListStandardComponent },
       ]},
       { path: 'alterar-despesa', component: UpdateExpenseComponent, children: [
-        { path: 'fixa', component: UpdateFixedExpenseComponent },
+        { path: 'fixa/:id', component: UpdateFixedExpenseComponent },
         { path: 'longa', component: UpdateLongExpenseComponent },
         { path: 'curta', component: UpdateShortExpenseComponent },
         { path: 'variavel', component: UpdateVariableExpenseComponent },

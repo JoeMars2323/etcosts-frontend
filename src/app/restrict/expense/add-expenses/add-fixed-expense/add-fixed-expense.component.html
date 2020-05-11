@@ -1,4 +1,3 @@
-<!-- create new expense-->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-blue">Criar despesa corrente fixa</h1>
 </div><hr>
@@ -28,18 +27,10 @@
         <div class="row">
             <!--expense date-->
             <div class="col-sm-6" >
-                <label>Data da despesa:</label>
-                <!-- <input required name="expenseDate" type="text" class="form-control ml-1" 
-                [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig"
-                [bsValue]="bsDate"> -->
-                <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
-                #datepickerDMY="bsDatepicker" [bsValue]="bsValue"
-                formControlName="dateDMY" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+                <label for="expenseDate">Data da despesa:</label>
+                <input required id="expenseDate" name="expenseDate" type="text" class="form-control" bsDatepicker 
+                [(ngModel)]="expense.expenseDate" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
             </div>
-
-
-
-
             <!-- currency -->
             <div class="col-sm-6" >
                 <label>Moeda:</label>

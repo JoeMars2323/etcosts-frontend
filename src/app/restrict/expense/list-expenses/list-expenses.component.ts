@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { User } from '../../../shared/User';
 import { Expense } from '../Expense';
-
 import { RestApiService } from '../../../shared/rest-api-service/rest-api.service';
 import { AuthenticationService } from '../../../shared/authentication-service/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';

@@ -9,23 +9,17 @@ import { ChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
-
 import { RestApiService } from './shared/rest-api-service/rest-api.service';
-import { WindowsChangeService } from './shared/windows-change-service/windows-change.service';
 import { AuthenticationService } from './shared/authentication-service/authentication.service';
-
 import { AppComponent } from './app.component';
-
 import { PublicComponent } from './public/public.component';
 import { HomeComponent } from './public/home/home.component';
 import { ServicesComponent } from './public/services/services.component';
 import { FaqComponent } from './public/faq/faq.component';
 import { ContactsComponent } from './public/contacts/contacts.component';
 import { AboutComponent } from './public/about/about.component';
-
 import { LoginComponent } from './login/login.component';
 import { CreateLoginComponent } from './login/create-login/create-login.component';
-
 import { RestrictComponent } from './restrict/restrict.component';
 import { ChartsTablesComponent } from './restrict/charts-tables/charts-tables.component';
 import { ListExpensesComponent } from './restrict/expense/list-expenses/list-expenses.component';
@@ -100,8 +94,7 @@ import { ListStandardComponent } from './restrict/expense/list-expenses/list-sta
   ],
   providers: [
     AuthenticationService,
-    RestApiService,
-    WindowsChangeService
+    RestApiService
   ],
   bootstrap: [AppComponent]
 })

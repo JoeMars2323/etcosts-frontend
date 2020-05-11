@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Expense } from '../../Expense';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UpdateService } from 'src/app/shared/update-service/update.service';
+import { RestApiService } from 'src/app/shared/rest-api-service/rest-api.service';
 
 @Component({
   selector: 'app-list-standard',
@@ -14,26 +14,24 @@ export class ListStandardComponent implements OnInit {
   @Input() expenseList: Expense[];
   expense: Expense;
 
-  constructor(private update: UpdateService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private api: RestApiService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
-
-  onEdit(selectedExpense) {
-    this.update.getId(selectedExpense.expenseId);
-    switch(selectedExpense.expenseType) {
+  onEdit(expense) {
+    switch(expense.expenseType) {
       case 'Despesa corrente fixa':
-        this.router.navigate(['../alterar-despesa/fixa'], { relativeTo: this.route });
+        this.router.navigate(['../alterar-despesa/fixa', expense.expenseId], { relativeTo: this.route });
         break;
         case 'Despesa corrente variável':
-          this.router.navigate(['../alterar-despesa/variavel'], { relativeTo: this.route });
+          this.router.navigate(['../alterar-despesa/variavel', expense.expenseId], { relativeTo: this.route });
         break;
         case 'Despesa não corrente de curta duração':
-          this.router.navigate(['../alterar-despesa/curta'], { relativeTo: this.route });
+          this.router.navigate(['../alterar-despesa/curta', expense.expenseId], { relativeTo: this.route });
         break;
         case 'Despesa não corrente de longa duração':
-          this.router.navigate(['../alterar-despesa/longa'], { relativeTo: this.route });
+          this.router.navigate(['../alterar-despesa/longa', expense.expenseId], { relativeTo: this.route });
         break;
     }
     

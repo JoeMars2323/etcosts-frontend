@@ -18,6 +18,7 @@ export class Expense {
 	value: string;
 	hasItems: boolean;
 	itemArray: ExpenseItem[];
+
 	update: boolean;
 
 
