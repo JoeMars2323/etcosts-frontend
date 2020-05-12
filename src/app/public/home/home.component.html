@@ -1,24 +1,24 @@
 <main id="main">
-
-  <!-- ======= Why Us Section ======= -->
   <section id="why-us" class="why-us">
     <div class="container">
 
       <div class="row">
         <div class="col-xl-4 col-lg-5" data-aos="fade-up">
+          <br>
           <div class="content">
             <h3>Porquê escolher a solução ET-Costs?</h3>
             <p>
-              ET-Costs, acrómimo de Expense Tracker Costs, é um software de Gestão de rendimentos, que lhe permite 
-              gerir as suas despesas de acordo com os seus rendimentos. </p>
-            <p> É uma solução simples que procura mostrar-lhe de forma simples, se a cadencia com que está a gastar 
-              o seu dinheiro, é acompanhada pelos seus rendimentos. </p>
+              ET-Costs, acrómimo de Expense Tracker Costs, é um software de Gestão do orçamemto pessoal,
+              que lhe permite gerir as suas despesas de acordo com os seus rendimentos. </p>
+            <p> É uma solução simples, livre de custos, que procura mostrar-lhe de forma simples, como está 
+              a gastar o seu dinheiro. </p>
             <p>A ET-Costs tem ferramentas que lhe permitem fazer comparações entre rendimentos e despesas de forma 
-              a que possa tomar decisões que ajudem o seu orçamento a ficar mais equilibrado.
+              a que possa tomar decisões que o ajudem a melhorar o seu orçamento, de forma a que  este fique 
+              mais equilibrado.
             </p> 
-            <p> Para que possa ter uma ideia do que se passa com os seus rendimentos, a ET-Costs, apresenta-lhe 
-              diferentes tipos de gráficos e de tabelas, para que possa ver o mesmo problema, em várias prespectivas.  
-            </p><br>
+            <p> De forma a oferecer as funcionalidades necessárias para conseguir executar tais tarefas, a ET-Costs 
+              foi construida com base em três módulos que se irão complementar.
+            </p><br><br>
           </div>
         </div>
         <div class="col-xl-8 col-lg-7 d-flex">
@@ -26,20 +26,32 @@
             <div class="row">
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <i class="fas fa-receipt"></i>
-                  <h4>Adicionar Despesas</h4>
+                  <a  style="cursor: pointer;" (click)="openExpense()"><i class="fas fa-file-invoice-dollar"></i></a>
+                  <a  style="cursor: pointer;" (click)="openExpense()"><h4>Despesas</h4></a>
+                  <div *ngIf="expense">
+                    Pode efetuar diversas operações com as despesas, tais como: criar, procurar, visualizar,
+                    alterar e apagar.
+                  </div>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <i class="fas fa-dollar-sign"></i>
-                  <h4>Adicionar Receitas</h4>
+                  <a  style="cursor: pointer;" (click)="openRevenue()"><i class="fas fa-dollar-sign"></i></a>
+                  <a  style="cursor: pointer;" (click)="openRevenue()"><h4>Receitas</h4></a>
+                  <div *ngIf="revenue">
+                    À semelhança das despesas, tambem aqui pode fazer uma gestão efetiva de receitas, tal como:
+                    criar, procurar, visualizar, alterar e apagar.
+                  </div>
                 </div>
               </div>
               <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <i class="fas fa-chart-bar"></i>
-                  <h4>&nbsp; Calcular Lucros e Perdas</h4>
+                  <a  style="cursor: pointer;" (click)="openGraph()"><i class="fas fa-chart-pie"></i></a>
+                  <a  style="cursor: pointer;" (click)="openGraph()"><h4> Calcular Lucros e Perdas</h4></a>
+                  <div *ngIf="graph">
+                    Para que possa gerir o seu orçamento, a ET-Costs contem algoritmos de cálculo para 
+                    que possa visualizar o relacionamento entre todas as suas despesas e lucros.
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,6 +61,4 @@
 
     </div>
   </section>
-
-
 </main>

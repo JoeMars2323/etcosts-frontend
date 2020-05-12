@@ -16,7 +16,6 @@ import { PublicComponent } from './public/public.component';
 import { HomeComponent } from './public/home/home.component';
 import { ServicesComponent } from './public/services/services.component';
 import { FaqComponent } from './public/faq/faq.component';
-import { ContactsComponent } from './public/contacts/contacts.component';
 import { AboutComponent } from './public/about/about.component';
 import { LoginComponent } from './login/login.component';
 import { CreateLoginComponent } from './login/create-login/create-login.component';
@@ -52,7 +51,6 @@ import { ListStandardComponent } from './restrict/expense/list-expenses/list-sta
     HomeComponent,
     AboutComponent,
     ServicesComponent,
-    ContactsComponent,
     FaqComponent,    
     LoginComponent,
     CreateLoginComponent,

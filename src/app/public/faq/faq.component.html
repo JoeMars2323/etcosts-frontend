@@ -3,54 +3,71 @@
         <div class="container">
   
           <div class="section-title">
-            <br>
-            <h2 data-aos="fade-up">F.A.Q</h2>
-            <p data-aos="fade-up">Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+            <h2 style="color: #3366ff">F.A.Q</h2>
+            <p style="text-align: justify;">Eis a resposta a algumas perguntas pertinentes, 
+              que os utilizadores da aplicação ET-Costs possam colocar.</p>
           </div>
   
           <div class="faq-list">
             <ul>
               <li data-aos="fade-up">
-                <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse" href="#faq-list-1">Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-1" class="collapse show" data-parent=".faq-list">
+                <a  style="cursor: pointer;" 
+                (click)="openQuestion1()"><i class="far fa-question-circle"></i> 
+                  Como criar conta na ET-Costs? </a>
+                <div class="faq-answer"  *ngIf="question1">
                   <p>
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                    Para criar conta na ET-Costs, basta entrar no site e aceder à página de criação de conta.
+                    Lá, basta providenciar username, palavra passe e associar um email válido.
+                    Comcluído o processo, basta entrar na página de login e colocar as suas credenciais corretamente.
+                    Após validação concluída, irá ser direcionado para a sua área.
                   </p>
                 </div>
               </li>
   
-              <li data-aos="fade-up" data-aos-delay="100">
-                <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-2" class="collapsed">Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-2" class="collapse" data-parent=".faq-list">
+              <li data-aos="fade-up">
+                <a style="cursor: pointer;" (click)="openQuestion2()"><i class="far fa-question-circle"></i> 
+                  Quanto é que eu tenho de pagar para ter conta na ET-Costs? </a>
+                <div class="faq-answer" *ngIf="question2">
                   <p>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    A ET-Costs é uma plataforma de gestão orçamental livre de custos. Pode aceder de forma
+                    completamente gratuita. A unica coisa que deve fazer é criar conta e associar um
+                    email válido. Com isto pode usufruir de todas as funcionalidades e fazer a melhor 
+                    gestão do seu orçamento familiar. 
                   </p>
                 </div>
               </li>
-  
-              <li data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-3" class="collapsed">Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-3" class="collapse" data-parent=".faq-list">
+
+              <li data-aos="fade-up">
+                <a style="cursor: pointer;" (click)="openQuestion3()"><i class="far fa-question-circle"></i> 
+                  Posso quardar dados pessoais? </a>
+                <div class="faq-answer" *ngIf="question3">
                   <p>
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                    A plataforma ET-Costs está construída de forma robusta, onde apenas cada utilizador consegue
+                    aceder aos seus conteudos, contudo, a Marsoft não se responsabilisa pela possível usurpação 
+                    de dados.
                   </p>
                 </div>
               </li>
-  
-              <li data-aos="fade-up" data-aos-delay="300">
-                <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-4" class="collapse" data-parent=".faq-list">
+
+              <li data-aos="fade-up">
+                <a  style="cursor: pointer;" (click)="openQuestion4()"><i class="far fa-question-circle"></i> 
+                  O que acontece caso eu perca os meus dados? </a>
+                <div class="faq-answer" *ngIf="question4">
                   <p>
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+                    A plataforma ET-Costs está construída de forma robusta, os dados de cada utilizador 
+                    são guardados de forma segura, contudo, a Marsoft não se responsabilisa pela possível 
+                    perda dos dados.
                   </p>
                 </div>
               </li>
-  
-              <li data-aos="fade-up" data-aos-delay="400">
-                <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-5" class="collapse" data-parent=".faq-list">
+
+              <li data-aos="fade-up">
+                <a style="cursor: pointer;" (click)="openQuestion5()"><i class="far fa-question-circle"></i> 
+                  Posso ter mais do que uma conta na ET-Costs? </a>
+                <div class="faq-answer" *ngIf="question5">
                   <p>
-                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                    Cada utilizador pode ter as contas que achar necessário, a partir do momento em que tenha 
+                    e-mails suficientes para associar a essas contas, bem como usernames diferentes.
                   </p>
                 </div>
               </li>

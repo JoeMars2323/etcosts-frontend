@@ -6,7 +6,6 @@ import { HomeComponent } from './public/home/home.component';
 import { AboutComponent } from './public/about/about.component';
 import { ServicesComponent } from './public/services/services.component';
 import { FaqComponent } from './public/faq/faq.component';
-import { ContactsComponent } from './public/contacts/contacts.component';
 import { LoginComponent } from './login/login.component';
 import { CreateLoginComponent } from './login/create-login/create-login.component';
 import { RestrictComponent } from './restrict/restrict.component';
@@ -36,8 +35,7 @@ const routes: Routes = [
      { path: 'principal', component: HomeComponent },
      { path: 'sobre', component: AboutComponent },
      { path: 'servicos', component: ServicesComponent },
-     { path: 'faq', component: FaqComponent },
-     { path: 'contactos', component: ContactsComponent }
+     { path: 'faq', component: FaqComponent }
    ] },
   { path: 'login', component: LoginComponent },
   { path: 'criar-conta', component: CreateLoginComponent },

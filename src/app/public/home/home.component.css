@@ -1,17 +1,14 @@
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   color: #313030;
 }
 
 a {
-  color: #99ccff;
+  color: #000000;
 }
 
 a:hover {
-  color: #99ccff;
+  color: #3366ff;
   text-decoration: none;  
 }
 
@@ -25,16 +22,13 @@ p {
   font-size: 14px;
 }
 
-/*--------------------------------------------------------------
-  # Sections General
-  --------------------------------------------------------------*/
   section {
     padding: 60px 0;
     overflow: hidden;
   }
   
   .section-bg {
-    background-color: #fff;
+    background-color: #ebf3f9;
   }
   
   .section-title {
@@ -55,9 +49,6 @@ p {
     margin-bottom: 0;
   }
   
-  /*--------------------------------------------------------------
-  # Why Us
-  --------------------------------------------------------------*/
   .why-us {
     padding: 0 0 30px 0;
     position: relative;
@@ -124,3 +115,5 @@ p {
     font-size: 15px;
     color: #716f6f;
   }
+
+  
