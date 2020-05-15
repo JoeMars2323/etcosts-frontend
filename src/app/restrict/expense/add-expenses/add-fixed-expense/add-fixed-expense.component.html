@@ -1,97 +1,105 @@
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-blue">Criar despesa corrente fixa</h1>
-</div><hr>
-  
+<div class="container">
+    <h1 class="text-blue">{{ types[0] }}</h1>
+</div>
+<hr>
+
 <!--form expenses-->
-<form #itemForm="ngForm" name="form" ngSubmit="onSubmit()">
+<form (ngSubmit)="onSubmit()" #form="ngForm">
     <div class="container-fluid">
         <div class="row">
             <!-- expense name -->
-            <div class="col-sm-6" [class.has-error]="name.invalid && name.touched" 
-            [class.has-success]="name.valid">
-                <label [attr.for]="name" class="control-label">Nome da despesa:</label>
-                <input required [id]="name" name="expenseName" type="text" class="form-control ml-1" 
-                [(ngModel)]="expense.expenseName" #name="ngModel">
-                <span class="help-block" *ngIf="name.invalid && name.touched"> 
-                    O nome da despesa é obrigatório</span>
+            <div class="col-sm-6">
+                <label for="name">Nome da despesa:</label>
+                <input required id="name" name="name" type="text" class="form-control ml-1"
+                    [(ngModel)]="expense.expenseName" #name="ngModel">
+                <span class="help-block" *ngIf="!name.valid && name.touched"> O nome da despesa é obrigatório</span>
             </div>
             <!-- expense type -->
-            <div class="col-sm-6" >
+            <div class="col-sm-6">
                 <label>Tipo da despesa:</label>
-                <select required name="expenseSubtype" class="form-control ml-1" [(ngModel)]="expense.expenseSubtype" >
-                    <option *ngFor="let e of expenseSubtype"[value]="e">{{e}}</option>
+                <select required id="type" name="type" class="form-control ml-1" [(ngModel)]="expense.expenseSubtype">
+                    <option *ngFor="let subtype of subtypes" [value]="subtype">{{ subtype }}</option>
                 </select>
             </div>
         </div>
         <br>
         <div class="row">
             <!--expense date-->
-            <div class="col-sm-6" >
-                <label for="expenseDate">Data da despesa:</label>
-                <input required id="expenseDate" name="expenseDate" type="text" class="form-control" bsDatepicker 
-                [(ngModel)]="expense.expenseDate" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+            <div class="col-sm-6">
+                <label for="date" class="control-label">Data da despesa:</label>
+                <input required id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate"
+                    bsDatepicker [bsConfig]="bsConfig">
             </div>
             <!-- currency -->
-            <div class="col-sm-6" >
-                <label>Moeda:</label>
-                <select required id="currency" name="currency" class="form-control ml-1" 
-                [(ngModel)]="expense.currency" (change)="getCurrency()" >
-                        <option *ngFor="let c of currency"[value]="c"> {{c}} </option>
+            <div class="col-sm-6">
+                <label for="currency">Moeda:</label>
+                <select required id="currency" name="currency" class="form-control ml-1" [(ngModel)]="expense.currency">
+                    <option *ngFor="let currency of currencies" [value]="currency"> {{ currency }} </option>
                 </select>
             </div>
         </div>
         <br>
-        <!--month/year of reference -->
-        <p>Referente a:</p>
+        <!--month reference -->
+        <label for="month">Referente a:</label>
         <div class="row">
             <div class="col-sm-6">
-                <select name="expenseMonth" class="form-control ml-1" [(ngModel)]="expense.month">
-                    <option>Janeiro</option>
-                    <option>Fevereiro</option>
-                    <option>Março</option>
-                    <option>Abril</option>
-                    <option>Maio</option>
-                    <option>Junho</option>
-                    <option>Julho</option>
-                    <option>Agosto</option>
-                    <option>Setembro</option>
-                    <option>Outubro</option>
-                    <option>Novembro</option>
-                    <option>Dezembro</option>
+                <select id="month" name="month" class="form-control ml-1" [(ngModel)]="expense.month">
+                    <option *ngFor="let month of monthsService.months"> {{ month }} </option>
                 </select>
             </div>
             <!--year reference-->
             <div class="col-sm-6">
-                <select name="expenseYear" class="form-control ml-1" [(ngModel)]="expense.year"
-                (change)="getYears()">
-                    <option *ngFor="let y of years"[value]="y"> {{y}} </option>
+                <select id="year" name="year" class="form-control ml-1" [(ngModel)]="expense.year">
+                    <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
                 </select>
             </div>
         </div>
         <br>
         <div class="row">
-            <!-- expense name -->
+            <!-- comments -->
             <div class="col-sm-12">
                 <label>Observações:</label>
-                <textarea name="expenseName" type="text" rows="2" class="form-control ml-1" 
-                [(ngModel)]="expense.expenseDescription"></textarea>
+                <textarea name="expenseName" type="text" rows="2" class="form-control ml-1"
+                    [(ngModel)]="expense.expenseDescription"></textarea>
             </div>
         </div>
+        <br>
+        <!--file chooser-->
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-secondary" name="add" *ngIf="!toggle"
+            (click)="getOpenFileChooser()">Adicionar ficheiro</button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-secondary" name="close" *ngIf="toggle" (click)="getOpenFileChooser()">
+            Fechar</button>
+        <br>
+        <br>
+        <div *ngIf="toggle">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="fileAddon">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputFile" aria-describedby="fileAddon">
+                    <label class="custom-file-label" for="inputFile">Escolher ficheiro</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <br>
         <br>
         <!--total value-->
         <div class="row">
             <div class="col-sm-6">
-                <label>Valor da despesa:</label>
-                <input required type="Number" name="value" class="form-control ml-1" [(ngModel)]="expense.value">
+                <label for="total">Custo total:</label>
+                <input required id="total" type="Number" name="total" class="form-control ml-1"
+                    [(ngModel)]="expense.value" #total="ngModel">
             </div>
+            <span class="help-block" *ngIf="!total.valid && total.touched"> O total da despesa é obrigatório</span>
         </div>
         <br>
-        <!--value-->
+        <!--submit-->
         <div class="col-sm-6">
-            <button class="btn btn-primary" type="submit" [disabled]="itemForm.invalid"
-             (click)="onSubmit()">Submeter</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submeter</button>
         </div>
     </div>
 </form>
-    
-  

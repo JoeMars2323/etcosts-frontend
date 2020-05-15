@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams  } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { User } from '../User';
 import { Expense } from '../../restrict/expense/Expense';
-
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,7 @@ export class RestApiService {
   private usersUrl: String;
   id : number;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient) { 
     this.usersUrl = 'http://localhost:8080/etcosts';
   }
 

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { FormControl, FormGroup } from '@angular/forms';
 
+import { SessionService } from 'src/app/shared/session-service/session.service';
 import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
 import { Expense } from '../../Expense';
-import { SessionService } from 'src/app/shared/session-service/session.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MonthsService } from 'src/app/shared/months-service/months.service';
 
 @Component({
   selector: 'app-fixed-expense',
@@ -14,55 +15,73 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddFixedExpenseComponent implements OnInit {
 
+  // bind form
+  @ViewChild('form') signupForm: NgForm;
+
   // return if data was or not inserted on database
   status: boolean;
-  
+
+  // represent the expense
   expense: Expense;
-
+  
+  // datepicker properties
+  colorTheme = 'theme-dark-blue';
   bsConfig: Partial<BsDatepickerConfig>;
-
+ 
   // lists
-  expenseSubtype: String[];
-  currency: String[];
+  types: String[];
+  subtypes: String[];
+  currencies: String[];
   years: String[] = []; 
 
-  bsValue = new Date();
+  // file choser
+  toggle: boolean = false;
 
-  constructor(private api: RestApiService, private session: SessionService, 
-              private router: Router, private route: ActivatedRoute) { 
-    this.expense = new Expense();
-    this.bsConfig = new BsDatepickerConfig();
+  constructor(private api: RestApiService, private session: SessionService, private router: Router, 
+              private route: ActivatedRoute, public monthsService: MonthsService) { 
+      this.expense = new Expense();
   }
-
-  form = new FormGroup({
-    dateDMY: new FormControl(new Date())
-  });
 
   ngOnInit(): void {
-    this.getExpenseSubtype();
-    this.getCurrency();
+    this.bsConfiguration();
+    this.getTypes();
+    this.getSubtypes();
+    this.getCurrencies();
     this.getYears();
-    this.bsConfiguration()
   }
 
+  // configure datepicker
   bsConfiguration() {
-    this.bsConfig.containerClass = 'theme-dark-blue';
-
+    this.bsConfig = Object.assign({}, { 
+      containerClass: 'theme-dark-blue',
+      dateInputFormat: 'DD-MM-YYYY'
+      //locale: 'pt'
+    });
+    setTimeout(() => {
+    });
   }
 
   // load dropdowns
-  getExpenseSubtype() {
-    this.api.getExpenseSubtype(1).subscribe(
+  getTypes() {
+    this.api.getExpenseType().subscribe(
       data => {
-        this.expenseSubtype = data;
+        this.types = data;
       }
     )
   }
-  getCurrency() {
+
+  getSubtypes() {
+    this.api.getExpenseSubtype(1).subscribe(
+      data => {
+        this.subtypes = data;
+      }
+    )
+  }
+
+  getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
-        this.currency = data;
-
+        this.currencies = data;
       }
     )
   }
@@ -75,7 +94,12 @@ export class AddFixedExpenseComponent implements OnInit {
     this.years.push((current - 1).toString());
     this.years.push((current).toString());
     this.years.push((current + 1).toString());
+  }
 
+  // file chooser
+  getOpenFileChooser() {
+    this.toggle = !this.toggle;
+    return '';
   }
 
    // submit button
@@ -89,7 +113,8 @@ export class AddFixedExpenseComponent implements OnInit {
         this.status = data;
         if(this.status === true) {
           alert(' Dados inseridos com sucesso!');
-          this.router.navigate(['restrito'], { relativeTo: this.route })
+          this.signupForm.reset();
+          this.router.navigate(['/restrito'], { relativeTo: this.route })
         } else {
           alert('Não foi possivel fazer a inserção');
         }

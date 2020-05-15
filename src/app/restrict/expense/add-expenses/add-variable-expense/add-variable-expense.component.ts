@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { listLocales } from 'ngx-bootstrap/chronos';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
+import { SessionService } from 'src/app/shared/session-service/session.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
-import { SessionService } from 'src/app/shared/session-service/session.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MonthsService } from 'src/app/shared/months-service/months.service';
 
 @Component({
   selector: 'app-variable-expense',
@@ -15,6 +16,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddVariableExpenseComponent implements OnInit {
 
+  // bind form
+  @ViewChild('form') signupForm: NgForm;
+  
   // return if data was or not inserted on database
   status: boolean;
 
@@ -24,58 +28,66 @@ export class AddVariableExpenseComponent implements OnInit {
   item: ExpenseItem;
 
   // datepicker properties
-  locale = 'en';
-  locales = listLocales();
-  bsConfig: Partial<BsDatepickerConfig>;
   colorTheme = 'theme-dark-blue';
+  bsConfig: Partial<BsDatepickerConfig>;
 
   // lists
-  expenseType: String[];
-  expenseSubtype: String[];
-  currency: String[];
+  types: String[];
+  subtypes: String[];
+  currencies: String[];
+
+  // file choser
+  toggle: boolean = false;
 
   // calculate total
   total: number = 0;
 
-  constructor(private api: RestApiService, private localeService: BsLocaleService, private session: SessionService,
-              private router: Router, private route: ActivatedRoute) { 
+  constructor(private api: RestApiService, private session: SessionService, private router: Router, 
+              private route: ActivatedRoute) { 
     this.expense = new Expense();
     this.item = new ExpenseItem();
   }
 
   ngOnInit(): void {
-    this.getExpenseType();
-    this.getCurrency();
+    this.bsConfiguration();
     this.dataArray.push(this.item);
-    this.applyTheme();
-    this.applyLocale();
+    this.getTypes();
+    this.getSubtypes();
+    this.getCurrencies();
   }
 
   // load dropdowns
-  getExpenseType() {
+  getTypes() {
+    this.api.getExpenseType().subscribe(
+      data => {
+        this.types = data;
+      }
+    )
+  }
+
+  getSubtypes() {
     this.api.getExpenseSubtype(2).subscribe(
       data => {
-        this.expenseSubtype = data;
+        this.subtypes = data;
       }
     )
   }
 
-  getCurrency() {
+  getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
-        this.currency = data;
+        this.currencies = data;
 
       }
     )
   }
 
-  // change datepicker properties
-  applyLocale() {
-    this.localeService.use(this.locale);
-  }
-
-  applyTheme() {
-    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
+   // configure datepicker
+   bsConfiguration() {
+    this.bsConfig = Object.assign({}, { 
+      containerClass: 'theme-dark-blue',
+      dateInputFormat: 'DD-MM-YYYY'
+    });
     setTimeout(() => {
     });
   }
@@ -93,14 +105,11 @@ export class AddVariableExpenseComponent implements OnInit {
   }
 
   valueSum() {
-    //return this.total = this.dataArray.map(obj => obj.value).reduce((a, b) => a + b);
     this.total = 0;
     for (let i = 0; i < this.dataArray.length; i++) {
       if(this.dataArray[i].valueNumber !== undefined) {
         this.total += this.dataArray[i].valueNumber;
-        //console.log(typeof this.total === "number");
       }
-       
      }
     return this.total;
 
@@ -112,26 +121,26 @@ export class AddVariableExpenseComponent implements OnInit {
     this.expense.username = this.session.getUsername();
     this.expense.expenseType = "Despesa corrente variável";
     this.expense.hasItems = true;
-    // add item array to expense
+    // add item array to expense and the same date to each item
     this.expense.itemArray = this.dataArray;
     for(let i = 0; i < this.expense.itemArray.length; i++) {
       this.expense.itemArray[i].stateType = "Pago";
+      this.expense.itemArray[i].expenseDate = this.expense.expenseDate;
       this.expense.itemArray[i].value = this.expense.itemArray[i].valueNumber.toString();
-
     }
     this.api.saveExpense(this.expense).subscribe(
       data => {
         this.status = data;
         if(this.status === true) {
           alert(' Dados inseridos com sucesso!');
-          this.router.navigate(['restrito'], { relativeTo: this.route })
+          this.signupForm.reset();
+          this.router.navigate(['/restrito'], { relativeTo: this.route })
         } else {
           alert('Não foi possivel fazer a inserção');
         }
       }
     );
     this.total = 0
-
   }
 
 }

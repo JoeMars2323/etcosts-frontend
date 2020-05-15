@@ -43,6 +43,7 @@ import { ListByTypesComponent } from './restrict/expense/list-expenses/list-by-t
 import { ListByYearComponent } from './restrict/expense/list-expenses/list-by-year/list-by-year.component';
 import { ListByStateComponent } from './restrict/expense/list-expenses/list-by-state/list-by-state.component';
 import { ListStandardComponent } from './restrict/expense/list-expenses/list-standard/list-standard.component';
+import { DropDownDirective } from './shared/drop-down-directive/drop-down.directive';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ListStandardComponent } from './restrict/expense/list-expenses/list-sta
     ListByTypesComponent,
     ListByYearComponent,
     ListByStateComponent,
-    ListStandardComponent
+    ListStandardComponent,
+    DropDownDirective
   ],
   imports: [
     AppRoutingModule,
