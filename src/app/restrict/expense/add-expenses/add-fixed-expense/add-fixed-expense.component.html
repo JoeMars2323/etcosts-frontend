@@ -1,8 +1,9 @@
+<!--add fixed expense-->
 <div class="container">
-    <h1 class="text-blue">{{ types[0] }}</h1>
+    <h1 class="text-blue">{{ expenseType.name }}</h1>
+    <div class="expense-description"> {{ expenseType.description }} </div>
 </div>
-<hr>
-
+<br>
 <!--form expenses-->
 <form (ngSubmit)="onSubmit()" #form="ngForm">
     <div class="container-fluid">
@@ -14,11 +15,11 @@
                     [(ngModel)]="expense.expenseName" #name="ngModel">
                 <span class="help-block" *ngIf="!name.valid && name.touched"> O nome da despesa é obrigatório</span>
             </div>
-            <!-- expense type -->
+            <!-- currency -->
             <div class="col-sm-6">
-                <label>Tipo da despesa:</label>
-                <select required id="type" name="type" class="form-control ml-1" [(ngModel)]="expense.expenseSubtype">
-                    <option *ngFor="let subtype of subtypes" [value]="subtype">{{ subtype }}</option>
+                <label for="currency">Moeda:</label>
+                <select required id="currency" name="currency" class="form-control ml-1" [(ngModel)]="expense.currency">
+                    <option *ngFor="let currency of currencies" [value]="currency.name"> {{ currency.name }} </option>
                 </select>
             </div>
         </div>
@@ -29,13 +30,6 @@
                 <label for="date" class="control-label">Data da despesa:</label>
                 <input required id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate"
                     bsDatepicker [bsConfig]="bsConfig">
-            </div>
-            <!-- currency -->
-            <div class="col-sm-6">
-                <label for="currency">Moeda:</label>
-                <select required id="currency" name="currency" class="form-control ml-1" [(ngModel)]="expense.currency">
-                    <option *ngFor="let currency of currencies" [value]="currency"> {{ currency }} </option>
-                </select>
             </div>
         </div>
         <br>
@@ -60,7 +54,7 @@
             <div class="col-sm-12">
                 <label>Observações:</label>
                 <textarea name="expenseName" type="text" rows="2" class="form-control ml-1"
-                    [(ngModel)]="expense.expenseDescription"></textarea>
+                    [(ngModel)]="expense.comments"></textarea>
             </div>
         </div>
         <br>
@@ -91,8 +85,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="total">Custo total:</label>
-                <input required id="total" type="Number" name="total" class="form-control ml-1"
-                    [(ngModel)]="expense.value" #total="ngModel">
+                <input required id="total" type="Number" min="0" name="total" class="form-control ml-1"
+                    [(ngModel)]="expense.total" #total="ngModel">
             </div>
             <span class="help-block" *ngIf="!total.valid && total.touched"> O total da despesa é obrigatório</span>
         </div>
@@ -102,4 +96,6 @@
             <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submeter</button>
         </div>
     </div>
+    <br>
+    <br>
 </form>

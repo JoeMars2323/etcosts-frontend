@@ -14,13 +14,6 @@
                     #name="ngModel">
                 <span class="help-block" *ngIf="!name.valid && name.touched"> O nome da despesa é obrigatório</span>
             </div>
-            <!-- expense type -->
-            <div class="col-sm-6">
-                <label>Tipo da despesa:</label>
-                <select required id="type" name="type" class="form-control ml-1" [(ngModel)]="expense.expenseSubtype">
-                    <option *ngFor="let subtype of subtypes" [value]="subtype">{{ subtype }}</option>
-                </select>
-            </div>
         </div>
         <br>
 
@@ -57,7 +50,7 @@
             <div class="col-sm-12">
                 <label>Observações:</label>
                 <textarea name="expenseName" type="text" rows="2" class="form-control ml-1"
-                    [(ngModel)]="expense.expenseDescription"></textarea>
+                    [(ngModel)]="expense.comments"></textarea>
             </div>
         </div>
         <br>

@@ -5,8 +5,10 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 import { SessionService } from 'src/app/shared/session-service/session.service';
 import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
-import { Expense } from '../../Expense';
 import { MonthsService } from 'src/app/shared/months-service/months.service';
+import { Expense } from '../../Expense';
+import { ExpenseType } from '../../ExpenseType';
+import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-fixed-expense',
@@ -17,23 +19,19 @@ export class AddFixedExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
-
   // return if data was or not inserted on database
   status: boolean;
-
   // represent the expense
   expense: Expense;
-  
   // datepicker properties
   colorTheme = 'theme-dark-blue';
   bsConfig: Partial<BsDatepickerConfig>;
- 
-  // lists
-  types: String[];
-  subtypes: String[];
-  currencies: String[];
-  years: String[] = []; 
-
+  // expense type
+  expenseType: ExpenseType;
+  // currency
+  currencies: Currency[];
+  //years of reference
+  years: string[] = []; 
   // file choser
   toggle: boolean = false;
 
@@ -44,8 +42,7 @@ export class AddFixedExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.bsConfiguration();
-    this.getTypes();
-    this.getSubtypes();
+    this.getFixedType();
     this.getCurrencies();
     this.getYears();
   }
@@ -61,23 +58,16 @@ export class AddFixedExpenseComponent implements OnInit {
     });
   }
 
-  // load dropdowns
-  getTypes() {
+  // get expense type
+  getFixedType() {
     this.api.getExpenseType().subscribe(
       data => {
-        this.types = data;
+        this.expenseType = data[0];
       }
     )
   }
 
-  getSubtypes() {
-    this.api.getExpenseSubtype(1).subscribe(
-      data => {
-        this.subtypes = data;
-      }
-    )
-  }
-
+  // load dropdowns
   getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
@@ -104,10 +94,13 @@ export class AddFixedExpenseComponent implements OnInit {
 
    // submit button
    onSubmit() {
-     // add username to expense
+     // add extra information
      this.expense.username = this.session.getUsername();
-     this.expense.expenseType = 'Despesa corrente fixa';
      this.expense.stateType = 'Pago';
+     this.expense.expenseType = this.expenseType.name;
+     this.expense.expenseTypeDescription = this.expenseType.description;
+     this.expense.hasItems = false;
+     // save
      this.api.saveExpense(this.expense).subscribe(
       data => {
         this.status = data;

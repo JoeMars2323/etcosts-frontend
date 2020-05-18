@@ -1,5 +1,5 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4" >
-    <h1 class="h3 mb-0 text-blue"> Alterar -  {{expense.expenseType }} </h1>
+    <h1 class="h3 mb-0 text-blue"> Alterar -  {{expenseType.name }} </h1>
 </div>
 
 <form #itemForm="ngForm" name="form" ngSubmit="onSubmit()" >
@@ -10,14 +10,6 @@
               <input required [id]="name" name="expenseName" type="text" class="form-control ml-1" 
               [(ngModel)]="expense.expenseName" #name="ngModel" >
               <span class="help-block" *ngIf="name.invalid && name.touched"> O nome da despesa é obrigatório</span>
-          </div>
-          <div class="col-sm-6" >
-              <label for="subtype" class="control-label">Tipo da despesa:</label>
-              <select required id="subtype" required name="expenseSubtype" class="form-control ml-1" 
-                [(ngModel)]="expense.expenseSubtype">
-                  <option value="0">{{ expense.expenseSubtype }}</option>
-                  <option *ngFor="let e of expenseSubtype"[value]="e">{{e}}</option>
-              </select>
           </div>
       </div>
       <br>
@@ -40,9 +32,9 @@
           <div class="col-sm-6" >
             <label for="currency" class="control-label">Moeda:</label>
             <select required id="currency" name="currency" class="form-control ml-1" 
-                [(ngModel)]="expense.currency" (change)="getCurrency()">
+                [(ngModel)]="expense.currency">
                     <option value="0">{{ expense.currency }}</option>
-                    <option *ngFor="let c of currency"[value]="c"> {{c}} </option>
+                    <option *ngFor="let currency of currencies"[value]="currency"> {{currency}} </option>
             </select>
         </div>
       </div>
@@ -75,7 +67,7 @@
           <div class="col-sm-12">
               <label>Observações:</label>
               <textarea name="expenseDescription" type="text" rows="2" class="form-control ml-1" 
-                [(ngModel)]="expense.expenseDescription"></textarea>
+                [(ngModel)]="expense.comments"></textarea>
           </div>
       </div>
       <br>
@@ -83,7 +75,7 @@
           <div class="col-sm-6">
               <label>Valor da despesa:</label>
               <input required type="number" name="value" class="form-control ml-1" 
-               [(ngModel)]="expense.value">
+               [(ngModel)]="expense.total">
           </div>
       </div>
       <br>

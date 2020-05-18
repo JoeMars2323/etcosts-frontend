@@ -8,12 +8,6 @@
               <input name="expenseName" type="text" class="form-control ml-1" 
               [(ngModel)]="updateFixed.expenseName" readonly>
           </div>
-          <!-- expense type -->
-          <div class="col-sm-6" >
-              <label >Tipo da despesa:</label>
-              <input name="expenseSubtype" type="text" class="form-control ml-1" 
-              [(ngModel)]="updateFixed.expenseSubtype" readonly>
-          </div>
       </div>
       <br>
       <div class="row">
@@ -48,7 +42,7 @@
           <div class="col-sm-12">
               <label>Observações:</label>
               <textarea name="expenseDescription" type="text" rows="2" class="form-control ml-1" 
-                [(ngModel)]="updateFixed.expenseDescription" readonly></textarea>
+                [(ngModel)]="updateFixed.comments" readonly></textarea>
           </div>
       </div>
       <br>
@@ -57,7 +51,7 @@
           <div class="col-sm-6">
               <label>Valor da despesa:</label>
               <input required type="number" name="text" class="form-control ml-1" 
-               [(ngModel)]="updateFixed.value" readonly>
+               [(ngModel)]="updateFixed.total" readonly>
           </div>
       </div>
   </div>

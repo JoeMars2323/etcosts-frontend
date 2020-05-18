@@ -1,26 +1,24 @@
 import { ExpenseItem } from './ExpenseItem';
 
 export class Expense {
-    
-    expenseId: number;
+
+	expenseId: number;
 	username: string;
-	expenseName: string;
-	expenseDescription: string;
+	stateType: string;
 	expenseType: string;
-	expenseSubtype: string;
+	expenseTypeDescription: string;
+	currency: string;
+	currencyValue: number;
+	expenseName: string;
 	expenseDate: string;
 	paymentDate: string;
-	deadlineDate: string;
+	comments: string;
 	month: string;
 	year: string;
-	currency: string;
-	stateType: string;
-	value: string;
+	total: number;
 	hasItems: boolean;
-	itemArray: ExpenseItem[];
-
+	itemsArray: ExpenseItem[];
 	update: boolean;
-
 
 	convertToDate(stringDate: string) {
 		let newDate = new Date(stringDate);

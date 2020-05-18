@@ -6,6 +6,8 @@ import { RestApiService } from 'src/app/shared/rest-api-service/rest-api.service
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
 import { MonthsService } from 'src/app/shared/months-service/months.service';
+import { ExpenseType } from '../../ExpenseType';
+import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-short-expense',
@@ -25,6 +27,9 @@ export class AddShortExpenseComponent implements OnInit {
   expense: Expense;
   item: ExpenseItem;
 
+  // expense type
+  expenseType: ExpenseType;
+
   // to change . variables to calculate the total
   costExpense: number;
   totalExpense: number;
@@ -38,7 +43,9 @@ export class AddShortExpenseComponent implements OnInit {
 
   // lists
   subtypes: String[];
-  currencies: String[];
+  
+  // currency
+  currencies: Currency[];
 
   //flags
   isChecked: boolean = false;
@@ -54,26 +61,26 @@ export class AddShortExpenseComponent implements OnInit {
   ngOnInit(): void {
     this.dataArray.push(this.item);
     this.bsConfiguration();
-    this.getSubtypes();
+    this.getShortType();
     this.getCurrencies();
     //this.getYears();
     
   }
 
-  // load dropdowns
-  getSubtypes() {
-    this.api.getExpenseSubtype(4).subscribe(
+  // get expense type
+  getShortType() {
+    this.api.getExpenseType().subscribe(
       data => {
-        this.subtypes = data;
+        this.expenseType = data[2];
       }
     )
   }
 
+  // load dropdowns
   getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
         this.currencies = data;
-
       }
     )
   }

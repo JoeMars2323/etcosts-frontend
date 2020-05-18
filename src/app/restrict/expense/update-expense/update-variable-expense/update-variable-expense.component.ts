@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute, Params } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-import { Expense } from '../../Expense';
 import { RestApiService } from 'src/app/shared/rest-api-service/rest-api.service';
 import { SessionService } from 'src/app/shared/session-service/session.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Expense } from '../../Expense';
+import { ExpenseType } from '../../ExpenseType';
+import { Currency } from 'src/app/shared/Currency';
+
 
 @Component({
   selector: 'app-update-variable-expense',
@@ -21,6 +23,12 @@ export class UpdateVariableExpenseComponent implements OnInit {
   expense: Expense;
   id: number;
 
+  // currency
+  currencies: Currency[];
+
+  // expense type
+  expenseType: ExpenseType;
+
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(private api: RestApiService, private route: ActivatedRoute, private session: SessionService) { 
@@ -29,13 +37,12 @@ export class UpdateVariableExpenseComponent implements OnInit {
   }
 
   // load dropdowns
-  expenseSubtype: String[];
-  currency: String[];
+
   years: String[] = [];
 
   ngOnInit(): void {
-    this.getExpenseSubtype();
-    this.getCurrency();
+    this.getVariableType();
+    this.getCurrencies();
     this.loadData();
   }
 
@@ -45,42 +52,40 @@ export class UpdateVariableExpenseComponent implements OnInit {
         this.id = params['id'];
       }
     )
-    this.api.getExpenseInf(this.id).subscribe(
+    this.api.getExpenseById(this.id).subscribe(
       data => {
         this.expense = data;
       }
     ) 
   }
 
-  // load dropdowns
-  getExpenseSubtype() {
-    this.api.getExpenseSubtype(1).subscribe(
+  // get expense type
+  getVariableType() {
+    this.api.getExpenseType().subscribe(
       data => {
-        this.expenseSubtype = data;
+        this.expenseType = data[1];
       }
     )
   }
-  getCurrency() {
+
+  // load dropdowns
+  getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
-        this.currency = data;
+        this.currencies = data;
       }
     )
   }
 
   // submit button
   onSubmit() {
-    // add username to expense
+    // add some additional info to expense
     this.expense.username = this.session.getUsername();
     this.expense.expenseType = "Despesa corrente variável";
     this.expense.hasItems = true;
+    this.expense.stateType = "Pago";
     // add item array to expense
     //this.expense.itemArray = this.dataArray;
-    for(let i = 0; i < this.expense.itemArray.length; i++) {
-      this.expense.itemArray[i].stateType = "Pago";
-      this.expense.itemArray[i].value = this.expense.itemArray[i].valueNumber.toString();
-
-    }
     this.api.saveExpense(this.expense).subscribe(
       data => {
         this.status = data;

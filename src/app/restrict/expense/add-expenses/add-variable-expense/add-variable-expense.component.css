@@ -25,3 +25,14 @@ input.ng-invalid.ng-touched {
   background-color: #fadadd;
   padding: 2px;
 }
+
+.expense-description {
+  background-color:  #f7f7f8;
+  text-align: justify; 
+  border: 2px solid #3366ff;
+  padding: 20px; 
+  border-top-right-radius:15px;
+  border-top-left-radius:15px;
+  border-bottom-right-radius:15px;
+  border-bottom-left-radius:15px
+}

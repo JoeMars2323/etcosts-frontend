@@ -7,7 +7,8 @@ import { RestApiService } from '../../../../shared/rest-api-service/rest-api.ser
 import { SessionService } from 'src/app/shared/session-service/session.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
-import { MonthsService } from 'src/app/shared/months-service/months.service';
+import { ExpenseType } from '../../ExpenseType';
+import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-variable-expense',
@@ -18,32 +19,26 @@ export class AddVariableExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
-  
   // return if data was or not inserted on database
   status: boolean;
-
   // expense declaration
   dataArray = [];
   expense: Expense;
   item: ExpenseItem;
-
   // datepicker properties
   colorTheme = 'theme-dark-blue';
   bsConfig: Partial<BsDatepickerConfig>;
-
-  // lists
-  types: String[];
-  subtypes: String[];
-  currencies: String[];
-
+  // expense type
+  expenseType: ExpenseType;
+  // currency
+  currencies: Currency[];
   // file choser
   toggle: boolean = false;
-
   // calculate total
   total: number = 0;
 
-  constructor(private api: RestApiService, private session: SessionService, private router: Router, 
-              private route: ActivatedRoute) { 
+  constructor(private api: RestApiService, private session: SessionService, private router: Router,
+              private route: ActivatedRoute) {
     this.expense = new Expense();
     this.item = new ExpenseItem();
   }
@@ -51,40 +46,31 @@ export class AddVariableExpenseComponent implements OnInit {
   ngOnInit(): void {
     this.bsConfiguration();
     this.dataArray.push(this.item);
-    this.getTypes();
-    this.getSubtypes();
+    this.getVariableType();
     this.getCurrencies();
-  }
+   }
 
-  // load dropdowns
-  getTypes() {
+   // get expense type
+   getVariableType() {
     this.api.getExpenseType().subscribe(
       data => {
-        this.types = data;
+        this.expenseType = data[1];
       }
     )
   }
 
-  getSubtypes() {
-    this.api.getExpenseSubtype(2).subscribe(
-      data => {
-        this.subtypes = data;
-      }
-    )
-  }
-
-  getCurrencies() {
+   // load dropdowns
+   getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
         this.currencies = data;
-
       }
     )
   }
 
    // configure datepicker
    bsConfiguration() {
-    this.bsConfig = Object.assign({}, { 
+    this.bsConfig = Object.assign({}, {
       containerClass: 'theme-dark-blue',
       dateInputFormat: 'DD-MM-YYYY'
     });
@@ -117,17 +103,15 @@ export class AddVariableExpenseComponent implements OnInit {
 
   // submit button
   onSubmit() {
-    // add username to expense
+    // add extra information
     this.expense.username = this.session.getUsername();
-    this.expense.expenseType = "Despesa corrente variável";
+    this.expense.stateType = 'Pago';
+    this.expense.expenseType = this.expenseType.name;
+     this.expense.expenseTypeDescription = this.expenseType.description;
     this.expense.hasItems = true;
-    // add item array to expense and the same date to each item
-    this.expense.itemArray = this.dataArray;
-    for(let i = 0; i < this.expense.itemArray.length; i++) {
-      this.expense.itemArray[i].stateType = "Pago";
-      this.expense.itemArray[i].expenseDate = this.expense.expenseDate;
-      this.expense.itemArray[i].value = this.expense.itemArray[i].valueNumber.toString();
-    }
+    // add item array to expense
+    this.expense.itemsArray = this.dataArray;
+    //save
     this.api.saveExpense(this.expense).subscribe(
       data => {
         this.status = data;

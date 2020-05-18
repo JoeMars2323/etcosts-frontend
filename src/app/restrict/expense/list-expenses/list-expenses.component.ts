@@ -78,9 +78,9 @@ export class ListExpensesComponent implements OnInit {
         //assign for now expensedate withe the first date in item array
         for(let i = 0; i < this.expenseList.length; i++) {
           if(this.expenseList[i].hasItems) {
-            this.expenseList[i].expenseDate = this.expenseList[i].itemArray[0].expenseDate;
+            this.expenseList[i].expenseDate = this.expenseList[i].itemsArray[0].expenseDate;
             // do the comparisson between dates later
-            for(let j = 0; j < this.expenseList[i].itemArray.length; j++) {
+            for(let j = 0; j < this.expenseList[i].itemsArray.length; j++) {
             }
           }
         }

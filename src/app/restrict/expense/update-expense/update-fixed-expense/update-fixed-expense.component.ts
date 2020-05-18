@@ -3,10 +3,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
-
-import { Expense } from '../../Expense';
 import { SessionService } from 'src/app/shared/session-service/session.service';
-
+import { Expense } from '../../Expense';
+import { ExpenseType } from '../../ExpenseType';
+import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-update-fixed-expense',
@@ -21,11 +21,15 @@ export class UpdateFixedExpenseComponent implements OnInit {
   id: number;
   expense: Expense;
   bsConfig: Partial<BsDatepickerConfig>;
+
+  // expense type
+  expenseType: ExpenseType;
+
+  // currency
+  currencies: Currency[];
   
   // load dropdowns
-  expenseSubtype: String[];
-  currency: String[];
-  years: String[] = [];
+  years: string[] = [];
 
   constructor(private api: RestApiService, private route: ActivatedRoute, private session: SessionService,
               private router: Router) { 
@@ -35,8 +39,8 @@ export class UpdateFixedExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getExpenseSubtype();
-    this.getCurrency();
+    this.getFixedType();
+    this.getCurrencies();
     this.loadData();
   }
 
@@ -46,25 +50,26 @@ export class UpdateFixedExpenseComponent implements OnInit {
         this.id = params['id'];
       }
     )
-    this.api.getExpenseInf(this.id).subscribe(
+    this.api.getExpenseById(this.id).subscribe(
       data => {
         this.expense = data;
       }
-    ) 
+    );
   }
 
-  // load dropdowns
-  getExpenseSubtype() {
-    this.api.getExpenseSubtype(1).subscribe(
+  // get expense type
+  getFixedType() {
+    this.api.getExpenseType().subscribe(
       data => {
-        this.expenseSubtype = data;
+        this.expenseType = data[0];
       }
     )
   }
-  getCurrency() {
+   // load dropdowns
+   getCurrencies() {
     this.api.getCurrency().subscribe(
       data => {
-        this.currency = data;
+        this.currencies = data;
       }
     )
   }
