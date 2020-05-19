@@ -1,67 +1,56 @@
+<!--add fixed expense-->
 <div class="container">
-    <h1 class="text-title">Despesa não corrente de longa duração</h1>
+    <h1 class="text-blue">{{ expenseType.name }}</h1>
+    <div class="expense-description"> {{ expenseType.description }} </div>
 </div>
-<hr>
-
+<br>
 <!--form expenses-->
 <form (ngSubmit)="onSubmit()" #form="ngForm">
     <div class="container-fluid">
         <div class="row">
             <!-- expense name -->
             <div class="col-sm-6">
-                <label for="name">Nome da despesa:</label>
-                <input required id="name" name="name" type="text" class="form-control" [(ngModel)]="expense.expenseName"
-                    #name="ngModel">
-                <span class="help-block" *ngIf="!name.valid && name.touched"> O nome da despesa é obrigatório</span>
+                <label for="expenseName">Nome da despesa:</label>
+                <input required id="expenseName" name="expenseName" type="text" class="form-control" 
+                    [(ngModel)]="expense.expenseName" #expenseName="ngModel">
+                <span class="help-block" *ngIf="!expenseName.valid && expenseName.touched"> 
+                    O nome da despesa é obrigatório</span>
             </div>
         </div>
         <br>
-
         <div class="row">
             <!--expense date-->
             <div class="col-sm-6">
-                <label for="date" class="control-label">Data da despesa:</label>
-                <input required id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate"
-                    bsDatepicker [bsConfig]="bsConfig">
+                <label for="expenseDate" class="control-label">Data da despesa:</label>
+                <input required id="expenseDate" name="expenseDate" type="text" class="form-control" 
+                    [(ngModel)]="expense.expenseDate"
+                    (ngModelChange)="manageDates($event)" bsDatepicker [bsConfig]="bsConfig">
             </div>
             <!-- limit date  -->
             <div class="col-sm-6">
                 <label for="limit">Data limite do pagamento:</label>
-                <input required id="limit" name="limit" type="text" class="form-control"
-                    [(ngModel)]="expense.paymentDate" (blur)="compareDates()" bsDatepicker [bsConfig]="bsConfig">
+                <input required id="limit" name="limit" type="text" class="form-control" 
+                    [(ngModel)]="expense.paymentDate"
+                    (ngModelChange)="manageDates($event)" bsDatepicker [bsConfig]="bsConfig">
             </div>
         </div>
         <br>
-
-        <div class="row">
-            <!-- currency -->
-            <div class="col-sm-6">
-                <label for="currency">Moeda:</label>
-                <select required id="currency" name="currency" class="form-control ml-1" [(ngModel)]="expense.currency">
-                    <option *ngFor="let currency of currencies" [value]="currency"> {{ currency }} </option>
-                </select>
-            </div>
-
-        </div>
-        <br>
-
         <div class="row">
             <!-- comments -->
             <div class="col-sm-12">
-                <label>Observações:</label>
-                <textarea name="expenseName" type="text" rows="2" class="form-control ml-1"
+                <label for="comments">Observações:</label>
+                <textarea id="comments" name="comments" type="text" rows="2" class="form-control ml-1"
                     [(ngModel)]="expense.comments"></textarea>
             </div>
         </div>
         <br>
-
         <!--file chooser-->
         &nbsp;&nbsp;
         <button type="button" class="btn btn-secondary" name="add" *ngIf="!toggle"
             (click)="getOpenFileChooser()">Adicionar ficheiro</button>
         &nbsp;&nbsp;
-        <button type="button" class="btn btn-secondary" name="close" *ngIf="toggle" (click)="getOpenFileChooser()">
-            Fechar</button>
+        <button type="button" class="btn btn-secondary" name="close" *ngIf="toggle" 
+        (click)="getOpenFileChooser()">Fechar</button>
         <br>
         <br>
         <div *ngIf="toggle">
@@ -78,55 +67,57 @@
         </div>
         <!--end file chooser-->
         <br>
-        <br>
+
 
         <div class="row">
             <!-- cost value  -->
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <label for="cost">Custo da despesa:</label>
-                <input required id="cost" name="cost" type="number" class="form-control" [(ngModel)]="costExpense">
-            </div>
-            <!-- payed value  -->
-            <div class="col-sm-4">
-                <label for="payed">Valor pago:</label>
-                <input required id="payed" name="payed" type="number" class="form-control" [(ngModel)]="renderArray[0]"
-                    (blur)="managePayment()">
+                <input required id="cost" name="cost" type="number" class="form-control" 
+                [(ngModel)]="expense.total">
             </div>
             <!--How many is it missing to end of payment-->
-            <div class="col-sm-4">
-                <label for="payed">Quanto flata para estar pago:</label>
-                <input required id="payed" name="payed" type="number" class="form-control" [(ngModel)]="difference"
-                    readonly>
+            <div class="col-sm-5">
+                <label for="difference">Quanto flata para estar pago:</label>
+                <input required id="difference" name="difference" type="number" class="form-control" 
+                    [(ngModel)]="calculateDifference" readonly>
             </div>
         </div>
     </div>
     <br>
     <br>
 
+
     <!-- render items -->
-    <div *ngIf="hasRender">
+    <div>
         <hr>
         <h4 class="mb-2 text-blue">Items da prestação</h4>
         <br>
-        <div class="container-fluid" *ngFor="let obj of dataArray; let i = index">
-            <h5 class="mb-2 text-gray">&nbsp;&nbsp;&nbsp;Item# {{i+2}}</h5>
+        <div class="container-fluid" *ngFor="let item of dataArray; let i=index">
+            <h5 class="mb-2 text-gray">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5>
             <br>
             <p>Referente a:</p>
             <div class="row">
-                <!-- date  -->
+                <!-- reference date  -->
                 <div class="col-sm-4">
-                    <label>Mês:</label>
-                    <select id="month" name="month" class="form-control ml-1" [(ngModel)]="expense.month">
+                    <label for="itemsMonth">Mês:</label>
+                    <select required id="itemsMonth" name="itemsMonth{{i}}" class="form-control ml-1" 
+                        [(ngModel)]="dataArray[i].month">
                         <option *ngFor="let month of monthsService.months"> {{ month }} </option>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label>Ano:</label>
-                    <input class="form-control">
+                    <label for="itemsYear">Ano:</label>
+                    <select id="itemsYear" name="itemsYear{{i}}" class="form-control ml-1" 
+                    [(ngModel)]="dataArray[i].year">
+                        <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
+                    </select>
                 </div>
+                <!--render date-->
                 <div class="col-sm-4">
-                    <label>Data da prestação:</label>
-                    <input type="text" class="form-control">
+                    <label for="renderDate">Data da prestação:</label>
+                    <input required id="renderDate" name="renderDate{{i}}" type="text" class="form-control" 
+                    [(ngModel)]="dataArray[i].expenseDate" bsDatepicker [bsConfig]="bsConfig">
                 </div>
             </div>
             <br>
@@ -134,8 +125,8 @@
                 <!--value-->
                 <div class="col-sm-4">
                     <label for="renderValue">Valor da prestação:</label>
-                    <input id="renderValue" name="renderValue{{i}}" type="number" class="form-control"
-                        [(ngModel)]="renderArray[i+1]" (blur)="managePayment()">
+                    <input required id="renderValue" name="renderValue{{i}}" type="number" class="form-control"
+                        [(ngModel)]="dataArray[i].value" (blur)="managePayment()">
                 </div>
             </div>
             <br>
@@ -155,7 +146,7 @@
         <div class="row" *ngIf="hasRender">
             <div class="col-sm-4">
                 <label>Total:</label>
-                <input id="value" type="number" class="form-control" readonly [(ngModel)]="totalExpense" name="total">
+                <input id="value" type="number" class="form-control" readonly [(ngModel)]="calculateTotal" name="total">
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <!--add variable expense-->
 <div class="container">
-  <h1 class="text-blue">{{ expenseType.name }}</h1><br>
+  <h1 class="text-blue">{{ expenseType.name }}</h1>
   <div class="expense-description"> {{ expenseType.description }} </div>
 </div>
 <br>
@@ -15,17 +15,6 @@
           #name="ngModel">
         <span class="help-block" *ngIf="name.invalid && name.touched"> O nome da despesa é obrigatório</span>
       </div>
-      <!--currency-->
-      <div class="col-sm-6">
-        <label for="currency">Moeda:</label>
-        <select required id="currency" name="currency" class="form-control ml-1" [(ngModel)]="expense.currency">
-            <option *ngFor="let currency of currencies" [value]="currency.name"> {{ currency.name }} </option>
-        </select>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <!-- date -->
       <div class="col-sm-6">
         <label for="date" class="control-label">Data da despesa:</label>
         <input required id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate"

@@ -6,7 +6,7 @@ export class ExpenseItem {
 	expenseDate: string;
 	month: string;
 	year: string;
-	value: number;
+    value: number;
 
     valueNumber: number;
     toggle: boolean = false;

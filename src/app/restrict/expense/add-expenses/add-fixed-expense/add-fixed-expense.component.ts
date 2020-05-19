@@ -8,7 +8,6 @@ import { RestApiService } from '../../../../shared/rest-api-service/rest-api.ser
 import { MonthsService } from 'src/app/shared/months-service/months.service';
 import { Expense } from '../../Expense';
 import { ExpenseType } from '../../ExpenseType';
-import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-fixed-expense',
@@ -28,8 +27,6 @@ export class AddFixedExpenseComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   // expense type
   expenseType: ExpenseType;
-  // currency
-  currencies: Currency[];
   //years of reference
   years: string[] = []; 
   // file choser
@@ -43,7 +40,6 @@ export class AddFixedExpenseComponent implements OnInit {
   ngOnInit(): void {
     this.bsConfiguration();
     this.getFixedType();
-    this.getCurrencies();
     this.getYears();
   }
 
@@ -63,15 +59,6 @@ export class AddFixedExpenseComponent implements OnInit {
     this.api.getExpenseType().subscribe(
       data => {
         this.expenseType = data[0];
-      }
-    )
-  }
-
-  // load dropdowns
-  getCurrencies() {
-    this.api.getCurrency().subscribe(
-      data => {
-        this.currencies = data;
       }
     )
   }

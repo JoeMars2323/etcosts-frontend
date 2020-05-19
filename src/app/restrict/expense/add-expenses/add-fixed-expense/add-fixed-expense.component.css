@@ -1,6 +1,15 @@
-.text-blue {
+.text-title {
   color: #0c43f8 !important;
   font-weight: bold !important;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.text-blue {
+  color: #0c43f8 !important;
+  font-family: "Times New Roman", Times, serif;
+}
+.text-gray {
+  color: #44494d !important;
   font-family: "Times New Roman", Times, serif;
 }
 

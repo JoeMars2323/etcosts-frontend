@@ -8,7 +8,6 @@ import { SessionService } from 'src/app/shared/session-service/session.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
 import { ExpenseType } from '../../ExpenseType';
-import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-variable-expense',
@@ -30,8 +29,6 @@ export class AddVariableExpenseComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   // expense type
   expenseType: ExpenseType;
-  // currency
-  currencies: Currency[];
   // file choser
   toggle: boolean = false;
   // calculate total
@@ -47,7 +44,6 @@ export class AddVariableExpenseComponent implements OnInit {
     this.bsConfiguration();
     this.dataArray.push(this.item);
     this.getVariableType();
-    this.getCurrencies();
    }
 
    // get expense type
@@ -55,15 +51,6 @@ export class AddVariableExpenseComponent implements OnInit {
     this.api.getExpenseType().subscribe(
       data => {
         this.expenseType = data[1];
-      }
-    )
-  }
-
-   // load dropdowns
-   getCurrencies() {
-    this.api.getCurrency().subscribe(
-      data => {
-        this.currencies = data;
       }
     )
   }
