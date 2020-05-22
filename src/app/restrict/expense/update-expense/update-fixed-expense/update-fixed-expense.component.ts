@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
 import { SessionService } from 'src/app/shared/session-service/session.service';
+import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
+import { DateService } from 'src/app/shared/date-service/date.service';
 import { Expense } from '../../Expense';
 import { ExpenseType } from '../../ExpenseType';
-import { Currency } from 'src/app/shared/Currency';
 
 @Component({
   selector: 'app-update-fixed-expense',
@@ -15,36 +16,46 @@ import { Currency } from 'src/app/shared/Currency';
 })
 export class UpdateFixedExpenseComponent implements OnInit {
 
+  
+  // bind form
+  @ViewChild('form') signupForm: NgForm;
+
+  // expense declaration
+  expense: Expense;
+  id: number;
+  
+  // expense type
+  expenseType: ExpenseType;
+  
+  //months and years of reference
+  months: string[] = [];
+  years: string[] = [];
+
+  // datepicker properties
+  colorTheme = 'theme-dark-blue';
+  bsConfig: Partial<BsDatepickerConfig>;
+  
   // return if data was or not inserted on database
   status: boolean;
 
-  id: number;
-  expense: Expense;
-  bsConfig: Partial<BsDatepickerConfig>;
-
-  // expense type
-  expenseType: ExpenseType;
-
-  // currency
-  currencies: Currency[];
+  // file choser
+  toggle: boolean = false;
   
-  // load dropdowns
-  years: string[] = [];
+  constructor(private api: RestApiService, private session: SessionService, private router: Router, 
+              private route: ActivatedRoute, private dateService: DateService) { 
+      this.expense = new Expense();
+}
 
-  constructor(private api: RestApiService, private route: ActivatedRoute, private session: SessionService,
-              private router: Router) { 
-    this.bsConfig = new BsDatepickerConfig();
-    this.bsConfig.containerClass = 'theme-dark-blue';
+ngOnInit(): void {
+  this.loadData();
+  this.bsConfiguration();
+  this.getFixedType();
+  this.months = this.dateService.months;
+  this.years = this.dateService.getYears();
+}
 
-  }
-
-  ngOnInit(): void {
-    this.getFixedType();
-    this.getCurrencies();
-    this.loadData();
-  }
-
-  loadData() {
+   // load data to update
+   loadData() {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
@@ -57,6 +68,17 @@ export class UpdateFixedExpenseComponent implements OnInit {
     );
   }
 
+   // configure datepicker
+  bsConfiguration() {
+    this.bsConfig = Object.assign({}, { 
+      containerClass: 'theme-dark-blue',
+      dateInputFormat: 'DD-MM-YYYY'
+      //locale: 'pt'
+    });
+    setTimeout(() => {
+    });
+  }
+
   // get expense type
   getFixedType() {
     this.api.getExpenseType().subscribe(
@@ -65,33 +87,29 @@ export class UpdateFixedExpenseComponent implements OnInit {
       }
     )
   }
-   // load dropdowns
-   getCurrencies() {
-    this.api.getCurrency().subscribe(
-      data => {
-        this.currencies = data;
-      }
-    )
-  }
-  
-  // submit button
-  onSubmit() {
-    // add username to expense
-    this.expense.username = this.session.getUsername();
-    this.expense.expenseType = 'Despesa corrente fixa';
-    this.expense.stateType = 'Pago';
-    this.api.saveExpense(this.expense).subscribe(
-     data => {
-       this.status = data;
-       if(this.status === true) {
-         alert(' Dados alterados com sucesso!');
-         this.router.navigate(['restrito'], { relativeTo: this.route })
-       } else {
-         alert('Não foi possivel fazer a alteração');
-       }
-     }
-   );
 
- }
+  // file chooser
+  getOpenFileChooser() {
+    this.toggle = !this.toggle;
+    return '';
+  }
+
+  // submit button
+   onSubmit() {
+     // update
+     this.api.saveExpense(this.expense).subscribe(
+      data => {
+        this.status = data;
+        if(this.status === true) {
+          alert(' Dados alteradoe com sucesso!');
+          this.signupForm.reset();
+          this.router.navigate(['/restrito'], { relativeTo: this.route })
+        } else {
+          alert('Não foi possivel fazer a alteração');
+        }
+      }
+    );
+
+  }
 
 }

@@ -1,63 +1,118 @@
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-blue">Alterar despesa corrente variável</h1>
+<!--update fixed expense-->
+<div class="container">
+  <h1 class="text-blue"> Alterar - {{ expenseType.name }}</h1>
+  <div class="expense-description"> {{ expenseType.description }} </div>
 </div>
-<form #itemForm="ngForm" name="form">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="expenseName" class="control-label">Nome da despesa:</label>
-          <input required id="expenseName" name="expenseName" type="text" class="form-control"
-          value="{{ expense.expenseName }}">
-        </div>
+<br>
+<!--form expenses-->
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- expense name -->
+      <div class="col-sm-6">
+        <label for="name" class="control-label">Nome da despesa:</label>
+        <input required id="name" name="name" type="text" class="form-control" [(ngModel)]="expense.expenseName"
+            #name="ngModel">
+        <span class="help-block" *ngIf="name.invalid && name.touched"> O nome da despesa é obrigatório</span>
       </div>
-      <br>
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="expenseDate" class="control-label">Data:</label>
-          <input id="expenseDate" name="expenseDate" type="text" class="form-control" 
-          value="{{expense.expenseDate}}">
+      <!-- expense date -->
+      <div class="col-sm-6">
+        <label for="date" class="control-label">Data da despesa:</label>
+        <input required id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate"
+          bsDatepicker [bsConfig]="bsConfig">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <!-- comments -->
+      <div class="col-sm-12">
+        <label>Observações:</label>
+        <textarea name="expenseName" type="text" rows="2" class="form-control ml-1"
+          [(ngModel)]="expense.comments"></textarea>
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <!-- items -->
+  <h4 class="mb-2 text-blue">Items da despesa</h4><br>
+  <div class="container-fluid" *ngFor="let item of itemsArray; let i = index">
+    <h5 class="mb-2 text-gray">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5>
+    <br>
+    <div class="row">
+      <!--item name-->
+      <div class="col-sm-6">
+        <label [attr.for]="'itemName'+i" class="control-label">Nome do item:</label>
+        <input required [id]="'itemName'+i" name="itemName{{i}}" type="text" class="form-control"
+          [(ngModel)]="item.name" #item="ngModel">
+        <span class="help-block" *ngIf="item.invalid && item.touched"> O nome do item é obrigatório</span>
+      </div>
+      <!--item description-->
+      <div class="col-sm-6">
+        <label for="description">Descrição:</label>
+        <textarea id="description" name="description{{i}}" type="text" rows="1" class="form-control"
+          [(ngModel)]="item.description"></textarea>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <!--value-->
+      <div class="col-sm-6">
+        <label for="value" class="control-label">Valor:</label>
+        <input required id="value" name="value{{i}}" type="number" min="0" class="form-control"
+          [(ngModel)]="item.value" #val="ngModel" (blur)="valueSum()">
+        <span class="help-block" *ngIf="val.invalid && val.touched"> O valor do item é obrigatório </span>
+        <br>
+      </div>
+    </div>
+    <br>
+    <br>
+    <button type="button" class="btn btn-secondary" name="add{{i}}" *ngIf="!item.toggle"
+      (click)="item.getOpenFileChooser()">Adicionar ficheiro</button>
+    <button type="button" class="btn btn-secondary" name="add{{i}}" *ngIf="item.toggle"
+      (click)="item.getOpenFileChooser()"> Fechar</button>
+    <br>
+    <br>
+    <div *ngIf="item.toggle">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+          <label class="custom-file-label" for="inputGroupFile01">Escolher ficheiro</label>
         </div>
       </div>
     </div>
     <br>
-    <hr>
-    <div class="container-fluid" >
-      <h4 class="mb-2 text-blue2">Items da despesa</h4><br>
-      <div class="row">
-        <div class="col-sm-6">
-          <label >Nome do item:</label>
-          <input id="itemName" type="text" class="form-control" >
-        </div>
-        <div class="col-sm-6">
-          <label for="description">Descrição:</label>
-          <textarea id="description" type="text" rows="1" class="form-control" ></textarea>
-        </div>
+    <br>
+    <div class="row">
+      <div class="col-0" *ngIf="i!=0">
+        <span (click)="removeItem(i)" class="btn btn-danger">-</span>
       </div>
-      <br>
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="currency">Moeda:</label>
-          <select required id="currency" class="form-control ml-1" >
-              <option > </option>
-          </select>
-        </div>
-        <div class="col-sm-6">
-          <label for="value" class="control-label">Valor:</label>
-          <input required id="value" type="number" class="form-control" >
-        </div>
-      </div>
-      <br>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-4">
-            <input id="value" type="text" class="form-control" readonly>
-          </div>
-          <div class="col-sm-4">
-            <button class="btn btn-primary" type="button" >Confirmar</button>
-          </div>
-        </div>
+      <div class="col-1">
+        <span (click)="addItem()" class="btn btn-success">+</span>
       </div>
     </div>
-    <br><br><br><br>
+    <hr>
+  </div>
+  <!--end of item-->
+  <br>
+  <br>
 
-  </form>
+  <!--total value-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Custo total:</label>
+        <input id="value" type="number" class="form-control" readonly value="{{ total }}">
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submeter</button>
+  </div>
+  <br>
+  <br>
+</form>

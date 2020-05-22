@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'criar-conta', component: CreateLoginComponent },
   { path: 'restrito', component: RestrictComponent, children:[
-     { path: 'charts-tabelas', component: ChartsTablesComponent },
+     { path: '', component: ChartsTablesComponent },
      { path: 'despesas', component: ExpenseComponent, children:[
       { path: 'adicionar-despesa', component: AddExpensesComponent, children: [
         { path: 'fixa', component: AddFixedExpenseComponent },
@@ -56,9 +56,9 @@ const routes: Routes = [
       ]},
       { path: 'alterar-despesa', component: UpdateExpenseComponent, children: [
         { path: 'fixa/:id', component: UpdateFixedExpenseComponent },
-        { path: 'longa', component: UpdateLongExpenseComponent },
-        { path: 'curta', component: UpdateShortExpenseComponent },
-        { path: 'variavel', component: UpdateVariableExpenseComponent },
+        { path: 'longa/:id', component: UpdateLongExpenseComponent },
+        { path: 'curta/:id', component: UpdateShortExpenseComponent },
+        { path: 'variavel/:id', component: UpdateVariableExpenseComponent },
       ] },
       { path: 'ver-despesa', component: ViewExpenseComponent },
      ]},

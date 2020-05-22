@@ -1,6 +1,6 @@
 <!--add fixed expense-->
 <div class="container">
-    <h1 class="text-blue">{{ expenseType.name }}</h1>
+    <h1 class="text-blue"> Inserir - {{ expenseType.name }}</h1>
     <div class="expense-description"> {{ expenseType.description }} </div>
 </div>
 <br>
@@ -18,24 +18,17 @@
             <!--expense date-->
             <div class="col-sm-6">
                 <label for="date" class="control-label">Data da despesa:</label>
-                <input required id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate"
-                    bsDatepicker [bsConfig]="bsConfig">
+                <input required id="date" name="date" type="text" class="form-control" 
+                    [(ngModel)]="expense.expenseDate" bsDatepicker [bsConfig]="bsConfig">
             </div>
-            <!-- currency -->
-            <!-- <div class="col-sm-6">
-                <label for="currency">Moeda:</label>
-                <select required id="currency" name="currency" class="form-control ml-1" [(ngModel)]="expense.currency">
-                    <option *ngFor="let currency of currencies" [value]="currency.name"> {{ currency.name }} </option>
-                </select>
-            </div> -->
         </div>
         <br>
-        <!--month reference -->
         <label for="month">Referente a:</label>
         <div class="row">
+            <!--month reference -->
             <div class="col-sm-6">
                 <select id="month" name="month" class="form-control ml-1" [(ngModel)]="expense.month">
-                    <option *ngFor="let month of monthsService.months"> {{ month }} </option>
+                    <option *ngFor="let month of months"> {{ month }} </option>
                 </select>
             </div>
             <!--year reference-->
@@ -46,8 +39,8 @@
             </div>
         </div>
         <br>
+        <!-- comments -->
         <div class="row">
-            <!-- comments -->
             <div class="col-sm-12">
                 <label>Observações:</label>
                 <textarea name="expenseName" type="text" rows="2" class="form-control ml-1"
@@ -56,16 +49,17 @@
         </div>
         <br>
         <!--file chooser-->
-        &nbsp;&nbsp;
-        <button type="button" class="btn btn-secondary" name="add" *ngIf="!toggle"
-            (click)="getOpenFileChooser()">Adicionar ficheiro</button>
-        &nbsp;&nbsp;
-        <button type="button" class="btn btn-secondary" name="close" *ngIf="toggle" (click)="getOpenFileChooser()">
-            Fechar</button>
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-secondary" name="add" *ngIf="!toggle"
+                    (click)="getOpenFileChooser()">Adicionar ficheiro</button>
+                <button type="button" class="btn btn-secondary" name="close" *ngIf="toggle" 
+                    (click)="getOpenFileChooser()">Fechar</button>
+            </div>
+        </div>
         <br>
-        <br>
-        <div *ngIf="toggle">
-            <div class="input-group">
+        <div class="row" *ngIf="toggle">
+            <div class=" col-sm-12 input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="fileAddon">Upload</span>
                 </div>
@@ -74,9 +68,7 @@
                     <label class="custom-file-label" for="inputFile">Escolher ficheiro</label>
                 </div>
             </div>
-            <hr>
         </div>
-        <br>
         <br>
         <!--total value-->
         <div class="row">
@@ -89,8 +81,10 @@
         </div>
         <br>
         <!--submit-->
-        <div class="col-sm-6">
-            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submeter</button>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submeter</button>
+            </div>
         </div>
     </div>
     <br>

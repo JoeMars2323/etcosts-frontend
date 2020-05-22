@@ -1,1 +1,166 @@
-<p>update-long-expense works!</p>
+<!--add fixed expense-->
+<div class="container">
+    <h1 class="text-blue"> Alterar - {{ expenseType.name }}</h1>
+    <div class="expense-description"> {{ expenseType.description }} </div>
+</div>
+<br>
+<!--form expenses-->
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- expense name -->
+            <div class="col-sm-6">
+                <label for="expenseName">Nome da despesa:</label>
+                <input required id="expenseName" name="expenseName" type="text" class="form-control" 
+                    [(ngModel)]="expense.expenseName" #expenseName="ngModel">
+                <span class="help-block" *ngIf="!expenseName.valid && expenseName.touched"> 
+                    O nome da despesa é obrigatório</span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!--expense date-->
+            <div class="col-sm-6">
+                <label for="expenseDate" class="control-label">Data da despesa:</label>
+                <input required id="expenseDate" name="expenseDate" type="text" class="form-control" 
+                    [(ngModel)]="expense.expenseDate" 
+                    (ngModelChange)="manageDates()" bsDatepicker [bsConfig]="bsConfig">
+            </div>
+            <!-- limit date  -->
+            <div class="col-sm-6">
+                <label for="paymentDate">Data limite do pagamento:</label>
+                <input required id="paymentDate" name="paymentDate" type="text" class="form-control" 
+                    [(ngModel)]="expense.paymentDate"
+                    (ngModelChange)="manageDates()" bsDatepicker [bsConfig]="bsConfig">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!-- comments -->
+            <div class="col-sm-12">
+                <label for="comments">Observações:</label>
+                <textarea id="comments" name="comments" type="text" rows="2" class="form-control ml-1"
+                    [(ngModel)]="expense.comments"></textarea>
+            </div>
+        </div>
+        <br>
+        <!--file chooser-->
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-secondary" name="add" *ngIf="!toggle"
+            (click)="getOpenFileChooser()">Adicionar ficheiro</button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-secondary" name="close" *ngIf="toggle" 
+        (click)="getOpenFileChooser()">Fechar</button>
+        <br>
+        <br>
+        <div *ngIf="toggle">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="fileAddon">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputFile" aria-describedby="fileAddon">
+                    <label class="custom-file-label" for="inputFile">Escolher ficheiro</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--end file chooser-->
+        <br>
+
+
+        <div class="row">
+            <!-- cost value  -->
+            <div class="col-sm-4">
+                <label for="cost">Custo da despesa:</label>
+                <input required id="cost" name="cost" type="number" class="form-control" 
+                [(ngModel)]="expense.total">
+            </div>
+            <!-- first time payed value  -->
+            <div class="col-sm-4">
+                <label for="firstTimePayed">Valor pago no ato da compra:</label>
+                <input required id="firstTimePayed" name="firstTimePayed" type="number" class="form-control" 
+                [(ngModel)]="beginPayment" (blur)="managePayment()">
+            </div>
+            <!--How mutch is it missing to end of payment-->
+            <div class="col-sm-4">
+                <label for="difference">Quanto falta para estar pago:</label>
+                <input required id="difference" name="difference" type="number" class="form-control" 
+                    [(ngModel)]="calculateDifference" readonly>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- render items -->
+    <div *ngIf="hasRender">
+        <hr>
+        <h4 class="mb-2 text-blue">Items da prestação</h4>
+        <br>
+        <div class="container-fluid" *ngFor="let item of itemArray; let i=index">
+            <h5 class="mb-2 text-gray">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5>
+            <br>
+            <p>Referente a:</p>
+            <div class="row">
+                <!-- reference date  -->
+                <div class="col-sm-4">
+                    <label for="itemsMonth">Mês:</label>
+                    <select required id="itemsMonth" name="itemsMonth{{i}}" class="form-control ml-1" 
+                        [(ngModel)]="itemArray[i].month">
+                        <option *ngFor="let month of dateService.months"> {{ month }} </option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="itemsYear">Ano:</label>
+                    <select id="itemsYear" name="itemsYear{{i}}" class="form-control ml-1" 
+                    [(ngModel)]="itemArray[i].year">
+                        <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
+                    </select>
+                </div>
+                <!--render date-->
+                <div class="col-sm-4">
+                    <label for="renderDate">Data da prestação:</label>
+                    <input required id="renderDate" name="renderDate{{i}}" type="text" class="form-control" 
+                    [(ngModel)]="itemArray[i].expenseDate" bsDatepicker [bsConfig]="bsConfig">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <!--value-->
+                <div class="col-sm-4">
+                    <label for="renderValue">Valor da prestação:</label>
+                    <input required id="renderValue" name="renderValue{{i}}" type="number" class="form-control"
+                        [(ngModel)]="itemArray[i].value" (blur)="managePayment()">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-0" *ngIf="i!=0">
+                    <span (click)="removeItem(i)" class="btn btn-danger">-</span>
+                </div>
+                <div class="col-1">
+                    <span (click)="addItem()" class="btn btn-success">+</span>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <label>Total:</label>
+                <input id="value" type="number" class="form-control" readonly [(ngModel)]="calculateTotal" name="total">
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--end of render items-->
+
+    <!--submit-->
+    <div class="container-fluid">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submeter</button>
+    </div>
+    <br>
+    <br>
+</form>

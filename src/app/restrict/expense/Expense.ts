@@ -20,6 +20,13 @@ export class Expense {
 	itemsArray: ExpenseItem[];
 	update: boolean;
 
+	toggle: boolean = false;
+
+    getOpenFileChooser() {
+        this.toggle = !this.toggle;
+        return '';
+    }
+
 	convertToDate(stringDate: string) {
 		let newDate = new Date(stringDate);
 		return newDate;

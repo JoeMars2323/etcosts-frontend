@@ -18,32 +18,35 @@ export class AddVariableExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
-  // return if data was or not inserted on database
-  status: boolean;
+  
   // expense declaration
   dataArray = [];
   expense: Expense;
   item: ExpenseItem;
+  
+  // expense type
+  expenseType: ExpenseType;
+
   // datepicker properties
   colorTheme = 'theme-dark-blue';
   bsConfig: Partial<BsDatepickerConfig>;
-  // expense type
-  expenseType: ExpenseType;
-  // file choser
-  toggle: boolean = false;
+    
   // calculate total
   total: number = 0;
-
+  
+  // return if data was or not inserted on database
+  status: boolean;
+  
   constructor(private api: RestApiService, private session: SessionService, private router: Router,
               private route: ActivatedRoute) {
-    this.expense = new Expense();
-    this.item = new ExpenseItem();
+      this.expense = new Expense();
+      this.item = new ExpenseItem();
   }
 
   ngOnInit(): void {
     this.bsConfiguration();
-    this.dataArray.push(this.item);
     this.getVariableType();
+    this.dataArray.push(this.item);
    }
 
    // get expense type
@@ -77,11 +80,12 @@ export class AddVariableExpenseComponent implements OnInit {
     this.valueSum();
   }
 
+  // calculate total
   valueSum() {
     this.total = 0;
     for (let i = 0; i < this.dataArray.length; i++) {
-      if(this.dataArray[i].valueNumber !== undefined) {
-        this.total += this.dataArray[i].valueNumber;
+      if(this.dataArray[i].value !== undefined) {
+        this.total += this.dataArray[i].value;
       }
      }
     return this.total;

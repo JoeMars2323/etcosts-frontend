@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
 
 import { RestApiService } from 'src/app/shared/rest-api-service/rest-api.service';
-import { MonthsService } from 'src/app/shared/months-service/months.service';
+import { DateService } from 'src/app/shared/date-service/date.service';
 import { SessionService } from 'src/app/shared/session-service/session.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
@@ -19,67 +19,44 @@ export class AddLongExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
+
   // return if data was or not inserted on database
   status: boolean;
+
   // expense type
   expenseType: ExpenseType;
+
   // expense declaration
   dataArray = [];
   expense: Expense;
   item: ExpenseItem;
-
+  
   //years of reference
   years: string[] = []; 
   
   // variables to calculate total and difference
+  beginPayment: number;
   calculateTotal: number;
   calculateDifference: number;
-
-  // datepicker properties
-  colorTheme = 'theme-dark-blue';
-  bsConfig: Partial<BsDatepickerConfig>;
 
   //flag to open a render item
   hasRender: boolean = false;
   // file choser
   toggle: boolean = false;
 
-  constructor(private api: RestApiService, public monthsService: MonthsService, private router: Router, 
+  bsConfig: Partial<BsDatepickerConfig>;
+
+  constructor(private api: RestApiService, public dateService: DateService, private router: Router, 
               private route: ActivatedRoute, private session: SessionService) { 
-    this.expense = new Expense();
-    this.item = new ExpenseItem();
+        this.expense = new Expense();
+        this.item = new ExpenseItem();
   }
 
   ngOnInit(): void {
+    this.getShortType();
     this.dataArray.push(this.item);
     this.bsConfiguration();
-    this.getLongType();
-    this.getYears
-  }
-
-  getYears() {
-    let current = (new Date()).getFullYear();
-    this.years.push((current - 4).toString());
-    this.years.push((current - 3).toString());
-    this.years.push((current - 2).toString());
-    this.years.push((current - 1).toString());
-    this.years.push((current).toString());
-    this.years.push((current + 1).toString());
-  }
-
-  // get expense type
-  getLongType() {
-    this.api.getExpenseType().subscribe(
-      data => {
-        this.expenseType = data[3];
-      }
-    )
-  }
-
-  // file chooser
-  getOpenFileChooser() {
-    this.toggle = !this.toggle;
-    return '';
+    this.years = this.dateService.getYears();
   }
 
   // configure datepicker
@@ -91,6 +68,21 @@ export class AddLongExpenseComponent implements OnInit {
     });
     setTimeout(() => {
     });
+  }
+
+  // get expense type
+  getShortType() {
+    this.api.getExpenseType().subscribe(
+      data => {
+        this.expenseType = data[3];
+      }
+    )
+  }
+
+  // file chooser
+  getOpenFileChooser() {
+    this.toggle = !this.toggle;
+    return '';
   }
 
   checkValue(){
@@ -107,31 +99,38 @@ export class AddLongExpenseComponent implements OnInit {
     this.dataArray.splice(index);
   }
 
-  // this method doesnt have the rigth behaviour
-  public manageDates(event: any): void {
+  // this method doesnt have the rigth behaviour because the datepicker doesnt clean the input
+  public manageDates(): void {
     let expenseDate = new Date(this.expense.expenseDate);
     let paymentDate = new Date(this.expense.paymentDate);
-    let limitDate = new Date(expenseDate.getFullYear() + 2);
+    let varDate = new Date(this.expense.paymentDate);
+    let year = varDate.getFullYear();
+    let month = varDate.getMonth();
+    let day = varDate.getDate();
+    let limitDate = new Date(year + 2, month, day);
     if(expenseDate > paymentDate) {
       this.expense.paymentDate = null;
       alert('A data de limite de pagamento tem de ser posterior à data da despesa!!!');
     }
-    // if(paymentDate > limitDate) {
-    //   this.expense.paymentDate = null;
-    //   alert('Este tipo de despesa não pode ser paga em mais de dois anos!!!'); 
-    // }
+    if(paymentDate < limitDate) {
+       this.expense.paymentDate = null;
+       alert('Este tipo de despesa não pode ser paga em menos de dois anos!!!'); 
+    }
   }
 
 
   // this method doesnt have the rigth behaviour
   managePayment() {
     this.calculateTotal = 0;
+    this.dataArray[0].value = this.beginPayment; 
+     if (this.expense.total > this.beginPayment) {
+       this.hasRender = true;
+     }
     //iterate data array and sum all values
-    for(let i = 0; i < this.dataArray.length; i++) {
+    for (let i = 0; i < this.dataArray.length; i++) {
       this.calculateTotal += this.dataArray[i].value;
     }
     if (this.expense.total > this.calculateTotal) {
-      this.hasRender = true;
       this.calculateDifference = this.expense.total - this.calculateTotal;
     }
     if (this.expense.total < this.calculateTotal) {

@@ -2,16 +2,15 @@
     <h1 class="h3 mb-0 text-blue">Listar todas as despesas</h1>
 </div> 
   
-<table class="table table-hover">
+<table class="table table-bordered table-hover">
     <thead>
     <tr>
         <th style="display: none;" scope="col">ID</th>
         <th scope="col">Despesa</th>
         <th scope="col">Tipo</th>
-        <th scope="col">Subtipo</th>
         <th scope="col">Data</th>
         <th scope="col">Total</th>
-        <td scope="col" colspan="3">Ações</td>
+        <th scope="col" colspan="3">Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -19,12 +18,15 @@
         <td style="display: none;">{{ item.expenseId }}</td>
         <td>{{ item.expenseName }}</td>
         <td>{{ item.expenseType }}</td>
-        <td>{{ item.expenseSubtype }}</td>
         <td>{{ item.expenseDate }}</td>
-        <td>{{ item.value }}</td>
-        <td><button class="btn btn-primary" type="button" (click)="onView(item)"><i class="far fa-eye"></i></button></td>
-        <td><button class="btn btn-primary" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button></td>
-        <td><button class="btn btn-primary" type="button"><i class="fas fa-trash"></i></button></td>
+        <td>{{ item.total }}</td>
+        <td colspan="3">
+            <button class="btn btn-secondary" type="button" (click)="onView(item)"><i class="far fa-eye"></i></button>
+            &nbsp;
+            <button class="btn btn-success" type="button" (click)="onEdit(item)"><i class="far fa-edit"></i></button>
+            &nbsp;
+            <button class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
+        </td>
     </tr>
     </tbody>
 </table>
