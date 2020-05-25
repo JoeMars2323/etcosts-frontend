@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
@@ -9,16 +9,20 @@ import { SessionService } from 'src/app/shared/session-service/session.service';
 import { ExpenseItem } from '../../ExpenseItem';
 import { Expense } from '../../Expense';
 import { ExpenseType } from '../../ExpenseType';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-long-expense',
   templateUrl: './add-long-expense.component.html',
   styleUrls: ['./add-long-expense.component.css']
 })
-export class AddLongExpenseComponent implements OnInit {
+export class AddLongExpenseComponent implements OnInit, OnDestroy {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
+
+  // subscription to unsubscribe
+  subscription: Subscription
 
   // return if data was or not inserted on database
   status: boolean;
@@ -72,7 +76,7 @@ export class AddLongExpenseComponent implements OnInit {
 
   // get expense type
   getShortType() {
-    this.api.getExpenseType().subscribe(
+    this.subscription = this.api.getExpenseType().subscribe(
       data => {
         this.expenseType = data[3];
       }
@@ -171,6 +175,10 @@ export class AddLongExpenseComponent implements OnInit {
       }
     );
   
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe;
   }
 
 }

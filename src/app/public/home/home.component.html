@@ -3,7 +3,7 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-xl-4 col-lg-5" data-aos="fade-up">
+        <div class="col-xl-4 col-lg-5">
           <br>
           <div class="content">
             <h3>Porquê escolher a solução ET-Costs?</h3>
@@ -24,31 +24,28 @@
         <div class="col-xl-8 col-lg-7 d-flex">
           <div class="icon-boxes d-flex flex-column justify-content-center">
             <div class="row">
-              <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="icon-box mt-4 mt-xl-0">
-                  <a  style="cursor: pointer;" (click)="openExpense()"><i class="fas fa-file-invoice-dollar"></i></a>
-                  <a  style="cursor: pointer;" (click)="openExpense()"><h4>Despesas</h4></a>
-                  <div *ngIf="expense">
+              <div class="align-items-stretch">
+                <div class="icon-box">
+                  <a class="why-us-boxes"><i class="fas fa-file-invoice-dollar"></i>  Despesas</a>
+                  <div >
                     Pode efetuar diversas operações com as despesas, tais como: criar, procurar, visualizar,
                     alterar e apagar.
                   </div>
                 </div>
               </div>
-              <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-xl-4 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <a  style="cursor: pointer;" (click)="openRevenue()"><i class="fas fa-dollar-sign"></i></a>
-                  <a  style="cursor: pointer;" (click)="openRevenue()"><h4>Receitas</h4></a>
-                  <div *ngIf="revenue">
+                  <a class="why-us-boxes"><i class="fas fa-dollar-sign"></i>  Receitas</a>
+                  <div >
                     À semelhança das despesas, tambem aqui pode fazer uma gestão efetiva de receitas, tal como:
                     criar, procurar, visualizar, alterar e apagar.
                   </div>
                 </div>
               </div>
-              <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+              <div class="col-xl-4 d-flex align-items-stretch">
                 <div class="icon-box mt-4 mt-xl-0">
-                  <a  style="cursor: pointer;" (click)="openGraph()"><i class="fas fa-chart-pie"></i></a>
-                  <a  style="cursor: pointer;" (click)="openGraph()"><h4> Calcular Lucros e Perdas</h4></a>
-                  <div *ngIf="graph">
+                  <a  class="why-us-boxes"><i class="fas fa-chart-pie"></i>Calcular Lucros e Perdas</a>
+                  <div >
                     Para que possa gerir o seu orçamento, a ET-Costs contem algoritmos de cálculo para 
                     que possa visualizar o relacionamento entre todas as suas despesas e lucros.
                   </div>

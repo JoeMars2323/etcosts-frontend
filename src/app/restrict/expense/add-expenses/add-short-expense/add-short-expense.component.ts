@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
+import { Subscription } from 'rxjs';
 
 import { RestApiService } from 'src/app/shared/rest-api-service/rest-api.service';
 import { DateService } from 'src/app/shared/date-service/date.service';
@@ -16,10 +17,13 @@ import { ExpenseType } from '../../ExpenseType';
   templateUrl: './add-short-expense.component.html',
   styleUrls: ['./add-short-expense.component.css']
 })
-export class AddShortExpenseComponent implements OnInit {
+export class AddShortExpenseComponent implements OnInit, OnDestroy {
   
   // bind form
   @ViewChild('form') signupForm: NgForm;
+
+  // subscription to unsubscribe
+  subscription: Subscription
 
   // expense type
   expenseType: ExpenseType;
@@ -74,7 +78,7 @@ export class AddShortExpenseComponent implements OnInit {
 
   // get expense type
   getShortType() {
-    this.api.getExpenseType().subscribe(
+    this.subscription = this.api.getExpenseType().subscribe(
       data => {
         this.expenseType = data[2];
       }
@@ -172,6 +176,10 @@ export class AddShortExpenseComponent implements OnInit {
       }
     );
   
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe;
   }
 
 }

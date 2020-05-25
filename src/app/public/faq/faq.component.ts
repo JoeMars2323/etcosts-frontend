@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
 
-  question1: boolean = false;
+  question1: boolean = true;
   question2: boolean = false;
   question3: boolean = false;
   question4: boolean = false;
