@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RestApiService } from '../../shared/rest-api-service/rest-api.service';
-import { User } from '../../shared/User';
+import { RestApiService } from '../../shared/rest-api.service';
+import { User } from '../../shared/user-model';
 
 @Component({
   selector: 'app-create-login',

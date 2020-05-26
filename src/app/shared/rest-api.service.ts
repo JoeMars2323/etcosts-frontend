@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { User } from '../User';
-import { Expense } from '../../restrict/expense/Expense';
-import { ExpenseType } from 'src/app/restrict/expense/ExpenseType';
-import { Currency } from '../Currency';
+import { User } from './user-model';
+import { Expense } from '../restrict/expense/expense-model';
+import { ExpenseType } from 'src/app/restrict/expense/expense-type-model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +29,6 @@ export class RestApiService {
 
   public getExpenseType(): Observable<ExpenseType[]> {
     return this.http.get<ExpenseType[]>(this.usersUrl + '/expenseTypes');
-  }
-
-  public getCurrency(): Observable<Currency[]> {
-    return this.http.get<Currency[]>(this.usersUrl + '/currency');
   }
 
   public getExpensesByUser(user: User): Observable<Expense[]> {

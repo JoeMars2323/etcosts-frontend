@@ -1,60 +1,63 @@
-<!--view mode-->
-<form name="formView" *ngIf="updateFixed.update">
-    <div class="container-fluid">
+<!--add fixed expense-->
+<div class="container">
+    <div class="row">
+        <h1 class="text-blue"> Ver - {{ expenseType.name }}</h1>
+        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
+    </div>
+    
+    <div class="expense-description"> {{ expenseType.description }} </div>
+</div>
+<br>
+<!--form expenses-->
+<form>
+  <div class="container-fluid">
       <div class="row">
           <!-- expense name -->
           <div class="col-sm-6">
-              <label >Nome da despesa:</label>
-              <input name="expenseName" type="text" class="form-control ml-1" 
-              [(ngModel)]="updateFixed.expenseName" readonly>
+              <label for="name">Nome da despesa:</label>
+              <input readonly id="name" name="name" type="text" class="form-control ml-1"
+                  [(ngModel)]="expense.expenseName">
+          </div>
+          <!--expense date-->
+          <div class="col-sm-6">
+              <label for="date" class="control-label">Data da despesa:</label>
+              <input readonly id="date" name="date" type="text" class="form-control" 
+                  [(ngModel)]="expense.expenseDate">
           </div>
       </div>
       <br>
+      <label for="month">Referente a:</label>
       <div class="row">
-          <!--expense date-->
-          <div class="col-sm-6" >
-            <label>Data da despesa:</label>
-            <input name="expenseDate" type="text" class="form-control ml-1" 
-                [(ngModel)]="updateFixed.expenseDate" readonly >
-        </div>
-          <!-- currency -->
-          <div class="col-sm-6" >
-            <label >Moeda:</label>
-            <input name="currency" type="text" class="form-control ml-1" 
-                [(ngModel)]="updateFixed.currency" readonly>
-        </div>
-      </div>
-      <br>
-      <!--month/year of reference -->
-      <p>Referente a:</p>
-      <div class="row">
+          <!--month reference -->
           <div class="col-sm-6">
-              <input name="expenseMonth" class="form-control ml-1" [(ngModel)]="updateFixed.month" readonly>
+              <input readonly id="month" name="month" class="form-control ml-1" [(ngModel)]="expense.month">
           </div>
           <!--year reference-->
           <div class="col-sm-6">
-              <input name="year" type="text" class="form-control ml-1" [(ngModel)]="updateFixed.year" readonly>
+              <input readonly id="year" name="year" class="form-control ml-1" [(ngModel)]="expense.year">
           </div>
       </div>
       <br>
+      <!-- comments -->
       <div class="row">
-          <!-- expense name -->
           <div class="col-sm-12">
               <label>Observações:</label>
-              <textarea name="expenseDescription" type="text" rows="2" class="form-control ml-1" 
-                [(ngModel)]="updateFixed.comments" readonly></textarea>
+              <textarea readonly name="expenseName" type="text" rows="2" class="form-control ml-1"
+                  [(ngModel)]="expense.comments"></textarea>
           </div>
       </div>
       <br>
       <!--total value-->
       <div class="row">
           <div class="col-sm-6">
-              <label>Valor da despesa:</label>
-              <input required type="number" name="text" class="form-control ml-1" 
-               [(ngModel)]="updateFixed.total" readonly>
+              <label for="total">Custo total:</label>
+              <input readonly required id="total" type="Number" min="0" name="total" class="form-control ml-1"
+                  [(ngModel)]="expense.total">
           </div>
       </div>
   </div>
-  <br><br><br><br>
-    
+  <br>
+  <br>
 </form>

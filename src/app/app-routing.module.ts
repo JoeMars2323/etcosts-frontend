@@ -28,6 +28,10 @@ import { ListByStateComponent } from './restrict/expense/list-expenses/list-by-s
 import { ListByTypesComponent } from './restrict/expense/list-expenses/list-by-types/list-by-types.component';
 import { ListByYearComponent } from './restrict/expense/list-expenses/list-by-year/list-by-year.component';
 import { ListStandardComponent } from './restrict/expense/list-expenses/list-standard/list-standard.component';
+import { ViewVariableExpenseComponent } from './restrict/expense/view-expense/view-variable-expense/view-variable-expense.component';
+import { ViewShortExpenseComponent } from './restrict/expense/view-expense/view-short-expense/view-short-expense.component';
+import { ViewLongExpenseComponent } from './restrict/expense/view-expense/view-long-expense/view-long-expense.component';
+import { ViewFixedExpenseComponent } from './restrict/expense/view-expense/view-fixed-expense/view-fixed-expense.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
@@ -60,7 +64,12 @@ const routes: Routes = [
         { path: 'curta/:id', component: UpdateShortExpenseComponent },
         { path: 'variavel/:id', component: UpdateVariableExpenseComponent },
       ] },
-      { path: 'ver-despesa', component: ViewExpenseComponent },
+      { path: 'ver-despesa', component: ViewExpenseComponent, children:[
+        { path: 'fixa/:id', component: ViewFixedExpenseComponent },
+        { path: 'longa/:id', component: ViewLongExpenseComponent },
+        { path: 'curta/:id', component: ViewShortExpenseComponent },
+        { path: 'variavel/:id', component: ViewVariableExpenseComponent },
+      ]},
      ]},
      { path: 'receitas', component: RevenueComponent },    
   ] }

@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { RestApiService } from '../../../shared/rest-api-service/rest-api.service';
-import { AuthenticationService } from '../../../shared/authentication-service/authentication.service';
+import { RestApiService } from '../../../shared/rest-api.service';
+import { AuthenticationService } from '../../../shared/authentication.service';
 
-import { User } from '../../../shared/User';
-import { Expense } from '../Expense';
+import { User } from '../../../shared/user-model';
+import { Expense } from '../expense-model';
 
 @Component({
   selector: 'app-list-expenses',

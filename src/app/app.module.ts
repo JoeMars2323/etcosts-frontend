@@ -9,8 +9,8 @@ import { ChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RestApiService } from './shared/rest-api-service/rest-api.service';
-import { AuthenticationService } from './shared/authentication-service/authentication.service';
+import { RestApiService } from './shared/rest-api.service';
+import { AuthenticationService } from './shared/authentication.service';
 import { AppComponent } from './app.component';
 import { PublicComponent } from './public/public.component';
 import { HomeComponent } from './public/home/home.component';
@@ -43,7 +43,7 @@ import { ListByTypesComponent } from './restrict/expense/list-expenses/list-by-t
 import { ListByYearComponent } from './restrict/expense/list-expenses/list-by-year/list-by-year.component';
 import { ListByStateComponent } from './restrict/expense/list-expenses/list-by-state/list-by-state.component';
 import { ListStandardComponent } from './restrict/expense/list-expenses/list-standard/list-standard.component';
-import { DropDownDirective } from './shared/drop-down-directive/drop-down.directive';
+import { DropDownDirective } from './shared/drop-down.directive';
 
 @NgModule({
   declarations: [

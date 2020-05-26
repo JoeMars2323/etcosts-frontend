@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { RestApiService } from '../rest-api-service/rest-api.service';
-import { User } from '../../shared/User';
+import { RestApiService } from './rest-api.service';
+import { User } from './user-model';
 
 @Injectable({
   providedIn: 'root'

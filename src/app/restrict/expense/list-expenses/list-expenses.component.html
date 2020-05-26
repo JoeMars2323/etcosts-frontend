@@ -11,6 +11,15 @@
         <option value="por-estado"> Por Estado <button></button> </option>
       </select>
     </div>
+    <div class="col-sm-6">
+      <label>Tipo de procura:</label>
+      <select required name="searchType" class="form-control ml-1" (change)="changeRoute($event.target.value)">
+        <option value="geral"> Geral </option>
+        <option value="por-tipo"> Por Tipo </option>
+        <option value="por-ano"> Por Ano </option>
+        <option value="por-estado"> Por Estado <button></button> </option>
+      </select>
+    </div>
   </div>
 </div>
 <br>

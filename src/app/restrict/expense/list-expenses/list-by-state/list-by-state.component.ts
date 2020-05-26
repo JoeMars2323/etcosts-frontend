@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Expense } from '../../Expense';
+import { Expense } from '../../expense-model';
 
 @Component({
   selector: 'app-list-by-state',

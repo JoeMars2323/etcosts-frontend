@@ -3,11 +3,11 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-import { RestApiService } from '../../../../shared/rest-api-service/rest-api.service';
-import { SessionService } from 'src/app/shared/session-service/session.service';
-import { ExpenseItem } from '../../ExpenseItem';
-import { Expense } from '../../Expense';
-import { ExpenseType } from '../../ExpenseType';
+import { RestApiService } from '../../../../shared/rest-api.service';
+import { SessionService } from 'src/app/shared/session.service';
+import { ExpenseItem } from '../../expense-item-model';
+import { Expense } from '../../expense-model';
+import { ExpenseType } from '../../expense-type-model';
 
 
 @Component({

@@ -1,4 +1,4 @@
-import { ExpenseItem } from './ExpenseItem';
+import { ExpenseItem } from './expense-item-model';
 
 export class Expense {
 

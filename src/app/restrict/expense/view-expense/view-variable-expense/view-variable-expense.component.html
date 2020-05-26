@@ -1,1 +1,84 @@
-<p>view-variable-expense works!</p>
+<!--update fixed expense-->
+<div class="container">
+    <h1 class="text-blue"> Ver - {{ expenseType.name }}</h1>
+    <div class="expense-description"> {{ expenseType.description }} </div>
+  </div>
+  <br>
+  <!--form expenses-->
+  <form>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- expense name -->
+        <div class="col-sm-6">
+          <label for="name" class="control-label">Nome da despesa:</label>
+          <input readonly id="name" name="name" type="text" class="form-control" [(ngModel)]="expense.expenseName">
+        </div>
+        <!-- expense date -->
+        <div class="col-sm-6">
+          <label for="date" class="control-label">Data da despesa:</label>
+          <input readonly id="date" name="date" type="text" class="form-control" [(ngModel)]="expense.expenseDate">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <!-- comments -->
+        <div class="col-sm-12">
+          <label>Observações:</label>
+          <textarea readonly name="expenseName" type="text" rows="2" class="form-control ml-1"
+            [(ngModel)]="expense.comments"></textarea>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <!-- items -->
+    <h4 class="mb-2 text-blue">Items da despesa</h4><br>
+    <div class="container-fluid" *ngFor="let item of itemsArray; let i = index">
+      <h5 class="mb-2 text-gray">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5>
+      <br>
+      <div class="row">
+        <!--item name-->
+        <div class="col-sm-6">
+          <label [attr.for]="'itemName'+i" class="control-label">Nome do item:</label>
+          <input readonly [id]="'itemName'+i" name="itemName{{i}}" type="text" class="form-control"
+            [(ngModel)]="item.name" #item="ngModel">
+        </div>
+        <!--item description-->
+        <div class="col-sm-6">
+          <label for="description">Descrição:</label>
+          <textarea readonly id="description" name="description{{i}}" type="text" rows="1" class="form-control"
+            [(ngModel)]="item.description"></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <!--value-->
+        <div class="col-sm-6">
+          <label for="value" class="control-label">Valor:</label>
+          <input readonly id="value" name="value{{i}}" type="number" min="0" class="form-control"
+            [(ngModel)]="item.value">
+          <br>
+        </div>
+      </div>
+      <br>
+      <br>
+      <hr>
+    </div>
+    <!--end of item-->
+    <br>
+    <br>
+    <!--total value-->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">
+          <label>Custo total:</label>
+          <input id="value" type="number" class="form-control" readonly value="{{ total }}">
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+    </div>
+    <br>
+    <br>
+  </form>

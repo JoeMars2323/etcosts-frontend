@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../shared/authentication-service/authentication.service';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-restrict',

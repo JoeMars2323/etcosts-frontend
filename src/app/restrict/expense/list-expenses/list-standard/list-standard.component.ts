@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Expense } from '../../Expense';
+import { Expense } from '../../expense-model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RestApiService } from 'src/app/shared/rest-api-service/rest-api.service';
+import { RestApiService } from 'src/app/shared/rest-api.service';
 
 @Component({
   selector: 'app-list-standard',
@@ -38,6 +38,20 @@ export class ListStandardComponent implements OnInit {
   }
 
   onView(selectedExpense) {
+    switch(selectedExpense.expenseType) {
+      case 'Despesa corrente fixa':
+        this.router.navigate(['../ver-despesa/fixa', selectedExpense.expenseId], { relativeTo: this.route });
+        break;
+        case 'Despesa corrente variável':
+          this.router.navigate(['../ver-despesa/variavel', selectedExpense.expenseId], { relativeTo: this.route });
+        break;
+        case 'Despesa não corrente de curta duração':
+          this.router.navigate(['../ver-despesa/curta', selectedExpense.expenseId], { relativeTo: this.route });
+        break;
+        case 'Despesa não corrente de longa duração':
+          this.router.navigate(['../ver-despesa/longa', selectedExpense.expenseId], { relativeTo: this.route });
+        break;
+    }
     
   }
 

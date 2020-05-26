@@ -1,7 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 
-import { Expense } from '../../Expense';
+import { RestApiService } from '../../../../shared/rest-api.service';
+import { DateService } from 'src/app/shared/date.service';
+import { Expense } from '../../expense-model';
+import { ExpenseType } from '../../expense-type-model';
 
 @Component({
   selector: 'app-view-fixed-expense',
@@ -10,24 +14,53 @@ import { Expense } from '../../Expense';
 })
 export class ViewFixedExpenseComponent implements OnInit {
 
-  @Input() updateFixed: Expense;
-  @Output() expenseToUpdate;
+  // bind form
+  @ViewChild('form') signupForm: NgForm;
 
-  bsConfig: Partial<BsDatepickerConfig>;
+  // expense declaration
+  expense: Expense;
+  id: number;
+  
+  // expense type
+  expenseType: ExpenseType;
+  
+  //months and years of reference
+  months: string[] = [];
+  years: string[] = [];
 
-  // load dropdowns
-  expenseSubtype: String[];
-  currency: String[];
-  years: String[] = [];
+  
+  constructor(private api: RestApiService, private route: ActivatedRoute, private dateService: DateService) { 
+      this.expense = new Expense();
+}
 
-  constructor() { 
-    this.bsConfig = new BsDatepickerConfig();
-    this.bsConfig.containerClass = 'theme-dark-blue';
-    this.expenseToUpdate = new EventEmitter<Expense>();
+ngOnInit(): void {
+  this.loadData();
+  this.getFixedType();
+  this.months = this.dateService.months;
+  this.years = this.dateService.getYears();
+}
 
+   // load data to update
+   loadData() {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = params['id'];
+      }
+    )
+    this.api.getExpenseById(this.id).subscribe(
+      data => {
+        this.expense = data;
+      }
+    );
   }
 
-  ngOnInit(): void {
+  // get expense type
+  getFixedType() {
+    this.api.getExpenseType().subscribe(
+      data => {
+        this.expenseType = data[0];
+      }
+    )
   }
 
 }
