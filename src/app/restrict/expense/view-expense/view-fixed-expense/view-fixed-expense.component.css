@@ -36,3 +36,16 @@
     border-bottom-right-radius:15px;
     border-bottom-left-radius:15px
   }
+
+  .generate-pdf {
+    color: #fff;
+    margin-left: 300px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    size: auto;
+  }
+
+  .resume-data {
+    margin-top: 10px;
+    margin-left: 40px;
+  }

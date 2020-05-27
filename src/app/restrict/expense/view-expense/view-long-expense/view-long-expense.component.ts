@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
+import * as jsPDF from 'jspdf';
 
 import { RestApiService } from 'src/app/shared/rest-api.service';
 import { DateService } from 'src/app/shared/date.service';
-import { SessionService } from 'src/app/shared/session.service';
 import { ExpenseItem } from '../../expense-item-model';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';
@@ -19,6 +18,7 @@ export class ViewLongExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
+  @ViewChild('content') content: ElementRef;
 
   // expense type
   expenseType: ExpenseType;
@@ -37,26 +37,18 @@ export class ViewLongExpenseComponent implements OnInit {
   calculateTotal: number;
   calculateDifference: number;
 
-  // return if data was or not inserted on database
-  status: boolean;
-
   //flag to open a render item
   hasRender: boolean = false;
-  
-  // file choser
-  toggle: boolean = false;
 
-  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(private api: RestApiService, public dateService: DateService, private router: Router, 
-              private route: ActivatedRoute, private session: SessionService) { 
+              private route: ActivatedRoute) { 
         this.expense = new Expense();
         this.item = new ExpenseItem();
   }
 
   ngOnInit(): void {
     this.loadData();
-    this.bsConfiguration();
     this.getShortType();
     //this.itemArray.push(this.item);
     this.years = this.dateService.getYears();
@@ -81,17 +73,6 @@ export class ViewLongExpenseComponent implements OnInit {
     );
   }
 
-  // configure datepicker
-  bsConfiguration() {
-    this.bsConfig = Object.assign({}, { 
-      containerClass: 'theme-dark-blue',
-      dateInputFormat: 'DD-MM-YYYY'
-      //locale: 'pt'
-    });
-    setTimeout(() => {
-    });
-  }
-
   // get expense type
   getShortType() {
     this.api.getExpenseType().subscribe(
@@ -99,12 +80,6 @@ export class ViewLongExpenseComponent implements OnInit {
         this.expenseType = data[3];
       }
     )
-  }
-
-  // file chooser
-  getOpenFileChooser() {
-    this.toggle = !this.toggle;
-    return '';
   }
 
   checkValue(){
@@ -119,25 +94,6 @@ export class ViewLongExpenseComponent implements OnInit {
 
   removeItem(index) {
     this.itemArray.splice(index);
-  }
-
-  // this method doesnt have the rigth behaviour because the datepicker doesnt clean the input
-  public manageDates(): void {
-    let expenseDate = new Date(this.expense.expenseDate);
-    let paymentDate = new Date(this.expense.paymentDate);
-    let varDate = new Date(this.expense.paymentDate);
-    let year = varDate.getFullYear();
-    let month = varDate.getMonth();
-    let day = varDate.getDate();
-    let limitDate = new Date(year + 2, month, day);
-    if(expenseDate < paymentDate) {
-      this.expense.paymentDate = null;
-      alert('A data de limite de pagamento tem de ser superior à data da despesa!!!');
-    }
-    if(paymentDate > limitDate) {
-       this.expense.paymentDate = null;
-       alert('Este tipo de despesa não pode ser paga em mais de dois anos!!!'); 
-    }
   }
 
   // this method doesnt have the rigth behaviour
@@ -164,30 +120,20 @@ export class ViewLongExpenseComponent implements OnInit {
     console.log(this.itemArray);
   }
 
-  onSubmit() {
-    // add extra information
-    if(this.expense.total > this.calculateTotal) {
-      this.expense.stateType = 'Por Pagar';
-    }
-    if(this.expense.total == this.calculateTotal) {
-      this.expense.stateType = 'Pago';
-    }
-    // update item array
-    this.expense.itemsArray = this.itemArray;
-    // update
-    this.api.saveExpense(this.expense).subscribe(
-      data => {
-        this.status = data;
-        if(this.status === true) {
-          alert(' Dados alterados com sucesso!');
-          this.signupForm.reset();
-          this.router.navigate(['/restrito'], { relativeTo: this.route })
-        } else {
-          alert('Não foi possivel fazer a alteração');
-        }
+  generatePDF() {
+    let doc = new jsPDF();
+    //convert html to pdf
+    let specialElementHandlers = {
+      '#editor': function(element, renderer) {
+        return true;
       }
-    );
-  
+    };
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+    doc.save('despesa-fixa.pdf');
   }
 
 }

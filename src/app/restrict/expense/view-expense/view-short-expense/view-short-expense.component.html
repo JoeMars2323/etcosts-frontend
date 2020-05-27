@@ -1,117 +1,87 @@
-<!--add fixed expense-->
-<div class="container">
-    <h1 class="text-blue"> Ver - {{ expenseType.name }}</h1>
-    <div class="expense-description"> {{ expenseType.description }} </div>
-</div>
-<br>
-<!--form expenses-->
-<form>
+<div #content>
+    <div class="container">
+        <h1 class="text-blue"> Relatório de Despesa</h1>
+    </div>
+    <br>
     <div class="container-fluid">
         <div class="row">
-            <!-- expense name -->
-            <div class="col-sm-6">
-                <label for="expenseName">Nome da despesa:</label>
-                <input readonly id="expenseName" name="expenseName" type="text" class="form-control"
-                    [(ngModel)]="expense.expenseName">
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <!--expense date-->
-            <div class="col-sm-6">
-                <label for="expenseDate" class="control-label">Data da despesa:</label>
-                <input readonly id="expenseDate" name="expenseDate" type="text" class="form-control"
-                    [(ngModel)]="expense.expenseDate">
-            </div>
-            <!-- limit date  -->
-            <div class="col-sm-6">
-                <label for="paymentDate">Data limite do pagamento:</label>
-                <input readonly id="paymentDate" name="paymentDate" type="text" class="form-control"
-                    [(ngModel)]="expense.paymentDate">
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <!-- comments -->
             <div class="col-sm-12">
-                <label for="comments">Observações:</label>
-                <textarea readonly id="comments" name="comments" type="text" rows="2" class="form-control ml-1">
-                </textarea>
+                <label><b> Tipo de despesa:</b></label> {{ expenseType.name }}
             </div>
         </div>
         <br>
         <div class="row">
-            <!-- cost value  -->
-            <div class="col-sm-4">
-                <label for="cost">Custo da despesa:</label>
-                <input readonly id="cost" name="cost" type="number" class="form-control" [(ngModel)]="expense.total">
+            <div class="col-sm-6">
+                <label><b> Estado da despesa:</b></label> {{ expense.stateType }}
             </div>
-            <!-- first time payed value  -->
-            <div class="col-sm-4">
-                <label for="firstTimePayed">Valor pago no ato da compra:</label>
-                <input readonly id="firstTimePayed" name="firstTimePayed" type="number" class="form-control"
-                    [(ngModel)]="beginPayment">
+            <div class="col-sm-6">
+                <label><b> Nome da despesa:</b></label> {{ expense.expenseName }}
             </div>
-            <!--How mutch is it missing to end of payment-->
-            <div class="col-sm-4">
-                <label for="difference">Quanto falta para estar pago:</label>
-                <input readonly id="difference" name="difference" type="number" class="form-control"
-                    [(ngModel)]="calculateDifference">
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+                <label><b>Data da despesa:</b></label> {{ expense.expenseDate }}
+            </div>
+            <div class="col-sm-6">
+                <label><b> Data limite do pagamento:</b></label> {{ expense.paymentDate }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <label><b> Observações:</b></label> {{ expense.comments }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+                <label><b> Custo da despesa:</b></label> {{ expense.total }}
+            </div>
+            <div class="col-sm-6">
+                <label><b> Valor pago no ato da compra:</b></label> {{ beginPayment }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <label><b>Quanto falta para estar pago:</b></label> {{ calculateDifference }}
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <!-- render items -->
     <div>
-        <hr>
-        <h4 class="mb-2 text-blue">Items da prestação</h4>
-        <br>
+        <br><hr><br>
+        <h4 class="text-blue">Items da prestação</h4>
         <div class="container-fluid" *ngFor="let item of itemArray; let i=index">
             <h5 class="mb-2 text-gray">&nbsp;&nbsp;&nbsp;Item# {{i+1}}</h5>
             <br>
-            <p>Referente a:</p>
             <div class="row">
-                <!-- reference date  -->
                 <div class="col-sm-4">
-                    <label for="itemsMonth">Mês:</label>
-                    <input readonly id="itemsMonth" name="itemsMonth{{i}}" class="form-control ml-1"
-                        [(ngModel)]="itemArray[i].month">
+                    <label><b> Referente a:</b></label> {{ itemArray[i].month }} {{ itemArray[i].year }}
                 </div>
-                <div class="col-sm-4">
-                    <label for="itemsYear">Ano:</label>
-                    <input readonly id="itemsYear" name="itemsYear{{i}}" class="form-control ml-1"
-                        [(ngModel)]="itemArray[i].year">
-                </div>
-                <!--render date-->
-                <div class="col-sm-4">
-                    <label for="renderDate">Data da prestação:</label>
-                    <input readonly id="renderDate" name="renderDate{{i}}" type="text" class="form-control"
-                        [(ngModel)]="itemArray[i].expenseDate">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <label><b> Data da prestação:</b></label> {{ itemArray[i].expenseDate }}
+                    </div>
                 </div>
             </div>
             <br>
             <div class="row">
-                <!--value-->
-                <div class="col-sm-4">
-                    <label for="renderValue">Valor da prestação:</label>
-                    <input readonly id="renderValue" name="renderValue{{i}}" type="number" class="form-control"
-                        [(ngModel)]="itemArray[i].value">
+                <div class="col-sm-12">
+                    <label><b> Valor da prestação:</b></label> {{ itemArray[i].value }}
                 </div>
             </div>
-            <br>
-            <br>
         </div>
-        <br>
-        <hr>
+        <br><hr><br>
         <div class="row">
-            <div class="col-sm-4">
-                <label>Total:</label>
-                <input readonly id="value" type="number" class="form-control" [(ngModel)]="calculateTotal" name="total">
+            <div class="col-sm-12">
+                <label><b> Total:</b></label> {{ calculateTotal }}
             </div>
         </div>
     </div>
-    <!--end of render items-->
-    <br>
-    <br>
-</form>
+</div>
+<br><hr><br>
+<a class="btn btn-primary generate-pdf" (click)="generatePDF()">
+    <i class="fas fa-download"></i> Gerar PDF
+</a>
+<br><br><br> 

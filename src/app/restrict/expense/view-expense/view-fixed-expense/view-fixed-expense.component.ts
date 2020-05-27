@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import * as jsPDF from 'jspdf';
 
 import { RestApiService } from '../../../../shared/rest-api.service';
 import { DateService } from 'src/app/shared/date.service';
@@ -16,6 +17,7 @@ export class ViewFixedExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
+  @ViewChild('content') content: ElementRef;
 
   // expense declaration
   expense: Expense;
@@ -61,6 +63,25 @@ ngOnInit(): void {
         this.expenseType = data[0];
       }
     )
+  }
+
+  // generate pdf first i needed to do 
+  //npm install jspdf --save and
+  //npm install @types/jspdf --save-dev
+  generatePDF() {
+    let doc = new jsPDF();
+    //convert html to pdf
+    let specialElementHandlers = {
+      '#editor': function(element, renderer) {
+        return true;
+      }
+    };
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+    doc.save('despesa-fixa.pdf');
   }
 
 }

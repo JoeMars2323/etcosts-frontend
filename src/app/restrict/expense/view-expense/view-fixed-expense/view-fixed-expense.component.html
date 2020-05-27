@@ -1,63 +1,45 @@
 <!--add fixed expense-->
-<div class="container">
+<div class="container" #content>
     <div class="row">
-        <h1 class="text-blue"> Ver - {{ expenseType.name }}</h1>
-        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-
+        <h1 class="text-blue"> {{ expenseType.name }}</h1>
     </div>
-    
     <div class="expense-description"> {{ expenseType.description }} </div>
+    <br>
+    <div class="resume-data">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label><b>Nome da despesa:</b></label> {{    expense.expenseName}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label><b>Data da despesa:</b></label> {{     expense.expenseDate}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label><b> Referente a:</b></label> {{     expense.month }} {{ expense.year }}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label><b>Observações:</b></label> {{    expense.comments}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label><b>Custo total:</b></label> {{     expense.total }}
+                </div>
+            </div>
+        </div>
+        <br>
+    <div>
 </div>
-<br>
-<!--form expenses-->
-<form>
-  <div class="container-fluid">
-      <div class="row">
-          <!-- expense name -->
-          <div class="col-sm-6">
-              <label for="name">Nome da despesa:</label>
-              <input readonly id="name" name="name" type="text" class="form-control ml-1"
-                  [(ngModel)]="expense.expenseName">
-          </div>
-          <!--expense date-->
-          <div class="col-sm-6">
-              <label for="date" class="control-label">Data da despesa:</label>
-              <input readonly id="date" name="date" type="text" class="form-control" 
-                  [(ngModel)]="expense.expenseDate">
-          </div>
-      </div>
-      <br>
-      <label for="month">Referente a:</label>
-      <div class="row">
-          <!--month reference -->
-          <div class="col-sm-6">
-              <input readonly id="month" name="month" class="form-control ml-1" [(ngModel)]="expense.month">
-          </div>
-          <!--year reference-->
-          <div class="col-sm-6">
-              <input readonly id="year" name="year" class="form-control ml-1" [(ngModel)]="expense.year">
-          </div>
-      </div>
-      <br>
-      <!-- comments -->
-      <div class="row">
-          <div class="col-sm-12">
-              <label>Observações:</label>
-              <textarea readonly name="expenseName" type="text" rows="2" class="form-control ml-1"
-                  [(ngModel)]="expense.comments"></textarea>
-          </div>
-      </div>
-      <br>
-      <!--total value-->
-      <div class="row">
-          <div class="col-sm-6">
-              <label for="total">Custo total:</label>
-              <input readonly required id="total" type="Number" min="0" name="total" class="form-control ml-1"
-                  [(ngModel)]="expense.total">
-          </div>
-      </div>
-  </div>
-  <br>
-  <br>
-</form>
+<a class="btn btn-primary generate-pdf" (click)="generatePDF()">
+    <i class="fas fa-download"></i> Gerar PDF
+</a>

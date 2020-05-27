@@ -37,7 +37,7 @@ export class ListStandardComponent implements OnInit {
     
   }
 
-  onView(selectedExpense) {
+  onPrint(selectedExpense) {
     switch(selectedExpense.expenseType) {
       case 'Despesa corrente fixa':
         this.router.navigate(['../ver-despesa/fixa', selectedExpense.expenseId], { relativeTo: this.route });

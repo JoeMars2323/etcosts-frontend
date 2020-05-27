@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import * as jsPDF from 'jspdf';
 
 import { RestApiService } from '../../../../shared/rest-api.service';
 import { SessionService } from 'src/app/shared/session.service';
@@ -18,6 +18,7 @@ export class ViewVariableExpenseComponent implements OnInit {
 
   // bind form
   @ViewChild('form') signupForm: NgForm;
+  @ViewChild('content') content: ElementRef;
   
   // expense declaration
   itemsArray: ExpenseItem[];
@@ -27,16 +28,9 @@ export class ViewVariableExpenseComponent implements OnInit {
   
   // expense type
   expenseType: ExpenseType;
-
-  // datepicker properties
-  colorTheme = 'theme-dark-blue';
-  bsConfig: Partial<BsDatepickerConfig>;
     
   // calculate total
   total: number = 0;
-  
-  // return if data was or not inserted on database
-  status: boolean;
   
   constructor(private api: RestApiService, private session: SessionService, private router: Router,
               private route: ActivatedRoute) {
@@ -46,7 +40,6 @@ export class ViewVariableExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    this.bsConfiguration();
     this.getVariableType();
     //this.dataArray.push(this.item);
    }
@@ -63,7 +56,6 @@ export class ViewVariableExpenseComponent implements OnInit {
         this.expense = data;
         this.itemsArray = data.itemsArray;
         this.valueSum();
-
       }
     ) 
   }
@@ -75,28 +67,6 @@ export class ViewVariableExpenseComponent implements OnInit {
         this.expenseType = data[1];
       }
     )
-  }
-
-   // configure datepicker
-   bsConfiguration() {
-    this.bsConfig = Object.assign({}, {
-      containerClass: 'theme-dark-blue',
-      dateInputFormat: 'DD-MM-YYYY'
-    });
-    setTimeout(() => {
-    });
-  }
-
-  // add and remove items
-  addItem() {
-    this.item = new ExpenseItem();
-    this.valueSum();
-    this.itemsArray.push(this.item);
-  }
-
-  removeItem(index) {
-    this.itemsArray.splice(index);
-    this.valueSum();
   }
 
   // calculate total
@@ -111,24 +81,24 @@ export class ViewVariableExpenseComponent implements OnInit {
 
   }
 
-  // submit button
-  onSubmit() {
-    // update item array
-    this.expense.itemsArray = this.itemsArray;
-    //update
-    this.api.saveExpense(this.expense).subscribe(
-      data => {
-        this.status = data;
-        if(this.status === true) {
-          alert(' Dados alterados com sucesso!');
-          this.signupForm.reset();
-          this.router.navigate(['/restrito'], { relativeTo: this.route })
-        } else {
-          alert('Não foi possivel fazer a alteração');
-        }
+  // generate pdf first i needed to do 
+  //npm install jspdf --save and
+  //npm install @types/jspdf --save-dev
+  generatePDF() {
+
+    let doc = new jsPDF();
+    //convert html to pdf
+    let specialElementHandlers = {
+      '#editor': function(element, renderer) {
+        return true;
       }
-    );
-    this.total = 0
+    };
+    let content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+    doc.save('despesa-variavel.pdf');
   }
 
 }
