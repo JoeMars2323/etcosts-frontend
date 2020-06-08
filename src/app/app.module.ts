@@ -44,6 +44,7 @@ import { ListByYearComponent } from './restrict/expense/list-expenses/list-by-ye
 import { ListByStateComponent } from './restrict/expense/list-expenses/list-by-state/list-by-state.component';
 import { ListStandardComponent } from './restrict/expense/list-expenses/list-standard/list-standard.component';
 import { DropDownDirective } from './shared/drop-down.directive';
+import { ForgotComponent } from './login/forgot/forgot.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { DropDownDirective } from './shared/drop-down.directive';
     ListByYearComponent,
     ListByStateComponent,
     ListStandardComponent,
-    DropDownDirective
+    DropDownDirective,
+    ForgotComponent
   ],
   imports: [
     AppRoutingModule,

@@ -32,6 +32,7 @@ import { ViewVariableExpenseComponent } from './restrict/expense/view-expense/vi
 import { ViewShortExpenseComponent } from './restrict/expense/view-expense/view-short-expense/view-short-expense.component';
 import { ViewLongExpenseComponent } from './restrict/expense/view-expense/view-long-expense/view-long-expense.component';
 import { ViewFixedExpenseComponent } from './restrict/expense/view-expense/view-fixed-expense/view-fixed-expense.component';
+import { ForgotComponent } from './login/forgot/forgot.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
@@ -43,6 +44,7 @@ const routes: Routes = [
    ] },
   { path: 'login', component: LoginComponent },
   { path: 'criar-conta', component: CreateLoginComponent },
+  { path: 'forgot', component: ForgotComponent },
   { path: 'restrito', component: RestrictComponent, children:[
      { path: '', component: ChartsTablesComponent },
      { path: 'despesas', component: ExpenseComponent, children:[

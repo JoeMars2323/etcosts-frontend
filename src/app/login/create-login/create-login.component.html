@@ -1,41 +1,42 @@
 <div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login100 p-t-20 p-b-85">
-      <form class="login100-form validate-form flex-sb flex-w" 
-      (ngSubmit)="onSubmit()" #userForm="ngForm">
-        <span class="login100-form-title p-b-31"> Criar Conta </span>
+  <div class="container-login">
+    <div class="wrap-login">
+      <form class="login-form" (ngSubmit)="onSubmit()">
+        <span class="login-title"> Criar Conta </span>
+
+        <!--return back button-->
+        <a class="return-back" routerLink="/" ><i class="fas fa-arrow-circle-left"></i> voltar</a>
 
         <!--Username-->
-        <a routerLink="/" class="txt1">voltar</a>
-        <div class="wrap-input100 validate-input m-b-12">
-          <input type="text" class="input100" [(ngModel)]="user.username" 
-          id="username" name="username" placeholder="Username">
-          <span class="focus-input100"></span>
+        <div class="wrap-input">
+          <input type="text" class="input" [(ngModel)]="user.username" 
+            id="username" name="username" placeholder="Username">
+          <span class="focus-input"></span>
         </div>
 
         <!--password-->
-        <div class="wrap-input100 validate-input m-b-12">
-          <input type="password" class="input100" [(ngModel)]="user.password"
+        <div class="wrap-input">
+          <input type="password" class="input" [(ngModel)]="user.password"
           id="password" name="password" placeholder="Password">
-          <span class="focus-input100"></span>
+          <span class="focus-input"></span>
         </div>
 
         <!--email-->
-        <div class="wrap-input100 validate-input m-b-12">
-          <input type="text" class="input100" [(ngModel)]="user.email"
+        <div class="wrap-input">
+          <input type="text" class="input" [(ngModel)]="user.email"
           id="email" name="email" placeholder="E-Mail">
-          <span class="focus-input100"></span>
+          <span class="focus-input"></span>
         </div>
 
         <!--confirm password-->
-        <div class="wrap-input100 validate-input m-b-12">
-          <input type="password" class="input100" [(ngModel)]="user.passConfirm"
+        <div class="wrap-input">
+          <input type="password" class="input" [(ngModel)]="user.passConfirm"
           id="confirmpass" name="confirmpass" placeholder="Confirm Password">
-          <span class="focus-input100"></span>
+          <span class="focus-input"></span>
         </div>
 
-        <div class="container-login100-form-btn m-t-15">
-          <button class="login100-form-btn" type="submit"> Criar Conta </button>
+        <div class="login-button">
+          <button class="login-form-btn" type="submit"> Criar Conta </button>
         </div>
       </form>
     </div>
