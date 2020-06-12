@@ -30,7 +30,7 @@
             <div class="col-sm-6">
                 <label for="paymentDate">Data limite do pagamento:</label>
                 <input required id="paymentDate" name="paymentDate" type="text" class="form-control" 
-                    [(ngModel)]="expense.paymentDate"
+                    [(ngModel)]="expense.expenseLimitDate"
                     (ngModelChange)="manageDates()" bsDatepicker [bsConfig]="bsConfig">
             </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="col-sm-12">
                 <label for="comments">Observações:</label>
                 <textarea id="comments" name="comments" type="text" rows="2" class="form-control ml-1"
-                    [(ngModel)]="expense.comments"></textarea>
+                    [(ngModel)]="expense.expenseDescription"></textarea>
             </div>
         </div>
         <br>
@@ -74,7 +74,7 @@
             <div class="col-sm-4">
                 <label for="cost">Custo da despesa:</label>
                 <input required id="cost" name="cost" type="number" class="form-control" 
-                [(ngModel)]="expense.total">
+                [(ngModel)]="expense.expenseTotal">
             </div>
             <!-- first time payed value  -->
             <div class="col-sm-4">
@@ -103,25 +103,12 @@
             <p>Referente a:</p>
             <div class="row">
                 <!-- reference date  -->
-                <div class="col-sm-4">
-                    <label for="itemsMonth">Mês:</label>
-                    <select required id="itemsMonth" name="itemsMonth{{i}}" class="form-control ml-1" 
-                        [(ngModel)]="itemArray[i].month">
-                        <option *ngFor="let month of dateService.months"> {{ month }} </option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label for="itemsYear">Ano:</label>
-                    <select id="itemsYear" name="itemsYear{{i}}" class="form-control ml-1" 
-                    [(ngModel)]="itemArray[i].year">
-                        <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
-                    </select>
-                </div>
+  
                 <!--render date-->
                 <div class="col-sm-4">
                     <label for="renderDate">Data da prestação:</label>
                     <input required id="renderDate" name="renderDate{{i}}" type="text" class="form-control" 
-                    [(ngModel)]="itemArray[i].expenseDate" bsDatepicker [bsConfig]="bsConfig">
+                    [(ngModel)]="itemArray[i].itemDate" bsDatepicker [bsConfig]="bsConfig">
                 </div>
             </div>
             <br>
@@ -130,7 +117,7 @@
                 <div class="col-sm-4">
                     <label for="renderValue">Valor da prestação:</label>
                     <input required id="renderValue" name="renderValue{{i}}" type="number" class="form-control"
-                        [(ngModel)]="itemArray[i].value" (blur)="managePayment()">
+                        [(ngModel)]="itemArray[i].itemValue" (blur)="managePayment()">
                 </div>
             </div>
             <br>

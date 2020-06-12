@@ -66,7 +66,7 @@ export class ViewLongExpenseComponent implements OnInit {
         this.expense = data;
         this.itemArray = data.itemsArray;
         //load begin payment
-        this.beginPayment = this.itemArray[0].value;
+        this.beginPayment = this.itemArray[0].itemValue;
         this.managePayment();
         console.log(this.beginPayment);
       }
@@ -99,21 +99,21 @@ export class ViewLongExpenseComponent implements OnInit {
   // this method doesnt have the rigth behaviour
   managePayment() {
     this.calculateTotal = 0;
-    this.itemArray[0].value = this.beginPayment; 
-     if (this.expense.total > this.beginPayment) {
+    this.itemArray[0].itemValue = this.beginPayment; 
+     if (this.expense.expenseTotal > this.beginPayment) {
        this.hasRender = true;
      }
     //iterate data array and sum all values
     for (let i = 0; i < this.itemArray.length; i++) {
-      this.calculateTotal += this.itemArray[i].value;
+      this.calculateTotal += this.itemArray[i].itemValue;
     }
-    if (this.expense.total > this.calculateTotal) {
-      this.calculateDifference = this.expense.total - this.calculateTotal;
+    if (this.expense.expenseTotal > this.calculateTotal) {
+      this.calculateDifference = this.expense.expenseTotal - this.calculateTotal;
     }
-    if (this.expense.total < this.calculateTotal) {
+    if (this.expense.expenseTotal < this.calculateTotal) {
       alert('despesa não pode ser menor do que já foi pago');
     }
-    if (this.expense.total === this.calculateTotal) {
+    if (this.expense.expenseTotal === this.calculateTotal) {
       this.calculateDifference = 0;
       alert('despesa paga');
     }

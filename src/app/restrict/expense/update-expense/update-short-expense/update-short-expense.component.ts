@@ -74,7 +74,7 @@ export class UpdateShortExpenseComponent implements OnInit {
         this.expense = data;
         this.itemArray = data.itemsArray;
         //load begin payment
-        this.beginPayment = this.itemArray[0].value;
+        this.beginPayment = this.itemArray[0].itemValue;
         this.managePayment();
         console.log(this.beginPayment);
       }
@@ -124,18 +124,18 @@ export class UpdateShortExpenseComponent implements OnInit {
   // this method doesnt have the rigth behaviour because the datepicker doesnt clean the input
   public manageDates(): void {
     let expenseDate = new Date(this.expense.expenseDate);
-    let paymentDate = new Date(this.expense.paymentDate);
-    let varDate = new Date(this.expense.paymentDate);
+    let expenseLimitDate = new Date(this.expense.expenseLimitDate);
+    let varDate = new Date(this.expense.expenseLimitDate);
     let year = varDate.getFullYear();
     let month = varDate.getMonth();
     let day = varDate.getDate();
     let limitDate = new Date(year + 2, month, day);
-    if(expenseDate > paymentDate) {
-      this.expense.paymentDate = null;
+    if(expenseDate > expenseLimitDate) {
+      this.expense.expenseLimitDate = null;
       alert('A data de limite de pagamento tem de ser posterior à data da despesa!!!');
     }
-    if(paymentDate > limitDate) {
-       this.expense.paymentDate = null;
+    if(expenseLimitDate > limitDate) {
+       this.expense.expenseLimitDate = null;
        alert('Este tipo de despesa não pode ser paga em mais de dois anos!!!'); 
     }
   }
@@ -143,21 +143,21 @@ export class UpdateShortExpenseComponent implements OnInit {
   // this method doesnt have the rigth behaviour
   managePayment() {
     this.calculateTotal = 0;
-    this.itemArray[0].value = this.beginPayment; 
-     if (this.expense.total > this.beginPayment) {
+    this.itemArray[0].itemValue = this.beginPayment; 
+     if (this.expense.expenseTotal > this.beginPayment) {
        this.hasRender = true;
      }
     //iterate data array and sum all values
     for (let i = 0; i < this.itemArray.length; i++) {
-      this.calculateTotal += this.itemArray[i].value;
+      this.calculateTotal += this.itemArray[i].itemValue;
     }
-    if (this.expense.total > this.calculateTotal) {
-      this.calculateDifference = this.expense.total - this.calculateTotal;
+    if (this.expense.expenseTotal > this.calculateTotal) {
+      this.calculateDifference = this.expense.expenseTotal - this.calculateTotal;
     }
-    if (this.expense.total < this.calculateTotal) {
+    if (this.expense.expenseTotal < this.calculateTotal) {
       alert('despesa não pode ser menor do que já foi pago');
     }
-    if (this.expense.total === this.calculateTotal) {
+    if (this.expense.expenseTotal === this.calculateTotal) {
       this.calculateDifference = 0;
       alert('despesa paga');
     }
@@ -165,13 +165,6 @@ export class UpdateShortExpenseComponent implements OnInit {
   }
 
   onSubmit() {
-    // add extra information
-    if(this.expense.total > this.calculateTotal) {
-      this.expense.stateType = 'Por Pagar';
-    }
-    if(this.expense.total == this.calculateTotal) {
-      this.expense.stateType = 'Pago';
-    }
     // update item array
     this.expense.itemsArray = this.itemArray;
     // update

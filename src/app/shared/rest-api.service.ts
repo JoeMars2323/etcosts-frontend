@@ -24,7 +24,7 @@ export class RestApiService {
   }
 
   public createAccount(user: User): Observable<boolean> {
-    return this.http.post<boolean>(this.usersUrl + '/createAccount', user);
+    return this.http.post<boolean>(this.usersUrl + '/account', user);
   }
 
   public getExpenseType(): Observable<ExpenseType[]> {
@@ -32,16 +32,21 @@ export class RestApiService {
   }
 
   public getExpensesByUser(user: User): Observable<Expense[]> {
-    return this.http.post<Expense[]>(this.usersUrl + '/expensesByUser', user);
+    return this.http.post<Expense[]>(this.usersUrl + '/expensesList', user);
   }
 
    public getExpenseById(id: number): Observable<Expense> {
      let params = new HttpParams().set('id', id.toString());
-     return this.http.get<Expense>(this.usersUrl + '/expenseById', { params: params });
+     return this.http.get<Expense>(this.usersUrl + '/expense', { params: params });
    }
 
   public saveExpense(expense: Expense): Observable<boolean> {
-    return this.http.post<boolean>(this.usersUrl + '/saveExpense', expense);
+    return this.http.post<boolean>(this.usersUrl + '/expenses', expense);
+  }
+
+  public deleteExpense(id: number): Observable<boolean> {
+    let params = new HttpParams().set('id', id.toString());
+    return this.http.delete<boolean>(this.usersUrl + '/expense', { params: params });
   }
 
 

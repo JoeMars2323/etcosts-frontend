@@ -81,10 +81,8 @@ export class AddFixedExpenseComponent implements OnInit {
    onSubmit() {
      // add extra information
      this.expense.username = this.session.getUsername();
-     this.expense.stateType = 'Pago';
-     this.expense.expenseType = this.expenseType.name;
+     this.expense.expenseTypeName = this.expenseType.name;
      this.expense.expenseTypeDescription = this.expenseType.description;
-     this.expense.hasItems = false;
      // save
      this.api.saveExpense(this.expense).subscribe(
       data => {

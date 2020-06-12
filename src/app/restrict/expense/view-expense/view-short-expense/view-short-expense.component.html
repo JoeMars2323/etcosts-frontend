@@ -12,7 +12,7 @@
         <br>
         <div class="row">
             <div class="col-sm-6">
-                <label><b> Estado da despesa:</b></label> {{ expense.stateType }}
+                <label><b> Estado da despesa:</b></label>
             </div>
             <div class="col-sm-6">
                 <label><b> Nome da despesa:</b></label> {{ expense.expenseName }}
@@ -24,19 +24,19 @@
                 <label><b>Data da despesa:</b></label> {{ expense.expenseDate }}
             </div>
             <div class="col-sm-6">
-                <label><b> Data limite do pagamento:</b></label> {{ expense.paymentDate }}
+                <label><b> Data limite do pagamento:</b></label> {{ expense.expenseLimitDate }}
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label><b> Observações:</b></label> {{ expense.comments }}
+                <label><b> Observações:</b></label> {{ expense.expenseDescription }}
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-6">
-                <label><b> Custo da despesa:</b></label> {{ expense.total }}
+                <label><b> Custo da despesa:</b></label> {{ expense.expenseTotal }}
             </div>
             <div class="col-sm-6">
                 <label><b> Valor pago no ato da compra:</b></label> {{ beginPayment }}
@@ -57,18 +57,18 @@
             <br>
             <div class="row">
                 <div class="col-sm-4">
-                    <label><b> Referente a:</b></label> {{ itemArray[i].month }} {{ itemArray[i].year }}
+                    <label><b> Referente a:</b></label>
                 </div>
                 <div class="row">
                     <div class="col-sm-8">
-                        <label><b> Data da prestação:</b></label> {{ itemArray[i].expenseDate }}
+                        <label><b> Data da prestação:</b></label> {{ itemArray[i].itemDate }}
                     </div>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-sm-12">
-                    <label><b> Valor da prestação:</b></label> {{ itemArray[i].value }}
+                    <label><b> Valor da prestação:</b></label> {{ itemArray[i].itemValue }}
                 </div>
             </div>
         </div>

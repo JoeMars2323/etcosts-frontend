@@ -2,24 +2,20 @@ import { ExpenseItem } from './expense-item-model';
 
 export class Expense {
 
+	//backend variables
 	expenseId: number;
 	username: string;
-	stateType: string;
-	expenseType: string;
+	expenseTypeName: string;
 	expenseTypeDescription: string;
-	currency: string;
-	currencyValue: number;
 	expenseName: string;
+	expenseDescription: string;
 	expenseDate: string;
-	paymentDate: string;
-	comments: string;
-	month: string;
-	year: string;
-	total: number;
-	hasItems: boolean;
+	expenseLimitDate: string;
+	expenseTotal: number;
 	itemsArray: ExpenseItem[];
-	update: boolean;
 
+	//variables tu use only in frontend
+	update: boolean;
 	toggle: boolean = false;
 
     getOpenFileChooser() {
@@ -32,6 +28,15 @@ export class Expense {
 		return newDate;
 
 	}
+
+
+
+
+
+
+
+
+	
 
  
 }

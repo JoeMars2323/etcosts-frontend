@@ -73,8 +73,8 @@ export class ViewVariableExpenseComponent implements OnInit {
   valueSum() {
     this.total = 0;
     for (let i = 0; i < this.itemsArray.length; i++) {
-      if(this.itemsArray[i].value !== undefined) {
-        this.total += this.itemsArray[i].value;
+      if(this.itemsArray[i].itemValue !== undefined) {
+        this.total += this.itemsArray[i].itemValue;
       }
      }
     return this.total;

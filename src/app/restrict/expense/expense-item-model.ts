@@ -1,13 +1,14 @@
 export class ExpenseItem {
 
+    //back end variables
     itemId: number;
-	name: string;
-	description: string;
-	expenseDate: string;
-	month: string;
-	year: string;
-    value: number;
+	itemName: string;
+	itemDescription: string;
+	itemQuantity: string;
+	itemDate: string;
+	itemValue: number;
 
+    //variables to use only in front end
     valueNumber: number;
     toggle: boolean = false;
 
@@ -15,4 +16,10 @@ export class ExpenseItem {
         this.toggle = !this.toggle;
         return '';
     }
+
+
+
+
+
+    
 }

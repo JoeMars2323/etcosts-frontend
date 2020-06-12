@@ -20,19 +20,19 @@
         <br>
         <div class="row">
             <div class="col-sm-6">
-                <label>Data limite do pagamento:</label> {{ expense.paymentDate }}
+                <label>Data limite do pagamento:</label> {{ expense.expenseLimitDate }}
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="comments">Observações:</label> {{ expense.comments }}
+                <label for="comments">Observações:</label> {{ expense.expenseDescription }}
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-4">
-                <label for="cost">Custo da despesa:</label> {{ expense.total }}
+                <label for="cost">Custo da despesa:</label> {{ expense.expenseTotal }}
             </div>
             <div class="col-sm-4">
                 <label>Valor pago no ato da compra:</label> {{ beginPayment }}
@@ -53,19 +53,19 @@
             <p>Referente a:</p>
             <div class="row">
                 <div class="col-sm-4">
-                    <label for="itemsMonth">Mês:</label> {{ itemArray[i].month }}
+                    <label for="itemsMonth">Mês:</label>
                 </div>
                 <div class="col-sm-4">
-                    <label for="itemsYear">Ano:</label> {{ itemArray[i].year }}
+                    <label for="itemsYear">Ano:</label>
                 </div>
                 <div class="col-sm-4">
-                    <label for="renderDate">Data da prestação:</label> {{ itemArray[i].expenseDate }}
+                    <label for="renderDate">Data da prestação:</label> {{ itemArray[i].itemDate }}
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-sm-4">
-                    <label for="renderValue">Valor da prestação:</label> {{ itemArray[i].value }}
+                    <label for="renderValue">Valor da prestação:</label> {{ itemArray[i].itemValue }}
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@
     <br>
     <div class="row">
       <div class="col-sm-12">
-        <label>Observações:</label> {{expense.comments}}
+        <label>Observações:</label> {{expense.expenseDescription}}
       </div>
     </div>
   </div>
@@ -31,16 +31,16 @@
     <br>
     <div class="row">
       <div class="col-sm-6">
-        <label [attr.for]="'itemName'+i">Nome do item:</label> {{item.name}}
+        <label [attr.for]="'itemName'+i">Nome do item:</label> {{item.itemName}}
       </div>
       <div class="col-sm-6">
-        <label for="description">Descrição:</label> {{item.description}}
+        <label for="description">Descrição:</label> {{item.itemDescription}}
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-sm-6">
-        <label for="value" class="control-label">Valor:</label> {{item.value}}
+        <label for="value" class="control-label">Valor:</label> {{item.itemValue}}
         <br>
       </div>
     </div>
