@@ -9,8 +9,8 @@ import { ChartsModule } from 'ng2-charts';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RestApiService } from './shared/rest-api.service';
-import { AuthenticationService } from './shared/authentication.service';
+import { RestApiService } from './shared/expense.service';
+import { AuthenticationService } from './shared/auth.service';
 import { AppComponent } from './app.component';
 import { PublicComponent } from './public/public.component';
 import { HomeComponent } from './public/home/home.component';

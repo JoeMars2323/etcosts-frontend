@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { RestApiService } from '../../../shared/rest-api.service';
-import { AuthenticationService } from '../../../shared/authentication.service';
+import { RestApiService } from '../../../shared/expense.service';
+import { AuthenticationService } from '../../../shared/auth.service';
 
 import { User } from '../../../shared/user-model';
 import { Expense } from '../expense-model';
@@ -72,7 +72,7 @@ export class ListExpensesComponent implements OnInit {
 
   // get the expense list to pass to the table
   public getExpenseList() {
-    this.user = this.auth.getUser();
+    //this.user = this.auth.getUser();
     this.api.getExpensesByUser(this.user).subscribe(
       data => {
         this.expenseList = data;

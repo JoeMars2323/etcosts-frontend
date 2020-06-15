@@ -19,14 +19,6 @@ export class RestApiService {
   }
 
   // rest functions
-  public login(user: User): Observable<boolean> {
-    return this.http.post<boolean>(this.usersUrl + '/login', user);
-  }
-
-  public createAccount(user: User): Observable<boolean> {
-    return this.http.post<boolean>(this.usersUrl + '/account', user);
-  }
-
   public getExpenseType(): Observable<ExpenseType[]> {
     return this.http.get<ExpenseType[]>(this.usersUrl + '/expenseTypes');
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../shared/authentication.service';
+import { AuthenticationService } from '../shared/auth.service';
 import { User } from '../shared/user-model';
 
 @Component({
@@ -11,6 +11,7 @@ import { User } from '../shared/user-model';
 export class LoginComponent implements OnInit {
   
   user: User;
+  login: boolean;
 
   constructor(private auth: AuthenticationService) {
                 this.user = new User();
@@ -20,8 +21,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void { 
-    this.auth.login(this.user);
+    this.auth.login(this.user).subscribe(
+      result => {
+        this.login = result;
+        if(this.login) {          
+          this.auth.gotoPersonalArea();
+        } else
+        alert('login failed');
+      });
+      this.auth.userEmiter.next(this.user.username);
+      
   }
+
+
+
+
 
   
 

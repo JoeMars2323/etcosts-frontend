@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../shared/authentication.service';
+import { AuthenticationService } from '../shared/auth.service';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-restrict',
@@ -24,7 +25,17 @@ export class RestrictComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsername();
+    // capture the username
+    /*
+    *need to solve the undefined problem inside subscribe 
+    */
+    this.auth.userEmiter.subscribe(
+      name => {
+        this.username = name;
+      }
+    );
+    console.log(this.username);
+    
   }
 
   // open sidebar menus
@@ -91,11 +102,6 @@ export class RestrictComponent implements OnInit {
     this.graphic = false;
     this.table = false;
 
-  }
-
-  // capture username to identify the session
-  getUsername() {
-    this.username = this.auth.getUsername();
   }
 
 

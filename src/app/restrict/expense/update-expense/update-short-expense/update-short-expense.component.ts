@@ -3,9 +3,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
 
-import { RestApiService } from 'src/app/shared/rest-api.service';
+import { RestApiService } from 'src/app/shared/expense.service';
 import { DateService } from 'src/app/shared/date.service';
-import { SessionService } from 'src/app/shared/session.service';
 import { ExpenseItem } from '../../expense-item-model';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';
@@ -49,7 +48,7 @@ export class UpdateShortExpenseComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(private api: RestApiService, public dateService: DateService, private router: Router, 
-              private route: ActivatedRoute, private session: SessionService) { 
+              private route: ActivatedRoute) { 
         this.expense = new Expense();
         this.item = new ExpenseItem();
   }

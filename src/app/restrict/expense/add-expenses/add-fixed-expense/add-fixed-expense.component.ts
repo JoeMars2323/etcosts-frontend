@@ -3,8 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-import { SessionService } from 'src/app/shared/session.service';
-import { RestApiService } from '../../../../shared/rest-api.service';
+import { RestApiService } from '../../../../shared/expense.service';
 import { DateService } from 'src/app/shared/date.service';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';
@@ -39,7 +38,7 @@ export class AddFixedExpenseComponent implements OnInit {
   // file choser
   toggle: boolean = false;
 
-  constructor(private api: RestApiService, private session: SessionService, private router: Router, 
+  constructor(private api: RestApiService, private router: Router, 
               private route: ActivatedRoute, private dateService: DateService) { 
       this.expense = new Expense();
   }
@@ -80,7 +79,7 @@ export class AddFixedExpenseComponent implements OnInit {
   // submit button
    onSubmit() {
      // add extra information
-     this.expense.username = this.session.getUsername();
+     //this.expense.username = this.session.getUsername();
      this.expense.expenseTypeName = this.expenseType.name;
      this.expense.expenseTypeDescription = this.expenseType.description;
      // save

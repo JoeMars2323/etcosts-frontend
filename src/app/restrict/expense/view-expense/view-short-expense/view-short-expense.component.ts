@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
 import * as jsPDF from 'jspdf';
 
-import { RestApiService } from 'src/app/shared/rest-api.service';
+import { RestApiService } from 'src/app/shared/expense.service';
 import { DateService } from 'src/app/shared/date.service';
 import { ExpenseItem } from '../../expense-item-model';
 import { Expense } from '../../expense-model';

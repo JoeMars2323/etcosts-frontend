@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-import { RestApiService } from '../../../../shared/rest-api.service';
-import { SessionService } from 'src/app/shared/session.service';
+import { RestApiService } from '../../../../shared/expense.service';
 import { ExpenseItem } from '../../expense-item-model';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';
@@ -37,7 +36,7 @@ export class AddVariableExpenseComponent implements OnInit {
   // return if data was or not inserted on database
   status: boolean;
   
-  constructor(private api: RestApiService, private session: SessionService, private router: Router,
+  constructor(private api: RestApiService, private router: Router,
               private route: ActivatedRoute) {
       this.expense = new Expense();
       this.item = new ExpenseItem();
@@ -95,7 +94,7 @@ export class AddVariableExpenseComponent implements OnInit {
   // submit button
   onSubmit() {
     // add extra information
-    this.expense.username = this.session.getUsername();
+    //this.expense.username = this.session.getUsername();
     this.expense.expenseTypeName = this.expenseType.name;
      this.expense.expenseTypeDescription = this.expenseType.description;
     // add item array to expense

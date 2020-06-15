@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Expense } from '../../expense-model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RestApiService } from 'src/app/shared/rest-api.service';
+import { RestApiService } from 'src/app/shared/expense.service';
 
 @Component({
   selector: 'app-list-standard',

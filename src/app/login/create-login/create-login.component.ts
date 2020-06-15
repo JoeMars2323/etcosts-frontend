@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Router } from '@angular/router';
 
-import { RestApiService } from '../../shared/rest-api.service';
 import { User } from '../../shared/user-model';
+import { AuthenticationService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-create-login',
@@ -14,7 +14,7 @@ export class CreateLoginComponent implements OnInit {
   user: User;
   response: boolean;
 
-  constructor(private api: RestApiService, private router: Router) { 
+  constructor(private auth: AuthenticationService, private router: Router) { 
       this.user = new User();
     }
 
@@ -28,7 +28,7 @@ export class CreateLoginComponent implements OnInit {
 
   validate(): boolean {
 
-    this.api.createAccount(this.user).subscribe(
+    this.auth.createAccount(this.user).subscribe(
       data => {
         this.response = data;
         if(this.response === true && (this.user.password === this.user.passConfirm)) {

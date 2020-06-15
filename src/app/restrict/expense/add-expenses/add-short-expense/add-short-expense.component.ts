@@ -4,9 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
 import { Subscription } from 'rxjs';
 
-import { RestApiService } from 'src/app/shared/rest-api.service';
+import { RestApiService } from 'src/app/shared/expense.service';
 import { DateService } from 'src/app/shared/date.service';
-import { SessionService } from 'src/app/shared/session.service';
 import { ExpenseItem } from '../../expense-item-model';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';
@@ -53,7 +52,7 @@ export class AddShortExpenseComponent implements OnInit, OnDestroy {
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(private api: RestApiService, public dateService: DateService, private router: Router, 
-              private route: ActivatedRoute, private session: SessionService) { 
+              private route: ActivatedRoute) { 
         this.expense = new Expense();
         this.item = new ExpenseItem();
   }
@@ -150,7 +149,7 @@ export class AddShortExpenseComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     // add extra information
-    this.expense.username = this.session.getUsername();
+    //this.expense.username = this.session.getUsername();
     this.expense.expenseTypeName = this.expenseType.name;
     this.expense.expenseTypeDescription = this.expenseType.description;
     // add item array to expense

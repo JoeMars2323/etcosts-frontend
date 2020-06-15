@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import * as jsPDF from 'jspdf';
 
-import { RestApiService } from '../../../../shared/rest-api.service';
+import { RestApiService } from '../../../../shared/expense.service';
 import { DateService } from 'src/app/shared/date.service';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';

@@ -3,8 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import * as jsPDF from 'jspdf';
 
-import { RestApiService } from '../../../../shared/rest-api.service';
-import { SessionService } from 'src/app/shared/session.service';
+import { RestApiService } from '../../../../shared/expense.service';
 import { ExpenseItem } from '../../expense-item-model';
 import { Expense } from '../../expense-model';
 import { ExpenseType } from '../../expense-type-model';
@@ -32,8 +31,7 @@ export class ViewVariableExpenseComponent implements OnInit {
   // calculate total
   total: number = 0;
   
-  constructor(private api: RestApiService, private session: SessionService, private router: Router,
-              private route: ActivatedRoute) {
+  constructor(private api: RestApiService, private router: Router, private route: ActivatedRoute) {
       this.expense = new Expense();
       this.item = new ExpenseItem();
   }
