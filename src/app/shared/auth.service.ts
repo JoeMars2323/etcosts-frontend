@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import { RestApiService } from './expense.service';
-import { User } from './user-model';
-import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+
+import { User } from './user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class AuthenticationService {
 
   private usersUrl: string;
 
-  userEmiter = new Subject<string>();
+  userSubject = new Subject<string>();
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
     this.usersUrl = 'http://localhost:8080/etcosts';

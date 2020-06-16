@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from '../shared/auth.service';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-restrict',
@@ -29,13 +28,10 @@ export class RestrictComponent implements OnInit {
     /*
     *need to solve the undefined problem inside subscribe 
     */
-    this.auth.userEmiter.subscribe(
-      name => {
+    this.auth.userSubject.subscribe( (name: string) => {
         this.username = name;
-      }
-    );
-    console.log(this.username);
-    
+      });
+    console.log('username is: ' + this.username); 
   }
 
   // open sidebar menus

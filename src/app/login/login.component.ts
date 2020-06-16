@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         } else
         alert('login failed');
       });
-      this.auth.userEmiter.next(this.user.username);
+      this.auth.userSubject.next(this.user.username);
       
   }
 
