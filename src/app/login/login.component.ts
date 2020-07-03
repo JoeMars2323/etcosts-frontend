@@ -14,24 +14,27 @@ export class LoginComponent implements OnInit {
   login: boolean;
 
   constructor(private auth: AuthenticationService) {
-                this.user = new User();
+      this.user = new User();
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void { 
+  onSubmit(): void {
     this.auth.login(this.user).subscribe(
-      result => {
-        this.login = result;
-        if(this.login) {          
+      data => {
+        this.login = data;
+        this.auth.userSubject.next(this.user.username);
+        if(this.login) { 
+          //send to private area
           this.auth.gotoPersonalArea();
         } else
         alert('login failed');
-      });
-      this.auth.userSubject.next(this.user.username);
-      
+      });      
   }
+
+
+
 
 
 

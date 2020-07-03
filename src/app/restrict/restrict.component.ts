@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from '../shared/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-restrict',
@@ -10,6 +11,8 @@ import { AuthenticationService } from '../shared/auth.service';
 export class RestrictComponent implements OnInit {
 
   username: string;
+
+  private activatedSub: Subscription
  
   //flags add expenses
   homeDashboard: boolean = false;
@@ -19,19 +22,13 @@ export class RestrictComponent implements OnInit {
   graphic: boolean = false;
   table: boolean = false;
 
-  constructor(private auth: AuthenticationService) {
+  constructor(private auth: AuthenticationService) {}
 
-  }
-
-  ngOnInit(): void {
-    // capture the username
-    /*
-    *need to solve the undefined problem inside subscribe 
-    */
-    this.auth.userSubject.subscribe( (name: string) => {
-        this.username = name;
-      });
-    console.log('username is: ' + this.username); 
+  ngOnInit() {
+    this.activatedSub = this.auth.userSubject.subscribe(data => {
+        this.username = data;
+        console.log(this.username);
+    });
   }
 
   // open sidebar menus
@@ -42,7 +39,6 @@ export class RestrictComponent implements OnInit {
     this.searchRevenue = false;
     this.graphic = false;
     this.table = false;
-    
   }
 
   openAddExpenses() {
@@ -99,6 +95,16 @@ export class RestrictComponent implements OnInit {
     this.table = false;
 
   }
+
+  ngOnDestroy() {
+    this.activatedSub.unsubscribe();
+  }
+
+
+
+
+
+
 
 
 

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Expense } from '../../expense-model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RestApiService } from 'src/app/shared/expense.service';
 
 @Component({
   selector: 'app-list-standard',
@@ -14,9 +13,10 @@ export class ListStandardComponent implements OnInit {
   @Input() expenseList: Expense[];
   expense: Expense;
 
-  constructor(private api: RestApiService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.expenseList);
   }
 
   onEdit(expense) {

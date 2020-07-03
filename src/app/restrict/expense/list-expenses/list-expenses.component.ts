@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { RestApiService } from '../../../shared/expense.service';
-import { AuthenticationService } from '../../../shared/auth.service';
 
 import { User } from '../../../shared/user-model';
 import { Expense } from '../expense-model';
@@ -25,8 +24,7 @@ export class ListExpensesComponent implements OnInit {
 
   @Output() expenseId = new EventEmitter<number>();
 
-  constructor(private api: RestApiService, private auth: AuthenticationService,
-              private router: Router, private route: ActivatedRoute) {
+  constructor(private api: RestApiService, private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -73,9 +71,11 @@ export class ListExpensesComponent implements OnInit {
   // get the expense list to pass to the table
   public getExpenseList() {
     //this.user = this.auth.getUser();
+    console.log("-->>");
     this.api.getExpensesByUser(this.user).subscribe(
       data => {
         this.expenseList = data;
+        console.log("-->>" + this.user);
 
         //assign for now expensedate withe the first date in item array
         for(let i = 0; i < this.expenseList.length; i++) {

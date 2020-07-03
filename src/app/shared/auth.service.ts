@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { User } from './user-model';
 
@@ -12,7 +12,7 @@ export class AuthenticationService {
 
   private usersUrl: string;
 
-  userSubject = new Subject<string>();
+  public userSubject = new BehaviorSubject<string>(null);
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
     this.usersUrl = 'http://localhost:8080/etcosts';
@@ -30,5 +30,12 @@ export class AuthenticationService {
   public gotoPersonalArea() {
     this.router.navigate(['/restrito'], { relativeTo: this.route });
   }
+
+
+
+
+
+
+  
 
 }
