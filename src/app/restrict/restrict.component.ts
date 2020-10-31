@@ -10,24 +10,22 @@ import { Subscription } from 'rxjs';
 })
 export class RestrictComponent implements OnInit {
 
-  username: string;
-
-  private activatedSub: Subscription
+  public username: string;
+  private activatedSub: Subscription;
  
   //flags add expenses
-  homeDashboard: boolean = false;
-  addExpense: boolean = false;
-  addRevenue: boolean = false;
-  searchRevenue: boolean = false;
-  graphic: boolean = false;
-  table: boolean = false;
+  public homeDashboard: boolean = false;
+  public addExpense: boolean = false;
+  public addRevenue: boolean = false;
+  public searchRevenue: boolean = false;
+  public graphic: boolean = false;
+  public table: boolean = false;
 
   constructor(private auth: AuthenticationService) {}
 
   ngOnInit() {
     this.activatedSub = this.auth.userSubject.subscribe(data => {
         this.username = data;
-        console.log(this.username);
     });
   }
 

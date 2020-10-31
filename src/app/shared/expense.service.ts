@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { User } from './user-model';
 import { Expense } from '../restrict/expense/expense-model';
 import { ExpenseType } from 'src/app/restrict/expense/expense-type-model';
 
@@ -23,8 +22,9 @@ export class RestApiService {
     return this.http.get<ExpenseType[]>(this.usersUrl + '/expenseTypes');
   }
 
-  public getExpensesByUser(user: User): Observable<Expense[]> {
-    return this.http.post<Expense[]>(this.usersUrl + '/expensesList', user);
+  public getExpensesByUser(username: string): Observable<Expense[]> {
+    let params = new HttpParams().set('username', username;
+    return this.http.get<Expense[]>(this.usersUrl + '/expenses', { params: params });
   }
 
    public getExpenseById(id: number): Observable<Expense> {
@@ -32,8 +32,16 @@ export class RestApiService {
      return this.http.get<Expense>(this.usersUrl + '/expense', { params: params });
    }
 
-  public saveExpense(expense: Expense): Observable<boolean> {
+   public saveExpense(expense: Expense): Observable<boolean> {
     return this.http.post<boolean>(this.usersUrl + '/expenses', expense);
+  }
+
+  public addExpense(expense: Expense): Observable<boolean> {
+    return this.http.post<boolean>(this.usersUrl + '/expense', expense);
+  }
+
+  public updateExpense(expense: Expense): Observable<boolean> {
+    return this.http.put<boolean>(this.usersUrl + '/expense', expense);
   }
 
   public deleteExpense(id: number): Observable<boolean> {

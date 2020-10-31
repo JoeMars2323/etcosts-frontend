@@ -260,10 +260,16 @@
 	-moz-transition: all 0.4s;
 	transition: all 0.4s;
   }
-  
+
   .login-form-btn:hover {
 	background-color: #99ccff;
   }
+  
+  .login-form-btn:disabled {
+	background-color: #c5e7f5
+  }
+
+  
   
   /*--------------------------------------------------------------
   # Login
