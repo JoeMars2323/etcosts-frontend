@@ -1,7 +1,7 @@
 <!--add fixed expense-->
 <div class="container">
-    <h1 class="text-blue"> Inserir - {{ expenseType.name }}</h1>
-    <div class="expense-description"> {{ expenseType.description }} </div>
+    <h1 class="text-blue">Inserir - {{ expenseType?.name }}</h1>
+    <div class="expense-description"> {{ expenseType?.description }} </div>
 </div>
 <br>
 <!--form expenses-->
@@ -13,7 +13,8 @@
                 <label for="name">Nome da despesa:</label>
                 <input required id="name" name="name" type="text" class="form-control ml-1"
                     [(ngModel)]="expense.expenseName" #name="ngModel">
-                <span class="help-block" *ngIf="!name.valid && name.touched"> O nome da despesa é obrigatório</span>
+                <span class="help-block" *ngIf="!name.valid && name.touched"> 
+                    O nome da despesa é obrigatório</span>
             </div>
             <!--expense date-->
             <div class="col-sm-6">

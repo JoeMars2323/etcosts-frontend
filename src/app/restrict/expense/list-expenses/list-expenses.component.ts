@@ -78,7 +78,7 @@ export class ListExpensesComponent implements OnInit {
     });
     console.log(this.user);
     this.user.username = 'tv';
-    this.api.getExpensesByUser(this.user).subscribe(
+    this.api.getExpensesByUser(this.user.username).subscribe(
       data => {
         this.expenseList = data;
         console.log("-->>" + data);

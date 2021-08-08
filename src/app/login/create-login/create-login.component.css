@@ -89,10 +89,6 @@
 	padding: 0 20px 0 38px;
   }
 
-  /*--------------------------------------------------------------
-  # Focus Input
-  --------------------------------------------------------------*/
-
 .focus-input {
 	position: absolute;
 	display: block;
@@ -136,8 +132,6 @@
 	transform: scale(1);
   }
 
-  /**/
-
   .forgot-wrapper {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -155,10 +149,6 @@
   .input-checkbox {
 	display: none;
   }
-
-  /*-----------------------------------------------------------------
-   # Restyle Checkbox
-   ------------------------------------------------------------------*/
 
 .input-checkbox {
 	display: none;
@@ -223,9 +213,6 @@
 	color: #99ccff;
 }
 
-  /*------------------------------------------------------------------
-   # Login Button
-   -------------------------------------------------------------------*/
   .login-button {
 	width: 100%;
 	display: -webkit-box;
@@ -264,10 +251,6 @@
   .login-form-btn:hover {
 	background-color: #99ccff;
   }
-  
-  /*--------------------------------------------------------------
-  # Login
-  --------------------------------------------------------------*/
 
 * {
 	margin: 0px; 
@@ -280,7 +263,6 @@ body, html {
 	font-family: Ubuntu-Regular, sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
 	font-family: Ubuntu-Regular;
 	font-size: 14px;
@@ -302,7 +284,6 @@ a:hover {
   color: #403866;
 }
 
-/*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
@@ -320,8 +301,6 @@ ul, li {
 	list-style-type: none;
 }
 
-
-/*---------------------------------------------*/
 input {
 	outline: none;
 	border: none;
@@ -351,7 +330,6 @@ label {
   margin: 0;
 }
 
-/*---------------------------------------------*/
 button {
 	outline: none !important;
 	border: none;

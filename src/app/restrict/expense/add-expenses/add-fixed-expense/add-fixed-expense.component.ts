@@ -44,8 +44,8 @@ export class AddFixedExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bsConfiguration();
     this.getFixedType();
+    this.bsConfiguration();
     this.months = this.dateService.months;
     this.years = this.dateService.getYears();
   }
@@ -63,11 +63,10 @@ export class AddFixedExpenseComponent implements OnInit {
 
   // get expense type
   getFixedType() {
-    this.api.getExpenseType().subscribe(
-      data => {
+    this.api.getExpenseType().subscribe(data => {
+        // get the first value of expenseType
         this.expenseType = data[0];
-      }
-    )
+      });
   }
 
   // file chooser

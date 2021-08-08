@@ -23,7 +23,7 @@ export class RestApiService {
   }
 
   public getExpensesByUser(username: string): Observable<Expense[]> {
-    let params = new HttpParams().set('username', username;
+    let params = new HttpParams().set('username', username);
     return this.http.get<Expense[]>(this.usersUrl + '/expenses', { params: params });
   }
 
